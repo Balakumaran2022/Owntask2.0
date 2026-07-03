@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ownTask Features — SLA, Recurring Tasks, Approvals, Audit Trail & More</title>
+  <meta name="description" content="Explore ownTask's complete feature set: 3-level hierarchy, dual board types, 2-level SLA, 21 audit events, recurring tasks, approvals, custom fields, bulk upload and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <meta property="og:title" content="ownTask Features — Complete Enterprise Feature Set" />
+  <meta property="og:description" content="Explore ownTask's complete feature set: 3-level hierarchy, dual board types, 2-level SLA, 21 audit events, recurring tasks, approvals, custom fields, bulk upload and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://owntask.ieyalsolutions.com/og-image.png" />
+  <meta property="og:url" content="https://owntask.ieyalsolutions.com/features.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+  <!-- Shared Navbar -->
+  <header class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      <img src="official-logo.png" onerror="this.src='logo.png'" alt="ownTask" />
+      <span>own<span style="color: var(--primary);">Task</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="features.html" class="nav-link active">Features</a>
+      <a href="analytics.html" class="nav-link">Analytics</a>
+      <a href="use-cases.html" class="nav-link">Use Cases</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <a href="index.html" class="btn btn-primary">Get Started &rarr;</a>
+  </header>
+
+  <main style="padding-top: var(--nav-h);">
+    <!-- Header Section -->
+    <section class="section container reveal reveal-delay-1" style="text-align: center; padding-top: 4rem;">
+      <h1 class="hero-h1-gradient" style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin-bottom: 1.5rem; line-height: 1.15;">
+        Every feature your team needs.<br />Nothing they don't.
+      </h1>
+      <p style="color: var(--muted); font-size: 1.25rem; max-w: 800px; margin: 0 auto 3rem;">
+        An enterprise-grade platform built by iEyal Solutions with strict data model integrity, deep SLA compliance, and multi-tenant isolation.
+      </p>
+    </section>
+
+    <!-- Core Hierarchy & Task Fields -->
+    <section class="section container reveal reveal-delay-2">
+      <div class="section-header">
+        <h2>Enterprise Structural Hierarchy</h2>
+        <p>Built from the ground up to support strict multi-level governance: Organisation &rarr; TaskProject &rarr; TaskSubject &rarr; Task &rarr; Subtask.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card-interactive">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #FFF;">Auto-Generated Readable IDs</h3>
+          <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem;">
+            Every task receives an auto-generated alphanumeric ID formatted as <code style="color: var(--primary); font-weight: 700;">TSK-XXXXXXXX</code>. Instantly reference tasks across Slack, email, and Git pull requests.
+          </p>
+          <span class="priority-badge highest">TSK-7A9B2C1D</span>
+        </div>
+        <div class="card-interactive">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #FFF;">Dual Board Architecture</h3>
+          <p style="color: var(--muted); font-size: 0.95rem;">
+            TaskProjects support both <strong style="color: #FFF;">task_board</strong> (traditional Kanban) and <strong style="color: #FFF;">ticket_board</strong> (automated escalation rules, SLA breach alerts, and role-scoped triage queues).
+          </p>
+        </div>
+        <div class="card-interactive">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #FFF;">Round-Robin Assignment</h3>
+          <p style="color: var(--muted); font-size: 0.95rem;">
+            Assign tasks directly to an individual (<code style="color: #FFF;">assignedTo</code>) or target a team (<code style="color: #FFF;">teamId</code>) to automatically distribute workload evenly across active members.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Dive Features Grid -->
+    <section class="section container reveal reveal-delay-3">
+      <div class="section-header">
+        <h2>Granular Task Capabilities</h2>
+        <p>Every core task field engineered for transparency and operational scale.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1rem; color: #FFF;">SLA Enforcement Engine</h3>
+          <p style="color: var(--muted); margin-bottom: 1.25rem;">
+            Two-level SLA tracking covering absolute deadlines (<code style="color: var(--success);">slaDeadline</code>) and status duration (<code style="color: var(--warning);">targetDuration</code> per status). Real-time tracking of <code style="color: #FFF;">slaBreached</code>, <code style="color: #FFF;">slaBreachedAt</code>, and <code style="color: #FFF;">slaBreachedBy</code>.
+          </p>
+          <div style="background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
+              <span>Status SLA: In Progress</span>
+              <span class="priority-badge high">4h Target</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill visible" style="width: 85%; background: var(--warning);"></div></div>
+          </div>
+        </div>
+
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1rem; color: #FFF;">Recurring Automation Series</h3>
+          <p style="color: var(--muted); margin-bottom: 1.25rem;">
+            Automate daily, weekly, monthly, yearly, or custom recurrence schedules. Features smart flags like <code style="color: #FFF;">skipWeekends</code> and <code style="color: #FFF;">skipHolidays</code>, with auto-calculated <code style="color: var(--primary);">nextDueDate</code> and dynamic offset formulas.
+          </p>
+          <span class="priority-badge normal">Auto-Generates Next Instance</span>
+        </div>
+
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1rem; color: #FFF;">Approval Gate Workflows</h3>
+          <p style="color: var(--muted); margin-bottom: 1.25rem;">
+            Configure project-level approval gates where <code style="color: #FFF;">requiresApproval: true</code> halts status transitions until signed off. Explicitly tracks <code style="color: #FFF;">approvalRequestedBy</code>, <code style="color: #FFF;">approvedBy</code>, and timestamps.
+          </p>
+          <span class="priority-badge low">Approved Status Gate</span>
+        </div>
+
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1rem; color: #FFF;">21 Immutable Audit Events</h3>
+          <p style="color: var(--muted); margin-bottom: 1.25rem;">
+            Every mutation is permanently logged with IP address, performer, and full <code style="color: #FFF;">oldValue &rarr; newValue</code> diffs. Covers <code style="color: #FFF;">STATUS_CHANGE</code>, <code style="color: #FFF;">DUE_DATE_CHANGE</code>, <code style="color: #FFF;">BULK_UPDATE</code>, and 18 more events.
+          </p>
+          <span class="priority-badge highest">Immutable Log</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subtasks & Task Library -->
+    <section class="section container reveal reveal-delay-4">
+      <div class="grid-2">
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1rem;">Subtask Governance Rules</h3>
+          <p style="color: var(--muted); margin-bottom: 1rem;">
+            Subtasks share the exact same robust model as parent tasks. Live counters (<code style="color: #FFF;">subtaskCount</code> / <code style="color: #FFF;">completedSubtaskCount</code>) keep progress visible. Choose <strong style="color: #FFF;">manual</strong> completion or <strong style="color: #FFF;">all</strong> auto-closure rules.
+          </p>
+        </div>
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1rem;">Pre-Built Task Library</h3>
+          <p style="color: var(--muted); margin-bottom: 1rem;">
+            Install enterprise subject templates with one click: Bug Tracker, Feature Backlog, Customer Onboarding, HR Requests, and IT Support Tickets. Instantly deploys custom fields, statuses, and SLAs.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="nav-brand" style="margin-bottom: 1rem;">
+          <img src="official-logo.png" onerror="this.src='logo.png'" alt="ownTask" />
+          <span>own<span style="color: var(--primary);">Task</span></span>
+        </div>
+        <p style="color: var(--faint); font-size: 0.9rem; max-width: 320px;">
+          Intelligent task management for growing teams. Part of the iEyal Solutions product family.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="use-cases.html">Use Cases</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="https://ieyalsolutions.com" target="_blank">iEyal Solutions</a></li>
+          <li><a href="#">ownChat</a></li>
+          <li><a href="#">ownCart</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="mailto:hello@ieyalsolutions.com">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 iEyal Solutions. All rights reserved.</span>
+      <div class="social-links">
+        <a href="https://ieyalsolutions.com" target="_blank">&globe;</a>
+        <a href="https://linkedin.com/company/ieyalsolutions" target="_blank">in</a>
+        <a href="https://facebook.com/ieyalsolutions" target="_blank">f</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Observer
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Animate inner progress bars if any
+          entry.target.querySelectorAll('.progress-fill').forEach(bar => bar.classList.add('visible'));
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Navbar Scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ownTask Analytics — Real-Time Team & Project Performance Dashboard</title>
+  <meta name="description" content="ownTask analytics tracks completion rates, on-time delivery, SLA compliance, and team performance — filterable by project, subject, and date range." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <meta property="og:title" content="ownTask Analytics — Real-Time Performance Dashboard" />
+  <meta property="og:description" content="ownTask analytics tracks completion rates, on-time delivery, SLA compliance, and team performance — filterable by project, subject, and date range." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://owntask.ieyalsolutions.com/og-image.png" />
+  <meta property="og:url" content="https://owntask.ieyalsolutions.com/analytics.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+  <!-- Shared Navbar -->
+  <header class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      <img src="official-logo.png" onerror="this.src='logo.png'" alt="ownTask" />
+      <span>own<span style="color: var(--primary);">Task</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="features.html" class="nav-link">Features</a>
+      <a href="analytics.html" class="nav-link active">Analytics</a>
+      <a href="use-cases.html" class="nav-link">Use Cases</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+    <a href="index.html" class="btn btn-primary">Get Started &rarr;</a>
+  </header>
+
+  <main style="padding-top: var(--nav-h);">
+    <!-- Header Section -->
+    <section class="section container reveal reveal-delay-1" style="text-align: center; padding-top: 4rem;">
+      <h1 class="hero-h1-gradient" style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin-bottom: 1.5rem; line-height: 1.15;">
+        Know exactly where your team stands —<br />at any moment.
+      </h1>
+      <p style="color: var(--muted); font-size: 1.25rem; max-w: 800px; margin: 0 auto 3rem;">
+        Deep real-time metrics across completion rates, SLA compliance, and individual agent performance. Filterable by date range, project, subject, and assignee.
+      </p>
+    </section>
+
+    <!-- Key Metrics Grid with Counter Animation -->
+    <section class="section container reveal reveal-delay-2">
+      <div class="grid-3">
+        <div class="card-interactive">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Completion Rate</span>
+          <div style="font-size: 3rem; font-weight: 900; color: var(--success); margin: 0.5rem 0;">
+            <span class="counter" data-target="87.4" data-decimals="1">0</span>%
+          </div>
+          <span style="font-size: 0.85rem; color: var(--faint);">&uarr; +4.2% vs prior period</span>
+        </div>
+
+        <div class="card-interactive">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">On-Time Delivery Rate</span>
+          <div style="font-size: 3rem; font-weight: 900; color: var(--primary); margin: 0.5rem 0;">
+            <span class="counter" data-target="79.1" data-decimals="1">0</span>%
+          </div>
+          <span style="font-size: 0.85rem; color: var(--faint);">&uarr; +2.8% on-time completion</span>
+        </div>
+
+        <div class="card-interactive">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">SLA Compliance Rate</span>
+          <div style="font-size: 3rem; font-weight: 900; color: var(--secondary); margin: 0.5rem 0;">
+            <span class="counter" data-target="94.2" data-decimals="1">0</span>%
+          </div>
+          <span style="font-size: 0.85rem; color: var(--faint);">Across 1,420 tracked SLA deadlines</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Granular Analytics & Distribution -->
+    <section class="section container reveal reveal-delay-3">
+      <div class="section-header">
+        <h2>Multi-Dimensional Intelligence</h2>
+        <p>Slice and dice workload metrics by status distribution, priority rank, and agent bandwidth.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1.25rem; color: #FFF;">Status & Priority Breakdown</h3>
+          <ul style="display: flex; flex-direction: column; gap: 1rem;">
+            <li>
+              <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.35rem;">
+                <span class="status-in-progress">In Progress (<span class="counter" data-target="42" data-decimals="0">0</span> tasks)</span>
+                <span style="font-family: monospace;">45%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill visible" style="width: 45%; background: #3B82F6;"></div></div>
+            </li>
+            <li>
+              <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.35rem;">
+                <span class="status-done">Done (<span class="counter" data-target="38" data-decimals="0">0</span> tasks)</span>
+                <span style="font-family: monospace;">40%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill visible" style="width: 40%; background: #10B981;"></div></div>
+            </li>
+            <li>
+              <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.35rem;">
+                <span class="status-waiting">Waiting Approval (<span class="counter" data-target="14" data-decimals="0">0</span> tasks)</span>
+                <span style="font-family: monospace;">15%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill visible" style="width: 15%; background: #F59E0B;"></div></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-interactive">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1.25rem; color: #FFF;">Role-Scoped Access Control</h3>
+          <p style="color: var(--muted); margin-bottom: 1.25rem; line-height: 1.7;">
+            ownTask enforces strict security clarity on analytics: <strong style="color: #FFF;">owner</strong> and <strong style="color: #FFF;">admin</strong> roles view organization-wide trends and cross-department velocity, while <strong style="color: #FFF;">member</strong> roles see personalized analytics scoped exclusively to their assigned queues.
+          </p>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <span class="priority-badge highest">Admin: Full Org Scope</span>
+            <span class="priority-badge normal">Member: Personal Queue Scope</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="nav-brand" style="margin-bottom: 1rem;">
+          <img src="official-logo.png" onerror="this.src='logo.png'" alt="ownTask" />
+          <span>own<span style="color: var(--primary);">Task</span></span>
+        </div>
+        <p style="color: var(--faint); font-size: 0.9rem; max-width: 320px;">
+          Intelligent task management for growing teams. Part of the iEyal Solutions product family.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+          <li><a href="use-cases.html">Use Cases</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="https://ieyalsolutions.com" target="_blank">iEyal Solutions</a></li>
+          <li><a href="#">ownChat</a></li>
+          <li><a href="#">ownCart</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="mailto:hello@ieyalsolutions.com">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 iEyal Solutions. All rights reserved.</span>
+      <div class="social-links">
+        <a href="https://ieyalsolutions.com" target="_blank">&globe;</a>
+        <a href="https://linkedin.com/company/ieyalsolutions" target="_blank">in</a>
+        <a href="https://facebook.com/ieyalsolutions" target="_blank">f</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Observer
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.querySelectorAll('.progress-fill').forEach(bar => bar.classList.add('visible'));
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Navbar Scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Counter Animation
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+          entry.target.dataset.counted = "true";
+          const target = parseFloat(entry.target.dataset.target);
+          const decimals = parseInt(entry.target.dataset.decimals || "0");
+          let current = 0;
+          const step = target / 40;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            entry.target.textContent = current.toFixed(decimals);
+          }, 30);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+  </script>
+</body>
+</html>

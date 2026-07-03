@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" style="scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      const navEntries = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType("navigation");
+      if (navEntries && navEntries.length > 0 && navEntries[0].type === "reload") {
+        if (window.location.pathname !== "/") {
+          window.location.replace("/");
+        }
+      }
+    </script>
+    
+    <!-- Primary SEO -->
+    <title>ownTask — Project & Task Management Built for Business Teams</title>
+    <meta name="description" content="ownTask gives your team Projects, SLAs, recurring tasks, approval workflows, and real-time analytics in one intelligent platform." />
+    <meta name="keywords" content="task management, project management, SLA tracking, approval workflows, recurring tasks, business teams, ownTask" />
+    <meta name="author" content="iEyal Solutions" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://owntask.ieyalsolutions.com/" />
+    <meta name="theme-color" content="#6366F1" />
+
+    <!-- Open Graph / Facebook Share Card -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://owntask.ieyalsolutions.com/index.html" />
+    <meta property="og:site_name" content="ownTask by iEyal Solutions" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="ownTask — Project & Task Management Built for Business Teams" />
+    <meta property="og:description" content="ownTask gives your team Projects, SLAs, recurring tasks, approval workflows, and real-time analytics in one intelligent platform." />
+    <meta property="og:image" content="https://owntask.ieyalsolutions.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ownTask — Enterprise Task Command Center" />
+
+    <!-- Twitter / X Share Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ieyalsolutions" />
+    <meta name="twitter:creator" content="@ieyalsolutions" />
+    <meta name="twitter:title" content="ownTask — Project & Task Management Built for Business Teams" />
+    <meta name="twitter:description" content="ownTask gives your team Projects, SLAs, recurring tasks, approval workflows, and real-time analytics in one intelligent platform." />
+    <meta name="twitter:image" content="https://owntask.ieyalsolutions.com/og-image.png" />
+    <meta name="twitter:image:alt" content="ownTask — Enterprise Task Command Center" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "OwnTasks",
+      "url": "https://owntasks.app",
+      "description": "AI-powered project command center that unifies tasks, Kanban boards, meeting intelligence, Git workflows, and calendar planning.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "OwnTasks",
+        "url": "https://owntasks.app"
+      }
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Bulletproof Scrollbar Removal Style -->
+    <style>
+      ::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+      html, body {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
