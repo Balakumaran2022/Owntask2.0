@@ -24,86 +24,102 @@ function ExecutionFlowBox() {
       }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       style={{ transformStyle: 'preserve-3d', perspective: '1200px' }}
-      className="relative overflow-hidden rounded-[24px] p-6 bg-[#0B0D17]/90 backdrop-blur-xl border border-white/10 shadow-2xl transition-all duration-500 w-full max-w-[500px] mx-auto lg:translate-y-8 cursor-pointer flex flex-col gap-5"
+      className="relative overflow-hidden rounded-[24px] p-6 bg-[#0B0D17]/90 backdrop-blur-xl border border-white/10 shadow-2xl transition-all duration-500 w-full max-w-[500px] mx-auto lg:translate-y-8 cursor-pointer flex flex-col gap-5 font-sans"
       aria-label="Execution flow preview"
     >
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-[60px] pointer-events-none" />
 
-      {/* Project Health Card */}
-      <div className="project-card relative z-10">
-        <div className="project-header">
-          <span className="project-icon">📁</span>
-          <span className="project-name">Website Redesign</span>
-          <span className="project-status active">Active</span>
+      {/* Section 1: Project */}
+      <div className="relative z-10 flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+           <div className="flex items-center gap-2.5 text-foreground font-bold text-[1.1rem]">
+             <Folder size={20} className="text-yellow-400 fill-yellow-400/20" />
+             Website Redesign
+           </div>
+           <span className="text-muted-foreground text-sm font-bold tracking-widest">[75%]</span>
         </div>
-        <div className="health-grid">
-          <div className="health-item">
-            <span className="health-label">Total Tasks</span>
-            <span className="health-value">24</span>
-          </div>
-          <div className="health-item">
-            <span className="health-label">Completed</span>
-            <span className="health-value success">18 (75%)</span>
-          </div>
-          <div className="health-item">
-            <span className="health-label">Overdue</span>
-            <span className="health-value warning">2</span>
-          </div>
-          <div className="health-item">
-            <span className="health-label">SLA Breached</span>
-            <span className="health-value error">1</span>
-          </div>
+        
+        <div className="flex items-center gap-4 mt-1">
+           <div className="flex-1 h-2.5 rounded-full bg-white/5 overflow-hidden flex border border-white/5">
+              <motion.div initial={{ width: 0 }} animate={{ width: '75%' }} transition={{ duration: 1.5, ease: 'easeOut' }} className="h-full bg-foreground shadow-[0_0_10px_rgba(255,255,255,0.3)] relative">
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8L3N2Zz4=')] opacity-30 mix-blend-overlay" />
+              </motion.div>
+           </div>
+           <span className="text-muted-foreground text-sm font-medium whitespace-nowrap">18/24 tasks</span>
         </div>
-        <div className="health-bar">
-          <div className="health-bar-fill" style={{ width: '75%', background: 'linear-gradient(90deg, #6366F1, #10B981)' }}></div>
+        
+        <div className="flex items-center gap-2 text-[0.9rem] text-muted-foreground font-medium mt-1">
+           SLA Compliance: <span className="text-foreground ml-1">94%</span>
+           <span className="flex items-center gap-1.5 ml-2 text-emerald-400 font-bold">
+             <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+             Green
+           </span>
         </div>
       </div>
 
-      {/* Task Card */}
-      <div className="task-card relative z-10">
-        <div className="task-header">
-          <span className="task-id">TSK-7A9B2C1D</span>
-          <span className="priority-badge highest">Highest</span>
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-6 relative z-10" />
+
+      {/* Section 2: Tasks List */}
+      <div className="relative z-10 flex flex-col gap-3.5">
+        <div className="flex items-center justify-between group">
+           <div className="flex items-center gap-3">
+             <ClipboardList size={18} className="text-orange-300" />
+             <span className="font-semibold text-[0.95rem] text-foreground/90 group-hover:text-foreground transition-colors">Backend</span>
+           </div>
+           <span className="text-sm font-bold text-blue-400 bg-blue-400/10 px-2.5 py-1 rounded-md border border-blue-400/20">[In Progress]</span>
         </div>
-        <p className="task-title">Redesign customer onboarding flow</p>
-        <div className="task-meta">
-          <span>📅 Jul 5</span>
-          <span>👤 John D.</span>
-          <span className="sla-badge">⏱ SLA</span>
+
+        <div className="flex items-center justify-between group">
+           <div className="flex items-center gap-3">
+             <Palette size={18} className="text-rose-400" />
+             <span className="font-semibold text-[0.95rem] text-foreground/90 group-hover:text-foreground transition-colors">Design</span>
+           </div>
+           <span className="text-sm font-bold text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-md border border-emerald-400/20">[Done ✓]</span>
         </div>
-        <div className="task-progress">
-          <div className="progress-label">
-            <span>In Progress</span>
-            <span>80%</span>
-          </div>
-          <div className="progress-track">
-            <div className="progress-fill" style={{ width: '80%', background: '#3B82F6' }}></div>
-          </div>
-        </div>
-        <div className="task-footer">
-          <span>✓ 3/5 checklist</span>
-          <span>📎 2 files</span>
+
+        <div className="flex items-center justify-between group">
+           <div className="flex items-center gap-3">
+             <TestTube2 size={18} className="text-cyan-400" />
+             <span className="font-semibold text-[0.95rem] text-foreground/90 group-hover:text-foreground transition-colors">QA</span>
+           </div>
+           <span className="text-sm font-bold text-muted-foreground bg-white/5 px-2.5 py-1 rounded-md border border-white/10">[To Do]</span>
         </div>
       </div>
 
-      {/* Audit Timeline Entry */}
-      <div className="timeline-item relative z-10">
-        <div className="timeline-line">
-          <div className="timeline-dot" style={{ background: '#10B981' }}>✓</div>
-          <div className="timeline-connector" style={{ background: 'rgba(255,255,255,0.07)' }}></div>
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-6 relative z-10" />
+
+      {/* Section 3: Task Focus */}
+      <div className="relative z-10 flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+           <span className="text-muted-foreground text-sm font-mono font-bold tracking-wider">TSK-7A9B2C1D</span>
+           <span className="flex items-center gap-2 text-sm font-bold text-foreground">
+             <span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse" />
+             Highest
+           </span>
         </div>
-        <div className="timeline-content">
-          <div className="timeline-header">
-            <span className="action-type">STATUS_CHANGE</span>
-            <span className="performed-by">John Doe</span>
-            <span className="performed-at">Jul 1, 14:25</span>
-          </div>
-          <div className="timeline-change">
-            <span className="old-value" style={{ background: 'rgba(239,68,68,0.15)', color: '#EF4444' }}>In Progress</span>
-            <span>→</span>
-            <span className="new-value" style={{ background: 'rgba(16,185,129,0.15)', color: '#10B981' }}>Done</span>
-          </div>
+        
+        <h3 className="text-foreground font-bold text-[1.15rem] leading-snug">
+          Redesign customer onboarding
+        </h3>
+
+        <div className="flex flex-wrap items-center gap-5 mt-1">
+           <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+             <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400"><User size={14} /></div>
+             John D.
+           </div>
+           <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+             <Calendar size={14} className="text-red-400" />
+             Jul 5
+           </div>
+        </div>
+        
+        <div className="flex items-center gap-3 mt-2">
+           <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-md border border-primary/20">[In Progress]</span>
+           <div className="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden flex border border-white/5">
+              <motion.div initial={{ width: 0 }} animate={{ width: '80%' }} transition={{ duration: 1.5, ease: 'easeOut', delay: 0.3 }} className="h-full bg-primary" />
+           </div>
+           <span className="text-muted-foreground text-xs font-bold">80%</span>
         </div>
       </div>
     </motion.aside>
