@@ -42,8 +42,8 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
     };
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1200);
-      if (window.innerWidth > 1200) setMobileOpen(false);
+      setIsMobile(window.innerWidth <= 1024);
+      if (window.innerWidth > 1024) setMobileOpen(false);
     };
 
     handleScroll();

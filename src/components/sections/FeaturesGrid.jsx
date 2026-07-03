@@ -158,7 +158,7 @@ export default function FeaturesGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed italic"
+            className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-normal not-italic"
           >
             A complete business task management platform — not a glorified to-do list.
           </motion.p>
