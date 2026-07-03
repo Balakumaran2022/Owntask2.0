@@ -137,55 +137,47 @@ export default function Hero({ onOpenLogin, onOpenDemo }) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-start gap-6 text-left font-sans"
           >
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-primary/40 rounded-full bg-primary/15 text-primary text-xs md:text-sm font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(99,102,241,0.25)]">
-              <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_rgba(99,102,241,1)] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 border border-primary/30 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-semibold tracking-wide uppercase shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(99,102,241,1)] animate-pulse" />
               Enterprise Task Intelligence
             </div>
 
-            <h1 
-              style={{ fontFamily: "'Outfit', 'Inter', system-ui, sans-serif" }}
-              className="text-4xl md:text-[3.25rem] lg:text-[3.75rem] font-black tracking-[-0.03em] leading-[1.1] max-w-[800px] text-white drop-shadow-md"
-            >
+            <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.2] max-w-[700px] text-white">
               Stop managing tasks.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] via-[#6366f1] to-[#8b5cf6]">
                 Start managing outcomes.
               </span>
             </h1>
 
-            <p 
-              style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-              className="max-w-[600px] text-slate-300 text-lg md:text-xl leading-relaxed font-normal"
-            >
+            <p className="max-w-[560px] text-slate-300 text-base md:text-lg leading-relaxed font-normal">
               ownTask is the only task platform that combines project hierarchy, SLA enforcement, recurring automation, approval workflows, and real-time analytics — without the complexity of enterprise tools.
             </p>
 
-            <div className="flex flex-col gap-3 mt-2 w-full">
-              <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex flex-col gap-3 mt-1 w-full">
+              <div className="flex items-center gap-3.5 flex-wrap">
                 <motion.button
                   onClick={onOpenDemo}
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 35px rgba(99,102,241,0.7)' }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{ fontFamily: "'Outfit', 'Inter', sans-serif" }}
-                  className="btn btn-primary btn-lg !rounded-full !text-base md:!text-lg !font-bold !px-9 !py-4 shadow-[0_10px_30px_rgba(99,102,241,0.4)] transition-all"
+                  whileHover={{ scale: 1.04, boxShadow: '0 0 25px rgba(99,102,241,0.6)' }}
+                  whileTap={{ scale: 0.96 }}
+                  className="btn btn-primary !rounded-full !text-sm md:!text-base !font-semibold !px-7 !py-3.5 shadow-[0_6px_20px_rgba(99,102,241,0.35)] transition-all"
                 >
                   Get Started Free →
                 </motion.button>
                 <motion.button
                   onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(99,102,241,0.6)' }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{ fontFamily: "'Outfit', 'Inter', sans-serif" }}
-                  className="btn btn-outline btn-lg !rounded-full !text-base md:!text-lg !font-bold !px-9 !py-4 border border-white/20 text-white backdrop-blur-md transition-all"
+                  whileHover={{ scale: 1.04, backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(99,102,241,0.5)' }}
+                  whileTap={{ scale: 0.96 }}
+                  className="btn btn-outline !rounded-full !text-sm md:!text-base !font-semibold !px-7 !py-3.5 border border-white/20 text-white backdrop-blur-md transition-all"
                 >
                   See Features
                 </motion.button>
               </div>
-              <div className="flex items-center gap-6 text-sm md:text-base text-slate-400 font-medium pl-1 pt-1">
-                <span className="flex items-center gap-2">
-                  <span className="text-emerald-400 font-bold text-lg">✓</span> No credit card required
+              <div className="flex items-center gap-5 text-xs md:text-sm text-slate-400 font-medium pl-1 pt-1">
+                <span className="flex items-center gap-1.5">
+                  <span className="text-emerald-400 font-bold text-base">✓</span> No credit card required
                 </span>
-                <span className="flex items-center gap-2">
-                  <span className="text-emerald-400 font-bold text-lg">✓</span> Setup in minutes
+                <span className="flex items-center gap-1.5">
+                  <span className="text-emerald-400 font-bold text-base">✓</span> Setup in minutes
                 </span>
               </div>
             </div>
