@@ -149,7 +149,7 @@ export default function Hero({ onOpenLogin, onOpenDemo }) {
               </span>
             </h1>
 
-            <p className="max-w-[560px] text-slate-300 text-base md:text-lg leading-relaxed font-normal">
+            <p className="max-w-[560px] text-muted-foreground text-base md:text-lg leading-relaxed italic">
               ownTask is the only task platform that combines project hierarchy, SLA enforcement, recurring automation, approval workflows, and real-time analytics — without the complexity of enterprise tools.
             </p>
 
