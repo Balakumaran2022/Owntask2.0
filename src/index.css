@@ -5,7 +5,7 @@
 /* ── Dark Mode (default) ── */
 :root,
 .theme-dark {
-  --font: 'Inter', 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --bg-deep:         #07070F;
   --bg-surface-1:    #0D0D1C;
   --bg-surface-2:    #121228;
