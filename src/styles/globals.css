@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --font: 'Inter', 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --background: 132 29% 3%; /* #060B07 */
     --foreground: 153 32% 94%; /* #E8F5EF */
     --card: 135 29% 5%; /* #0A120C */
@@ -34,7 +35,7 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font);
   }
 }
 
@@ -67,7 +68,6 @@
 /* ── Reset ── */
 *, *::before, *::after {
   box-sizing: border-box; margin: 0; padding: 0;
-  font-family: var(--font) !important;
 }
 
 html {
@@ -77,19 +77,21 @@ html {
   color: var(--text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  font-family: var(--font);
 }
 
 body {
   min-height: 100vh;
   background: linear-gradient(170deg, #060B07 0%, #0A140F 50%, #060B07 100%);
   line-height: 1.6;
+  font-family: var(--font);
 }
 
 a { color: inherit; text-decoration: none; }
-button { cursor: pointer; background: none; border: none; font-family: var(--font) !important; }
+button { cursor: pointer; background: none; border: none; font-family: var(--font); }
 img { max-width: 100%; display: block; }
 ul, ol { list-style: none; }
-input, textarea, select { font-family: var(--font) !important; }
+input, textarea, select { font-family: var(--font); }
 
 /* Scrollbar - wider and permanently visible green track indicator */
 ::-webkit-scrollbar {
