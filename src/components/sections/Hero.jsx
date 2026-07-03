@@ -135,49 +135,57 @@ export default function Hero({ onOpenLogin, onOpenDemo }) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-start gap-5 text-left"
+            className="flex flex-col items-start gap-6 text-left font-sans"
           >
-            <div className="inline-flex items-center gap-2 w-fit px-3 py-1 border border-primary/30 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(99,102,241,0.9)] animate-pulse" />
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-primary/40 rounded-full bg-primary/15 text-primary text-xs md:text-sm font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(99,102,241,0.25)]">
+              <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_rgba(99,102,241,1)] animate-pulse" />
               Enterprise Task Intelligence
             </div>
 
-            <h1 className="text-4xl md:text-[3rem] lg:text-[3.5rem] font-sans font-extrabold tracking-tight leading-[1.15] max-w-[800px]">
-              <span className="text-white whitespace-nowrap">Stop managing tasks.</span><br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#8b5cf6] whitespace-nowrap">
+            <h1 
+              style={{ fontFamily: "'Outfit', 'Inter', system-ui, sans-serif" }}
+              className="text-4xl md:text-[3.25rem] lg:text-[3.75rem] font-black tracking-[-0.03em] leading-[1.1] max-w-[800px] text-white drop-shadow-md"
+            >
+              Stop managing tasks.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] via-[#6366f1] to-[#8b5cf6]">
                 Start managing outcomes.
               </span>
             </h1>
 
-            <p className="max-w-[580px] text-muted-foreground text-xl leading-relaxed">
+            <p 
+              style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+              className="max-w-[600px] text-slate-300 text-lg md:text-xl leading-relaxed font-normal"
+            >
               ownTask is the only task platform that combines project hierarchy, SLA enforcement, recurring automation, approval workflows, and real-time analytics — without the complexity of enterprise tools.
             </p>
 
-            <div className="flex flex-col gap-2 mt-2">
+            <div className="flex flex-col gap-3 mt-2 w-full">
               <div className="flex items-center gap-4 flex-wrap">
                 <motion.button
                   onClick={onOpenDemo}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, boxShadow: '0 0 35px rgba(99,102,241,0.7)' }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn btn-primary btn-lg !rounded-full !text-lg !px-8 !py-4"
+                  style={{ fontFamily: "'Outfit', 'Inter', sans-serif" }}
+                  className="btn btn-primary btn-lg !rounded-full !text-base md:!text-lg !font-bold !px-9 !py-4 shadow-[0_10px_30px_rgba(99,102,241,0.4)] transition-all"
                 >
                   Get Started Free →
                 </motion.button>
                 <motion.button
                   onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(99,102,241,0.6)' }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn btn-outline btn-lg !rounded-full !text-lg !px-8 !py-4"
+                  style={{ fontFamily: "'Outfit', 'Inter', sans-serif" }}
+                  className="btn btn-outline btn-lg !rounded-full !text-base md:!text-lg !font-bold !px-9 !py-4 border border-white/20 text-white backdrop-blur-md transition-all"
                 >
                   See Features
                 </motion.button>
               </div>
-              <div className="flex items-center gap-5 text-base text-muted-foreground font-medium pl-1">
-                <span className="flex items-center gap-1.5">
-                  <span className="text-emerald-400 text-lg">✓</span> No credit card required
+              <div className="flex items-center gap-6 text-sm md:text-base text-slate-400 font-medium pl-1 pt-1">
+                <span className="flex items-center gap-2">
+                  <span className="text-emerald-400 font-bold text-lg">✓</span> No credit card required
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="text-emerald-400 text-lg">✓</span> Setup in minutes
+                <span className="flex items-center gap-2">
+                  <span className="text-emerald-400 font-bold text-lg">✓</span> Setup in minutes
                 </span>
               </div>
             </div>
