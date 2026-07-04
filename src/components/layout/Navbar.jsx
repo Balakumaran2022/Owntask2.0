@@ -6,9 +6,8 @@ import { Menu, X } from 'lucide-react';
 const NAV_LINKS = [
   { label: 'Features',            path: '/features'  },
   { label: 'Analytics',           path: '/analytics' },
-  { label: 'Use Cases',           path: '/solutions' },
-  { label: 'Pricing',             path: '/pricing'   },
-  { label: 'About',               path: '/about'     }
+  { label: 'Use Cases',           path: '/use-cases' },
+  { label: 'Pricing',             path: '/pricing'   }
 ];
 
 export default function Navbar({ onOpenLogin, onOpenDemo }) {
@@ -26,7 +25,8 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
       setScrolled(window.scrollY > 50);
       
       let currentSection = 'home';
-      const scrollPosition = window.scrollY + 100; // offset for navbar height
+      // Use mid-screen viewport trigger for precise active section detection
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
       
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -38,6 +38,12 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
           }
         }
       }
+
+      // If scrolled to the bottom, highlight the last section
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
+        currentSection = sections[sections.length - 1];
+      }
+
       setActiveSection(currentSection);
     };
 
@@ -57,9 +63,6 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
   }, []);
 
   const handleClick = (e, path) => {
-    // Remove specific React Router navigation for Analytics to keep it as a single page scrolling section
-
-
     e.preventDefault();
     const id = path.replace(/^\//, '') || 'home';
     const element = document.getElementById(id);
@@ -72,51 +75,58 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[100] flex items-center transition-all duration-300 ease-out px-5 md:px-8 ${
-          scrolled
-            ? 'h-[72px] shadow-xl'
-            : 'h-[80px] bg-transparent border-b-transparent'
-        }`}
-        style={scrolled ? {
-          background: 'rgba(18, 18, 40, 0.6)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: '1px solid rgba(255,255,255,0.07)'
-        } : {}}
-      >
-        <div className="w-full max-w-[1240px] mx-auto flex items-center justify-between gap-4">
+      {/* Floating Rectangular Rounded Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-[1000] flex justify-center pt-4 px-4 pointer-events-none">
+        <motion.header
+          initial={{ y: -80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="pointer-events-auto w-full max-w-[1100px] relative flex items-center justify-between gap-4 px-5 py-3 rounded-2xl transition-all duration-300"
+          style={{
+            background: scrolled
+              ? 'rgba(10, 10, 22, 0.92)'
+              : 'rgba(10, 10, 22, 0.75)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: scrolled
+              ? '1px solid rgba(99, 102, 241, 0.25)'
+              : '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: scrolled
+              ? '0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.15), inset 0 1px 0 rgba(255,255,255,0.06)'
+              : '0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)',
+          }}
+        >
           {/* ── Logo ── */}
           <Link to="/" onClick={(e) => handleClick(e, '/')} className="flex items-center shrink-0 no-underline gap-2">
             <img src="/official-logo.png" alt="ownTask" className="w-8 h-8 object-contain" />
-            <span className="text-xl md:text-2xl font-bold tracking-tight">
+            <span className="text-xl md:text-2xl font-black italic tracking-tight">
               <span className="text-white">own</span><span className="text-primary">Task</span>
             </span>
           </Link>
 
-          {/* ── Desktop Nav Links ── */}
+          {/* ── Desktop Nav Links — Absolutely Centered ── */}
           {!isMobile && (
-            <nav className="flex items-center gap-0.5">
+            <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-0.5">
               {NAV_LINKS.map((link) => {
                 const linkId = link.path.replace(/^\//, '') || 'home';
-                const isActive = activeSection === linkId;
+                const isActive = location.pathname === link.path || activeSection === linkId;
                 return (
                   <a
                     key={link.path}
                     href={link.path}
                     onClick={(e) => handleClick(e, link.path)}
-                    className={`relative px-3 py-2 text-[14px] font-bold tracking-wide transition-colors duration-200 whitespace-nowrap no-underline ${
-                      isActive ? 'text-white' : 'text-white/50 hover:text-white'
+                    className={`relative px-4 py-2 text-[13.5px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap no-underline rounded-xl ${
+                      isActive
+                        ? 'active text-white bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]'
+                        : 'text-white/55 hover:text-white hover:bg-white/[0.05]'
                     }`}
+                    style={isActive ? { color: '#FFFFFF' } : {}}
                   >
                     {link.label}
                     {isActive && (
                       <motion.span
                         layoutId="navbar-underline"
-                        className="absolute bottom-1 left-3 right-3 h-[2px] bg-white rounded-full glow-white"
+                        className="absolute bottom-1 left-4 right-4 h-[2px] bg-gradient-to-r from-indigo-400 to-violet-400 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.8)]"
                         transition={{ duration: 0.3, ease: 'easeOut' }}
                       />
                     )}
@@ -128,10 +138,10 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
 
           {/* ── Desktop CTA Buttons ── */}
           {!isMobile && (
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2.5 shrink-0">
               <button
                 onClick={onOpenLogin}
-                className="px-3 py-1.5 text-[14px] font-bold text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer bg-transparent border-none"
+                className="px-3.5 py-1.5 text-[13.5px] font-bold text-white/55 hover:text-white transition-colors duration-200 cursor-pointer bg-transparent border-none rounded-xl hover:bg-white/[0.05]"
               >
                 Sign In
               </button>
@@ -139,29 +149,37 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                 onClick={onOpenDemo}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn btn-sm !rounded-full !px-5 text-white bg-primary hover:bg-primary/90 font-bold border-none transition-all duration-200"
+                animate={{
+                  boxShadow: [
+                    '0 0 14px rgba(99,102,241,0.4)',
+                    '0 0 26px rgba(99,102,241,0.75)',
+                    '0 0 14px rgba(99,102,241,0.4)'
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                className="px-5 py-2 rounded-xl text-white text-[13.5px] font-extrabold bg-gradient-to-r from-indigo-500 to-violet-600 hover:brightness-110 border-none transition-all duration-200 cursor-pointer"
               >
                 Get Started →
               </motion.button>
             </div>
           )}
 
-          {/* ── Mobile: Sign In + Hamburger ── */}
+          {/* ── Mobile Hamburger ── */}
           {isMobile && (
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setMobileOpen(prev => !prev)}
-                className="flex items-center justify-center w-9 h-9 rounded-xl border border-primary/20 bg-primary/5 text-primary transition-all"
+                className="flex items-center justify-center w-9 h-9 rounded-xl border border-white/15 bg-white/[0.06] text-white/80 hover:text-white hover:bg-white/[0.12] transition-all cursor-pointer"
                 aria-label="Toggle menu"
               >
                 {mobileOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           )}
-        </div>
-      </motion.header>
+        </motion.header>
+      </div>
 
-      {/* ── Mobile Slide-Down Menu ── */}
+      {/* ── Mobile Slide-In Full-Screen Menu ── */}
       <AnimatePresence>
         {isMobile && mobileOpen && (
           <>
@@ -172,47 +190,56 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 z-[98] bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 z-[998] bg-black/80 backdrop-blur-md"
+              style={{ zIndex: 998 }}
             />
 
-            {/* Menu Panel */}
+            {/* Full-Screen Slide-In Menu Panel */}
             <motion.div
               key="mobile-menu"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-[76px] left-0 right-0 z-[99] bg-background/98 backdrop-blur-[24px] border-b border-primary/15 px-5 py-4 flex flex-col gap-1"
+              initial={{ x: '100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '100%', opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-0 z-[999] w-full h-screen bg-[#0A0A18]/98 backdrop-blur-3xl px-8 pt-28 pb-12 flex flex-col justify-between overflow-y-auto"
+              style={{ zIndex: 999 }}
             >
-              {NAV_LINKS.map((link) => {
-                const linkId = link.path.replace(/^\//, '') || 'home';
-                const isActive = activeSection === linkId;
-                return (
-                  <a
-                    key={link.path}
-                    href={link.path}
-                    onClick={(e) => handleClick(e, link.path)}
-                    className={`block px-4 py-3 text-base font-bold rounded-xl transition-all no-underline ${
-                      isActive
-                        ? 'text-primary bg-primary/10 border border-primary/20'
-                        : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                );
-              })}
-              <div className="pt-2 border-t border-primary/10 mt-1 flex flex-col gap-2">
+              {/* Navigation Links */}
+              <div className="flex flex-col gap-4 mt-6">
+                {NAV_LINKS.map((link) => {
+                  const linkId = link.path.replace(/^\//, '') || 'home';
+                  const isActive = location.pathname === link.path || activeSection === linkId;
+                  return (
+                    <a
+                      key={link.path}
+                      href={link.path}
+                      onClick={(e) => handleClick(e, link.path)}
+                      className={`flex items-center justify-between py-4 text-2xl md:text-3xl font-black transition-all no-underline border-b border-white/10 ${
+                        isActive
+                          ? 'active text-white pl-4 border-l-4 border-l-primary bg-primary/10 rounded-r-2xl'
+                          : 'text-white/60 hover:text-white hover:pl-2'
+                      }`}
+                      style={isActive ? { color: '#FFFFFF' } : {}}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && <span className="text-primary text-sm font-mono uppercase tracking-widest">Active</span>}
+                    </a>
+                  );
+                })}
+              </div>
+
+              {/* Bottom CTA Buttons */}
+              <div className="flex flex-col gap-4 pt-6 border-t border-white/10 mt-auto">
                 <button
                   onClick={() => { setMobileOpen(false); onOpenLogin(); }}
-                  className="w-full py-3 text-base font-extrabold border border-primary/20 text-primary bg-primary/5 rounded-xl transition-all cursor-pointer"
+                  className="w-full py-4 text-lg font-extrabold border border-white/20 text-white bg-white/5 hover:bg-white/10 rounded-2xl transition-all cursor-pointer active:scale-[0.98]"
                 >
                   Sign In
                 </button>
                 <button 
                   onClick={() => { setMobileOpen(false); onOpenDemo(); }}
-                  className="w-full btn !rounded-full mt-2 text-[#050e09] font-black border-none transition-all duration-200"
-                  style={{ background: 'linear-gradient(135deg, #34d399 0%, #6366f1 100%)', boxShadow: '0 0 12px rgba(52,211,153,0.2)' }}
+                  className="w-full py-4 rounded-2xl text-white text-lg font-black border-none transition-all duration-200 cursor-pointer active:scale-[0.98]"
+                  style={{ background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)', boxShadow: '0 0 25px rgba(99,102,241,0.5)' }}
                 >
                   Get Started →
                 </button>

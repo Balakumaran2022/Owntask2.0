@@ -4,9 +4,10 @@ import Background from './components/layout/Background';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Dashboard from './components/dashboard/Dashboard';
+import ParticleBackground from './components/ui/ParticleBackground';
+import CookieConsent from './components/ui/CookieConsent';
 
 import Home from './pages/core/Home';
-import Analytics from './pages/core/Analytics';
 import BookDemoForm from './components/forms/BookDemoForm';
 // Helper to dynamically enforce SEO tags on route changes
 function DynamicSEO() {
@@ -14,39 +15,59 @@ function DynamicSEO() {
   useEffect(() => {
     const seoData = {
       '/': {
-        title: "ownTask — Project & Task Management Built for Business Teams",
+        title: "OwnTasks | Intelligent Command Center",
+        desc: "ownTask gives your team Projects, SLAs, recurring tasks, approval workflows, and real-time analytics in one intelligent platform.",
+        ogPage: "index.html"
+      },
+      '/index.html': {
+        title: "OwnTasks | Intelligent Command Center",
         desc: "ownTask gives your team Projects, SLAs, recurring tasks, approval workflows, and real-time analytics in one intelligent platform.",
         ogPage: "index.html"
       },
       '/features': {
-        title: "ownTask Features — SLA, Recurring Tasks, Approvals, Audit Trail & More",
+        title: "OwnTasks | Intelligent Command Center",
+        desc: "Explore ownTask's complete feature set: 3-level hierarchy, dual board types, 2-level SLA, 21 audit events, recurring tasks, approvals, custom fields, bulk upload and more.",
+        ogPage: "features.html"
+      },
+      '/features.html': {
+        title: "OwnTasks | Intelligent Command Center",
         desc: "Explore ownTask's complete feature set: 3-level hierarchy, dual board types, 2-level SLA, 21 audit events, recurring tasks, approvals, custom fields, bulk upload and more.",
         ogPage: "features.html"
       },
       '/analytics': {
-        title: "ownTask Analytics — Real-Time Team & Project Performance Dashboard",
+        title: "OwnTasks | Intelligent Command Center",
         desc: "ownTask analytics tracks completion rates, on-time delivery, SLA compliance, and team performance — filterable by project, subject, and date range.",
         ogPage: "analytics.html"
       },
-      '/solutions': {
-        title: "ownTask Use Cases — Support Teams, Operations & Project Management",
+      '/analytics.html': {
+        title: "OwnTasks | Intelligent Command Center",
+        desc: "ownTask analytics tracks completion rates, on-time delivery, SLA compliance, and team performance — filterable by project, subject, and date range.",
+        ogPage: "analytics.html"
+      },
+      '/use-cases': {
+        title: "OwnTasks | Intelligent Command Center",
+        desc: "See how support teams, ops managers, and agencies use ownTask to manage SLAs, recurring processes, and multi-project oversight.",
+        ogPage: "use-cases.html"
+      },
+      '/use-cases.html': {
+        title: "OwnTasks | Intelligent Command Center",
         desc: "See how support teams, ops managers, and agencies use ownTask to manage SLAs, recurring processes, and multi-project oversight.",
         ogPage: "use-cases.html"
       },
       '/pricing': {
-        title: "ownTask Pricing — Transparent Plans for Teams of All Sizes",
+        title: "OwnTasks | Intelligent Command Center",
         desc: "Transparent pricing from free to enterprise. SLA tracking, recurring tasks, approval workflows, and full analytics — scale when ready.",
         ogPage: "pricing.html"
       },
-      '/about': {
-        title: "About ownTask — Built by iEyal Solutions",
-        desc: "ownTask is built by iEyal Solutions — focused, practical software for growing businesses.",
-        ogPage: "about.html"
+      '/pricing.html': {
+        title: "OwnTasks | Intelligent Command Center",
+        desc: "Transparent pricing from free to enterprise. SLA tracking, recurring tasks, approval workflows, and full analytics — scale when ready.",
+        ogPage: "pricing.html"
       }
     };
 
     const current = seoData[pathname] || seoData['/'];
-    document.title = current.title;
+    document.title = "OwnTasks | Intelligent Command Center";
 
     let descMeta = document.querySelector('meta[name="description"]');
     if (!descMeta) {
@@ -95,6 +116,14 @@ function DynamicSEO() {
       document.head.appendChild(ogUrl);
     }
     ogUrl.content = `https://owntask.ieyalsolutions.com/${current.ogPage}`;
+
+    let twCard = document.querySelector('meta[name="twitter:card"]');
+    if (!twCard) {
+      twCard = document.createElement('meta');
+      twCard.setAttribute('name', 'twitter:card');
+      document.head.appendChild(twCard);
+    }
+    twCard.content = "summary_large_image";
   }, [pathname]);
 
   return null;
@@ -104,7 +133,7 @@ function DynamicSEO() {
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    const path = pathname.replace(/^\//, ''); // remove leading slash
+    const path = pathname.replace(/^\//, '').replace(/\.html$/, ''); // remove leading slash and .html
     const id = path.split('/')[0] || 'home'; // get first part
     
     // Give a slight delay to ensure DOM is ready if just loaded
@@ -135,7 +164,9 @@ export default function App() {
     return (
       <div className="relative min-h-screen bg-background">
         <Background />
+        <ParticleBackground />
         <Dashboard onLogout={() => setIsLoggedIn(false)} />
+        <CookieConsent />
       </div>
     );
   }
@@ -146,6 +177,7 @@ export default function App() {
       <ScrollToTop />
       <div className="relative min-h-screen bg-background flex flex-col overflow-x-hidden">
         <Background />
+        <ParticleBackground />
         <Navbar onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />
         
         <main className="flex-1 relative z-10 pt-20 flex flex-col overflow-hidden gap-0">
@@ -157,20 +189,22 @@ export default function App() {
         <Footer isDark={isDark} onToggleTheme={() => setIsDark(p => !p)} />
 
         {isDemoOpen && (
-          <div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsDemoOpen(false)} />
-            <div className="relative z-10 w-full max-w-[700px] max-h-[90vh] overflow-y-auto rounded-3xl hide-scrollbar" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+          <div className="fixed inset-0 z-[2000] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-md" onClick={() => setIsDemoOpen(false)} />
+            <div className="relative z-10 w-full max-w-[640px] my-auto max-h-[85vh] overflow-y-auto rounded-3xl hide-scrollbar shadow-2xl border border-white/10 bg-[#050e09]" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
                <BookDemoForm />
                <button 
                  onClick={() => setIsDemoOpen(false)} 
-                 className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border-none cursor-pointer"
+                 className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border-none cursor-pointer"
                >
                  ✕
                </button>
             </div>
           </div>
         )}
+
+        <CookieConsent />
       </div>
     </BrowserRouter>
   );

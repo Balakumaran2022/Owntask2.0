@@ -142,41 +142,96 @@ const TabSLA = () => (
 /* ─── AUDIT TIMELINE ─── */
 const TabAudit = () => {
   const events = [
-    { icon: '✅', action: 'STATUS_CHANGE',  desc: 'In Progress → Done',    actor: 'John Doe', time: 'Jul 1, 14:25',  cls: 'text-emerald-400 border-emerald-500/20 bg-emerald-500/5' },
-    { icon: '👤', action: 'ASSIGN',          desc: 'Assigned to: Sarah K.',  actor: 'Admin',    time: 'Jul 1, 10:12',  cls: 'text-blue-400 border-blue-500/20 bg-blue-500/5' },
-    { icon: '📅', action: 'DUE_DATE_CHANGE', desc: 'Jul 5 → Jul 8',         actor: 'John Doe', time: 'Jun 30, 16:40', cls: 'text-amber-400 border-amber-500/20 bg-amber-500/5' },
-    { icon: '✨', action: 'CREATE',           desc: 'Task created',           actor: 'System',   time: 'Jun 30, 09:00', cls: 'text-primary border-primary/20 bg-primary/5' },
+    {
+      dotText: '✓',
+      dotBg: '#10B981',
+      actionType: 'STATUS_CHANGE',
+      performedBy: 'John Doe',
+      performedAt: 'Jul 1, 14:25',
+      oldValue: 'In Progress',
+      oldBg: 'rgba(239,68,68,0.15)',
+      oldColor: '#EF4444',
+      newValue: 'Done',
+      newBg: 'rgba(16,185,129,0.15)',
+      newColor: '#10B981',
+      actionStyle: { background: 'rgba(16,185,129,0.2)', color: '#10B981', borderColor: 'rgba(16,185,129,0.4)' }
+    },
+    {
+      dotText: '👤',
+      dotBg: '#3B82F6',
+      actionType: 'ASSIGN',
+      performedBy: 'Admin',
+      performedAt: 'Jul 1, 10:12',
+      oldValue: 'Unassigned',
+      oldBg: 'rgba(148,163,184,0.15)',
+      oldColor: '#94A3B8',
+      newValue: 'Sarah K.',
+      newBg: 'rgba(59,130,246,0.15)',
+      newColor: '#3B82F6',
+      actionStyle: { background: 'rgba(59,130,246,0.2)', color: '#3B82F6', borderColor: 'rgba(59,130,246,0.4)' }
+    },
+    {
+      dotText: '📅',
+      dotBg: '#F59E0B',
+      actionType: 'DUE_DATE_CHANGE',
+      performedBy: 'John Doe',
+      performedAt: 'Jun 30, 16:40',
+      oldValue: 'Jul 5',
+      oldBg: 'rgba(245,158,11,0.15)',
+      oldColor: '#F59E0B',
+      newValue: 'Jul 8',
+      newBg: 'rgba(16,185,129,0.15)',
+      newColor: '#10B981',
+      actionStyle: { background: 'rgba(245,158,11,0.2)', color: '#F59E0B', borderColor: 'rgba(245,158,11,0.4)' }
+    },
+    {
+      dotText: '✨',
+      dotBg: '#6366F1',
+      actionType: 'CREATE',
+      performedBy: 'System',
+      performedAt: 'Jun 30, 09:00',
+      oldValue: 'Draft',
+      oldBg: 'rgba(148,163,184,0.15)',
+      oldColor: '#94A3B8',
+      newValue: 'Task Created',
+      newBg: 'rgba(99,102,241,0.15)',
+      newColor: '#6366F1',
+      actionStyle: { background: 'rgba(99,102,241,0.2)', color: '#6366F1', borderColor: 'rgba(99,102,241,0.4)' }
+    }
   ];
+
   return (
-    <div className="p-8 lg:p-12 max-w-[700px] mx-auto relative">
-      <div className="absolute top-12 bottom-12 left-[72px] lg:left-[84px] w-[1px] bg-gradient-to-b from-transparent via-white/8 to-transparent" />
-      <div className="flex flex-col gap-10 relative z-10">
-        {events.map((ev, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: -28 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.13, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="flex gap-7 group"
-          >
-            <div className="w-14 h-14 rounded-2xl bg-[#0A0A14] border border-white/[0.07] flex items-center justify-center text-2xl shrink-0 shadow-lg group-hover:border-primary/25 group-hover:scale-105 group-hover:shadow-[0_8px_24px_rgba(99,102,241,0.15)] transition-all duration-300">
-              {ev.icon}
+    <div className="p-8 lg:p-12 max-w-[700px] mx-auto flex flex-col gap-6">
+      {events.map((ev, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: -28 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="timeline-item flex gap-5 relative group bg-[#0A0A14]/80 border border-white/[0.07] rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 shadow-lg"
+        >
+          <div className="timeline-line flex flex-col items-center relative">
+            <div className="timeline-dot w-9 h-9 rounded-full flex items-center justify-center font-black text-sm shadow-md z-10 shrink-0" style={{ background: ev.dotBg, color: '#FFFFFF' }}>
+              {ev.dotText}
             </div>
-            <div className="flex flex-col gap-2.5 pt-1.5 w-full">
-              <div className="flex items-start justify-between flex-wrap gap-2">
-                <div className="flex items-center gap-3 flex-wrap">
-                  <span className={`text-[0.65rem] font-black uppercase tracking-widest px-3 py-1 rounded-lg border ${ev.cls}`}>{ev.action}</span>
-                  <span className="text-base font-semibold text-white/85">{ev.desc}</span>
-                </div>
-                <span className="text-xs font-mono text-white/30 mt-0.5">{ev.time}</span>
-              </div>
-              <div className="text-sm font-medium text-white/35 flex items-center gap-2">
-                <User size={13} /> {ev.actor}
-              </div>
+            {i !== events.length - 1 && (
+              <div className="timeline-connector w-[2px] flex-grow my-2" style={{ background: 'rgba(255,255,255,0.07)' }} />
+            )}
+          </div>
+          <div className="timeline-content flex-grow flex flex-col gap-3">
+            <div className="timeline-header flex items-center justify-between flex-wrap gap-2">
+              <span className="action-type text-[0.68rem] font-black uppercase tracking-widest px-2.5 py-1 rounded-md border" style={ev.actionStyle}>{ev.actionType}</span>
+              <span className="performed-by text-sm font-semibold text-white/90 mr-auto ml-2">{ev.performedBy}</span>
+              <span className="performed-at text-xs font-mono text-white/40">{ev.performedAt}</span>
             </div>
-          </motion.div>
-        ))}
-      </div>
+            <div className="timeline-change flex items-center gap-3 text-sm font-bold pt-1">
+              <span className="old-value px-3 py-1 rounded-lg text-xs font-extrabold" style={{ background: ev.oldBg, color: ev.oldColor }}>{ev.oldValue}</span>
+              <span className="text-white/40 font-mono">→</span>
+              <span className="new-value px-3 py-1 rounded-lg text-xs font-extrabold" style={{ background: ev.newBg, color: ev.newColor }}>{ev.newValue}</span>
+            </div>
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 };

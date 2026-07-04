@@ -67,30 +67,28 @@ export default function BulkImport() {
           >
             Import tasks via CSV bulk upload. Rows with missing required fields are automatically placed into <span className="text-white font-bold">Backlog/Draft</span> state — with an automated warning flagging which fields are missing. Fix and promote drafts to active tasks at any time. Bulk update, bulk status change, and bulk assignments are all supported.
           </motion.p>
-        </div>
-
-        {/* Browser Mock Wrapper */}
-        <div className="max-w-4xl mx-auto">
-          <div className="w-full rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_32px_80px_rgba(0,0,0,0.65)] relative"
-            style={{ background: 'linear-gradient(160deg, #090911 0%, #0d0d1b 100%)' }}
+        </div>        {/* Browser Mock Wrapper (High Visibility & Modern UI) */}
+        <div className="max-w-5xl mx-auto">
+          <div className="w-full rounded-[32px] overflow-hidden border border-white/20 shadow-[0_32px_90px_rgba(0,0,0,0.85)] relative"
+            style={{ background: 'linear-gradient(160deg, #13122b 0%, #0d0c1f 100%)' }}
           >
             {/* Chrome Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05]">
-              <div className="flex items-center gap-2">
-                <div className="w-3.5 h-3.5 rounded-full bg-red-400/40 border border-red-400/60" />
-                <div className="w-3.5 h-3.5 rounded-full bg-amber-400/40 border border-amber-400/60" />
-                <div className="w-3.5 h-3.5 rounded-full bg-emerald-400/40 border border-emerald-400/60" />
+            <div className="flex items-center justify-between px-7 py-4.5 border-b border-white/10 bg-[#0a0a16]/80 backdrop-blur-md">
+              <div className="flex items-center gap-2.5">
+                <div className="w-3.5 h-3.5 rounded-full bg-red-500/80 border border-red-400 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
+                <div className="w-3.5 h-3.5 rounded-full bg-amber-500/80 border border-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+                <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/80 border border-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
               </div>
-              <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-white/[0.04] border border-white/[0.06]">
-                <FileSpreadsheet size={13} className="text-emerald-400" />
-                <span className="text-xs font-mono text-white/40">csv_importer_q3_release.csv</span>
+              <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-xl bg-white/10 border border-white/15 shadow-inner">
+                <FileSpreadsheet size={15} className="text-emerald-400 animate-pulse" />
+                <span className="text-xs font-mono font-bold text-white/90">csv_importer_q3_release.csv</span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-[10px] font-mono text-white/30">Rows: 149</span>
+                <span className="text-xs font-mono font-bold text-white/60 bg-white/5 px-3 py-1 rounded-lg border border-white/10">Rows: 149</span>
                 {draftRowFixed && (
                   <button 
                     onClick={handleReset}
-                    className="text-[9px] font-mono text-primary hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+                    className="text-xs font-mono font-bold text-primary hover:text-white transition-colors bg-primary/10 hover:bg-primary/20 px-3 py-1 rounded-lg border border-primary/30 cursor-pointer shadow-sm"
                   >
                     Reset Demo
                   </button>
@@ -99,77 +97,81 @@ export default function BulkImport() {
             </div>
 
             {/* Mock Dashboard Layout */}
-            <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 text-left">
+            <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 text-left bg-gradient-to-b from-transparent via-white/[0.01] to-transparent">
               
               {/* LEFT COLUMN: Import Status & Validation List (col-span-7) */}
               <div className="lg:col-span-7 flex flex-col gap-5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">Upload Validation Summary</span>
-                  <span className="text-xs font-bold text-[#34d399] bg-[#34d399]/10 border border-[#34d399]/20 px-2 py-0.5 rounded">
-                    {draftRowFixed ? '100% Validated' : 'Issues Found (1)'}
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                  <span className="text-xs font-mono font-black text-white/70 tracking-widest uppercase flex items-center gap-2">
+                    <Database size={15} className="text-primary" />
+                    <span>Upload Validation Summary</span>
+                  </span>
+                  <span className="text-xs font-extrabold text-[#34d399] bg-[#34d399]/15 border border-[#34d399]/30 px-3 py-1 rounded-full shadow-[0_0_15px_rgba(52,211,153,0.25)]">
+                    {draftRowFixed ? '✓ 100% Validated' : '⚠️ Issues Found (1)'}
                   </span>
                 </div>
 
-                {/* Validated Rows */}
-                <div className="flex flex-col gap-3">
+                {/* Validated Rows (High Visibility Modern Cards) */}
+                <div className="flex flex-col gap-3.5">
                   {[
                     { row: 1, title: 'Database index migration', status: 'Active', desc: 'Valid row structure' },
                     { row: 2, title: 'API Gateway endpoint setup', status: 'Active', desc: 'Valid row structure' },
                     { row: 3, title: 'Client onboarding walkthrough', status: 'Active', desc: 'Valid row structure' }
                   ].map((item) => (
-                    <div key={item.row} className="p-3.5 rounded-xl border border-white/[0.03] bg-white/[0.01] flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-7 h-7 rounded-lg bg-[#34d399]/10 border border-[#34d399]/20 flex items-center justify-center text-[#34d399]">
-                          <Check size={14} className="stroke-[3]" />
+                    <div key={item.row} className="p-4 rounded-2xl border border-white/15 bg-white/[0.06] hover:bg-white/[0.1] hover:border-white/25 transition-all duration-300 flex items-center justify-between gap-4 shadow-lg backdrop-blur-md group">
+                      <div className="flex items-center gap-3.5">
+                        <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.3)] group-hover:scale-110 transition-transform">
+                          <Check size={16} className="stroke-[3]" />
                         </div>
                         <div>
-                          <h5 className="text-white/80 font-bold text-xs">Row #{item.row}: {item.title}</h5>
-                          <span className="text-[10px] text-white/30 font-mono">{item.desc}</span>
+                          <h5 className="text-white font-extrabold text-sm md:text-base tracking-wide">{`Row #${item.row}: ${item.title}`}</h5>
+                          <span className="text-xs text-white/65 font-mono mt-0.5 block">{item.desc}</span>
                         </div>
                       </div>
-                      <span className="px-2 py-0.5 rounded text-[8px] font-bold font-mono tracking-wide bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-black font-mono tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm">
                         {item.status}
                       </span>
                     </div>
                   ))}
 
-                  {/* Warning / Draft Row */}
+                  {/* Warning / Draft Row (High Visibility & Neon Glow) */}
                   <motion.div 
                     animate={{
-                      borderColor: draftRowFixed ? 'rgba(255,255,255,0.03)' : 'rgba(239,68,68,0.25)',
-                      backgroundColor: draftRowFixed ? 'rgba(255,255,255,0.01)' : 'rgba(239,68,68,0.02)'
+                      borderColor: draftRowFixed ? 'rgba(52,211,153,0.5)' : 'rgba(239,68,68,0.6)',
+                      backgroundColor: draftRowFixed ? 'rgba(52,211,153,0.12)' : 'rgba(239,68,68,0.16)',
+                      boxShadow: draftRowFixed ? '0 0 30px rgba(52,211,153,0.25)' : '0 0 30px rgba(239,68,68,0.35)'
                     }}
-                    className="p-3.5 rounded-xl border flex items-center justify-between gap-4 relative overflow-hidden transition-all duration-300"
+                    className="p-4 rounded-2xl border flex items-center justify-between gap-4 relative overflow-hidden transition-all duration-300 backdrop-blur-md"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3.5">
                       <motion.div 
                         animate={{
-                          backgroundColor: draftRowFixed ? 'rgba(52,211,153,0.1)' : 'rgba(239,68,68,0.1)',
-                          borderColor: draftRowFixed ? 'rgba(52,211,153,0.2)' : 'rgba(239,68,68,0.2)',
+                          backgroundColor: draftRowFixed ? 'rgba(52,211,153,0.25)' : 'rgba(239,68,68,0.25)',
+                          borderColor: draftRowFixed ? 'rgba(52,211,153,0.5)' : 'rgba(239,68,68,0.5)',
                           color: draftRowFixed ? '#34d399' : '#f87171'
                         }}
-                        className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border"
+                        className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border shadow-md"
                       >
-                        {draftRowFixed ? <Check size={14} className="stroke-[3]" /> : <AlertCircle size={14} />}
+                        {draftRowFixed ? <Check size={16} className="stroke-[3]" /> : <AlertCircle size={16} />}
                       </motion.div>
                       <div>
-                        <h5 className="text-white/80 font-bold text-xs">Row #4: Set up SSL Certs</h5>
+                        <h5 className="text-white font-black text-sm md:text-base tracking-wide">Row #4: Set up SSL Certs</h5>
                         <AnimatePresence mode="wait">
                           {draftRowFixed ? (
                             <motion.span 
                               key="valid" 
                               initial={{ opacity: 0 }} 
                               animate={{ opacity: 1 }}
-                              className="text-[10px] text-white/30 font-mono block mt-0.5"
+                              className="text-xs text-emerald-300 font-mono font-bold block mt-1"
                             >
-                              Validated & promoted
+                              ✓ Validated & promoted to Active
                             </motion.span>
                           ) : (
                             <motion.span 
                               key="invalid" 
                               initial={{ opacity: 0 }} 
                               animate={{ opacity: 1 }}
-                              className="text-[10px] text-red-400 font-mono font-bold block mt-0.5"
+                              className="text-xs text-red-300 font-mono font-extrabold block mt-1"
                             >
                               ⚠️ Missing required field: Assignee
                             </motion.span>
@@ -181,11 +183,11 @@ export default function BulkImport() {
                     {/* Badge */}
                     <motion.span
                       animate={{
-                        color: draftRowFixed ? '#34d399' : '#f59e0b',
-                        borderColor: draftRowFixed ? 'rgba(52,211,153,0.2)' : 'rgba(245,158,11,0.2)',
-                        backgroundColor: draftRowFixed ? 'rgba(52,211,153,0.05)' : 'rgba(245,158,11,0.05)'
+                        color: draftRowFixed ? '#34d399' : '#fca5a5',
+                        borderColor: draftRowFixed ? 'rgba(52,211,153,0.5)' : 'rgba(239,68,68,0.5)',
+                        backgroundColor: draftRowFixed ? 'rgba(52,211,153,0.2)' : 'rgba(239,68,68,0.25)'
                       }}
-                      className="px-2 py-0.5 rounded text-[8px] font-bold font-mono tracking-wide border transition-all duration-300"
+                      className="px-3 py-1 rounded-full text-[10px] font-black font-mono tracking-wider border shadow-sm uppercase"
                     >
                       {draftRowFixed ? 'Active' : 'Draft'}
                     </motion.span>
@@ -194,80 +196,83 @@ export default function BulkImport() {
               </div>
 
               {/* RIGHT COLUMN: Interactive Draft Resolution Panel (col-span-5) */}
-              <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-white/[0.05] pt-6 lg:pt-0 lg:pl-6 flex flex-col justify-between">
+              <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-white/15 pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-between">
                 
                 {/* Panel Header */}
-                <div className="flex flex-col gap-2">
-                  <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">Promote Draft Task</span>
-                  <h4 className="text-white font-bold text-sm">Resolve Row #4 Validation Error</h4>
-                  <p className="text-white/45 text-xs leading-relaxed">
+                <div className="flex flex-col gap-2 pb-3 border-b border-white/10">
+                  <span className="text-xs font-mono font-black text-primary tracking-widest uppercase flex items-center gap-1.5">
+                    <Sliders size={14} />
+                    <span>Promote Draft Task</span>
+                  </span>
+                  <h4 className="text-white font-black text-base md:text-lg">Resolve Row #4 Validation Error</h4>
+                  <p className="text-white/70 text-xs leading-relaxed font-medium">
                     Set the missing required parameters to release this item from the Draft backlog.
                   </p>
                 </div>
 
-                {/* Form Input fields */}
-                <div className="my-6 flex flex-col gap-4">
+                {/* Form Input fields (High Visibility & Crisp Contrast) */}
+                <div className="my-6 flex flex-col gap-5">
                   <div>
-                    <label className="text-[10px] font-mono text-white/40 block mb-1.5 uppercase">Set Assignee (Required)</label>
+                    <label className="text-xs font-mono font-bold text-white/80 block mb-2 uppercase tracking-wider">Set Assignee (Required)</label>
                     <select
                       value={selectedAssignee}
                       onChange={(e) => setSelectedAssignee(e.target.value)}
                       disabled={draftRowFixed}
-                      className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2 text-xs text-white/80 focus:border-primary/50 focus:outline-none transition-all disabled:opacity-50 cursor-pointer"
+                      className="w-full bg-white/10 border border-white/25 rounded-2xl px-4 py-3.5 text-sm text-white font-bold focus:border-primary focus:bg-white/15 focus:outline-none transition-all disabled:opacity-50 cursor-pointer shadow-inner"
                     >
-                      <option value="" className="bg-[#0b0b16] text-white/60">-- Choose Assignee --</option>
-                      <option value="Alex" className="bg-[#0b0b16] text-white/90">Alex M. (Eng Lead)</option>
-                      <option value="Jane" className="bg-[#0b0b16] text-white/90">Jane D. (QA Lead)</option>
-                      <option value="Alice" className="bg-[#0b0b16] text-white/90">Alice K. (Sec Auditor)</option>
+                      <option value="" className="bg-[#0f0e24] text-white/60 font-medium">-- Choose Assignee --</option>
+                      <option value="Alex" className="bg-[#0f0e24] text-white font-bold">Alex M. (Eng Lead)</option>
+                      <option value="Jane" className="bg-[#0f0e24] text-white font-bold">Jane D. (QA Lead)</option>
+                      <option value="Alice" className="bg-[#0f0e24] text-white font-bold">Alice K. (Sec Auditor)</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-mono text-white/40 block mb-1.5 uppercase">Task Status</label>
+                    <label className="text-xs font-mono font-bold text-white/80 block mb-2 uppercase tracking-wider">Task Status</label>
                     <input 
                       type="text" 
                       value={bulkStatus}
                       disabled 
-                      className="w-full bg-white/[0.01] border border-white/[0.04] rounded-xl px-3 py-2 text-xs text-white/30 font-mono" 
+                      className="w-full bg-white/5 border border-white/15 rounded-2xl px-4 py-3.5 text-sm text-white/60 font-mono font-bold" 
                     />
                   </div>
                 </div>
 
                 {/* Action Trigger Button */}
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3.5">
                   <button
                     onClick={handlePromote}
                     disabled={!selectedAssignee || draftRowFixed || isPromoting}
-                    className={`w-full py-3 rounded-xl text-xs font-bold transition-all relative overflow-hidden flex items-center justify-center gap-2 ${
+                    className={`w-full py-4 rounded-2xl text-sm font-black transition-all relative overflow-hidden flex items-center justify-center gap-2.5 shadow-xl ${
                       draftRowFixed
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 cursor-default'
+                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 cursor-default shadow-[0_0_25px_rgba(52,211,153,0.3)]'
                         : !selectedAssignee
-                        ? 'bg-white/5 text-white/20 border border-white/5 cursor-not-allowed'
-                        : 'bg-primary text-black hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-lg'
+                        ? 'bg-white/10 text-white/40 border border-white/10 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-primary via-indigo-500 to-purple-600 text-white hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-[0_0_30px_rgba(99,102,241,0.6)] border-none'
                     }`}
                   >
                     {isPromoting ? (
                       <>
-                        <div className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         <span>Promoting Row...</span>
                       </>
                     ) : draftRowFixed ? (
                       <>
-                        <Check size={14} className="stroke-[3]" />
-                        <span>Promoted to Active</span>
+                        <Check size={18} className="stroke-[3]" />
+                        <span>Promoted to Active Task</span>
                       </>
                     ) : (
                       <>
                         <span>Promote to Active Task</span>
-                        <ArrowUpRight size={13} />
+                        <ArrowUpRight size={18} />
                       </>
                     )}
                   </button>
 
                   {/* Bulk metadata counters */}
-                  <div className="flex items-center justify-between text-[9px] font-mono text-white/35 px-1 mt-1">
+                  <div className="flex items-center justify-between text-xs font-mono font-bold text-white/60 px-2 mt-1">
                     <span>Selected: {selectedCount} / 149</span>
-                    <span>Action: Promote</span>
+                    <span className="text-primary">Action: Promote</span>
                   </div>
                 </div>
 
@@ -276,12 +281,12 @@ export default function BulkImport() {
             </div>
 
             {/* Footer summary */}
-            <div className="px-6 py-4 border-t border-white/[0.05] bg-white/[0.01] flex items-center justify-between text-[10px] font-mono text-white/45">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="px-8 py-4.5 border-t border-white/10 bg-[#0a0a16]/90 backdrop-blur-md flex items-center justify-between text-xs font-mono font-bold text-white/70">
+              <div className="flex items-center gap-2.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
                 <span>Bulk Engine Status: Operational</span>
               </div>
-              <span>Processing rate: 500 rows/sec</span>
+              <span className="text-emerald-400 font-extrabold">Processing rate: 500 rows/sec</span>
             </div>
 
           </div>

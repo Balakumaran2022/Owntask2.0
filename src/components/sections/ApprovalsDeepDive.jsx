@@ -70,56 +70,117 @@ export default function ApprovalsDeepDive() {
           </motion.p>
         </div>
 
-        {/* Auditing Metadata Trackers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* Auditing Metadata Trackers Grid (Ultra-Modern Glassmorphic 2026 UI) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {[
-            { label: 'Who requested approval and when', icon: User },
-            { label: 'Who approved and when', icon: ShieldCheck },
-            { label: 'Approval status: None → Pending → Approved', icon: Clock }
-          ].map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              transition={{ duration: 0.5, delay: 0.1 + idx * 0.08 }}
-              className="relative flex flex-col gap-3 p-6 rounded-2xl bg-[#0D0D1C]/80 border border-white/[0.06] hover:border-white/15 transition-all group cursor-default overflow-hidden"
-              style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.3)' }}
-            >
-              {/* Glowing top accent line */}
-              <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-violet-500/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              {/* Shimmer overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              <div className="relative z-10 w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-violet-500/10 transition-all border border-white/5">
-                <item.icon size={18} className="text-violet-400 group-hover:text-white transition-colors" />
-              </div>
-              <span className="relative z-10 text-white/70 font-semibold text-sm leading-snug group-hover:text-white transition-colors">{item.label}</span>
-            </motion.div>
-          ))}
+            { 
+              label: 'Who requested approval and when', 
+              icon: User,
+              badge: 'REQUESTER',
+              badgeColor: 'bg-violet-500/20 text-violet-300 border-violet-500/40 shadow-[0_0_12px_rgba(139,92,246,0.3)]',
+              iconStyle: 'from-violet-500/20 to-purple-500/20 border-violet-500/50 text-violet-300 shadow-[0_0_20px_rgba(139,92,246,0.3)]',
+              glow: 'via-violet-500/80',
+              borderHover: 'hover:border-violet-500/60'
+            },
+            { 
+              label: 'Who approved and when', 
+              icon: ShieldCheck,
+              badge: 'APPROVER',
+              badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-[0_0_12px_rgba(52,211,153,0.3)]',
+              iconStyle: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/50 text-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.3)]',
+              glow: 'via-emerald-500/80',
+              borderHover: 'hover:border-emerald-500/60'
+            },
+            { 
+              label: 'Approval status: None → Pending → Approved', 
+              icon: Clock,
+              badge: 'LIFECYCLE',
+              badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.3)]',
+              iconStyle: 'from-amber-500/20 to-rose-500/20 border-amber-500/50 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.3)]',
+              glow: 'via-amber-500/80',
+              borderHover: 'hover:border-amber-500/60'
+            }
+          ].map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ duration: 0.5, delay: 0.1 + idx * 0.1 }}
+                className={`relative flex flex-col justify-between p-6 rounded-3xl bg-gradient-to-br from-[#13122b]/95 via-[#181638]/95 to-[#13122b]/95 border border-white/20 ${item.borderHover} transition-all duration-300 group cursor-default overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl`}
+              >
+                {/* Glowing top accent line */}
+                <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent ${item.glow} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                
+                {/* Shimmer overlay */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
+                {/* Top Row: Glowing Icon Box + Badge */}
+                <div className="flex items-center justify-between gap-3 mb-4 relative z-10">
+                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.iconStyle} flex items-center justify-center group-hover:scale-110 transition-all border shadow-sm shrink-0`}>
+                    <Icon size={22} strokeWidth={2.5} />
+                  </div>
+                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-black font-mono tracking-wider border uppercase shadow-sm ${item.badgeColor}`}>
+                    {item.badge}
+                  </span>
+                </div>
+
+                {/* Text Label */}
+                <span className="relative z-10 text-white font-black text-base md:text-lg leading-snug group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-primary transition-all">
+                  {item.label}
+                </span>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Project-Level Settings Callout Card */}
+        {/* Project-Level Settings Callout Card (Ultra-Modern Glassmorphic 2026 UI) */}
         <div className="max-w-4xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            whileHover={{ y: -4, scale: 1.01 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="p-5 md:p-6 flex flex-col justify-center rounded-3xl bg-gradient-to-br from-violet-500/10 to-transparent border border-violet-500/10 relative overflow-hidden"
-            style={{ boxShadow: '0 4px 24px rgba(139, 92, 246, 0.05)' }}
+            className="group relative p-7 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-3xl bg-gradient-to-r from-[#16133a]/95 via-[#1e1a4f]/95 to-[#16133a]/95 border border-violet-500/40 hover:border-violet-400 transition-all duration-500 overflow-hidden shadow-[0_20px_60px_rgba(139,92,246,0.25)] backdrop-blur-2xl"
           >
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-              <Lock size={75} className="text-violet-400" />
+            {/* Glowing top accent line */}
+            <div className="absolute top-0 left-10 right-10 h-[2px] rounded-full bg-gradient-to-r from-transparent via-violet-400 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_15px_rgba(139,92,246,0.8)]" />
+            
+            {/* Background watermark lock */}
+            <div className="absolute -top-6 -right-6 p-4 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-700 pointer-events-none">
+              <Lock size={160} className="text-violet-400" />
             </div>
-            <div className="flex items-center gap-3 mb-2.5">
-              <div className="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center border border-violet-500/20">
-                <Lock size={18} className="text-violet-400" />
+
+            {/* Shimmer overlay */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+            {/* Left Box: Glowing Icon + Title + Badge */}
+            <div className="relative z-10 flex items-center gap-4 shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500/30 to-purple-600/30 flex items-center justify-center border border-violet-500/50 shadow-[0_0_25px_rgba(139,92,246,0.4)] group-hover:scale-110 transition-all">
+                <Lock size={26} className="text-violet-300 group-hover:text-white transition-colors" strokeWidth={2.5} />
               </div>
-              <h3 className="text-white font-bold text-lg">Project-Level Gates</h3>
+              <div>
+                <div className="flex items-center gap-2.5 mb-1 flex-wrap">
+                  <h3 className="text-white font-black text-xl md:text-2xl tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-violet-300 transition-all">
+                    Project-Level Gates
+                  </h3>
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black font-mono tracking-widest bg-violet-500/20 text-violet-300 border border-violet-500/40 shadow-[0_0_12px_rgba(139,92,246,0.3)] uppercase">
+                    ENFORCED
+                  </span>
+                </div>
+                <span className="text-xs font-mono font-bold text-violet-300/80 tracking-wide uppercase block">
+                  Strict Governance Mode
+                </span>
+              </div>
             </div>
-            <p className="text-white/65 text-sm md:text-base leading-relaxed">
-              Configure which status acts as the <span className="text-white font-bold">"Waiting for Approval"</span> gate. Status transitions can be enforced in order — ensuring absolutely no skipping steps.
+
+            {/* Right Box: Description */}
+            <p className="relative z-10 text-white/90 text-sm md:text-base leading-relaxed font-semibold max-w-xl">
+              Configure which status acts as the <span className="text-white font-black underline decoration-violet-400 decoration-2 underline-offset-4">"Waiting for Approval"</span> gate. Status transitions can be enforced in order — ensuring absolutely no skipping steps.
             </p>
           </motion.div>
         </div>

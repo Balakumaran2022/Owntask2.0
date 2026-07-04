@@ -27,7 +27,7 @@ export default function FeaturesPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h1 className="text-2xl md:text-4xl font-black text-[#F1F5F9] tracking-tight mb-6">
-            Enterprise <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#8B5CF6]">Capabilities</span>
+            Every feature your team needs. <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#8B5CF6]">Nothing they don't.</span>
           </h1>
           <p className="text-xl text-primary/60 leading-relaxed">
             A comprehensive suite of powerful tools designed to bring order, velocity, and accountability to complex enterprise operations.

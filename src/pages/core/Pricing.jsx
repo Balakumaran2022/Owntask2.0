@@ -10,7 +10,7 @@ const PLANS = [
     period: 'forever · no card needed',
     badge: null,
     bestFor: 'Individuals and small teams',
-    btnLabel: 'Start Free →',
+    btnLabel: 'Get Started',
     features: [
       { text: 'Up to 3 Projects', on: true },
       { text: 'Up to 5 Team Members', on: true },
@@ -32,9 +32,9 @@ const PLANS = [
     name: 'Growth',
     price: 'Contact Us',
     period: 'recommended for teams',
-    badge: 'Recommended',
+    badge: '⭐ MOST POPULAR',
     bestFor: 'Growing teams and businesses',
-    btnLabel: 'Contact Us →',
+    btnLabel: 'Get Started',
     features: [
       { text: 'Unlimited Projects', on: true },
       { text: 'Up to 50 Team Members', on: true },
@@ -58,7 +58,7 @@ const PLANS = [
     period: 'for large organisations',
     badge: null,
     bestFor: 'Large organisations with compliance needs',
-    btnLabel: 'Contact Sales →',
+    btnLabel: 'Contact Us',
     features: [
       { text: 'Everything in Growth', on: true },
       { text: 'Unlimited Team Members', on: true },
@@ -94,16 +94,16 @@ const COMPARISON = [
 ];
 
 const Cell = ({ val }) => {
-  if (val === true)  return <CheckCircle size={16} className="text-emerald-400 mx-auto" />;
-  if (val === false) return <X size={14} className="text-white/15 mx-auto" />;
-  return <span className="text-white/70 text-xs font-mono">{val}</span>;
+  if (val === true)  return <CheckCircle size={22} className="text-emerald-400 mx-auto" strokeWidth={3} />;
+  if (val === false) return <X size={22} className="text-red-400/90 mx-auto" strokeWidth={3} />;
+  return <span className="text-amber-400 font-semibold text-base">{val}</span>;
 };
 
-export default function Pricing() {
+export default function Pricing({ onOpenLogin, onOpenDemo }) {
   const [billing, setBilling] = useState('monthly');
 
   useEffect(() => {
-    document.title = "ownTask Pricing — Transparent Plans for Teams of All Sizes";
+    document.title = "OwnTasks | Intelligent Command Center";
     let m = document.querySelector('meta[name="description"]');
     if (!m) { m = document.createElement('meta'); m.name = "description"; document.head.appendChild(m); }
     m.content = "ownTask pricing for every team size. Start free, scale with SLA tracking, recurring tasks, approvals, and enterprise access controls.";
@@ -177,27 +177,42 @@ export default function Pricing() {
           </motion.div>
         </div>
 
-        {/* ── PRICING CARDS ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 items-stretch">
+        {/* ── PRICING CARDS (Ultra-Modern Glassmorphic UI) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 items-stretch">
           {PLANS.map((plan, idx) => {
             const isFeatured = plan.id === 'growth';
             const isEnt      = plan.id === 'enterprise';
 
-            const cardBg   = isFeatured ? 'bg-[#4F6CF7]'         : isEnt ? 'bg-[#9B5EA2]'        : 'bg-white/[0.04]';
-            const border   = isFeatured ? 'border-[#6B84FF]/40'  : isEnt ? 'border-[#B87CC0]/40' : 'border-white/[0.08]';
-            const priceClr = isFeatured ? 'text-white'           : isEnt ? 'text-white'           : 'text-primary';
-            const nameClr  = 'text-white';
-            const divClr   = isFeatured ? 'bg-white/20'          : isEnt ? 'bg-white/20'          : 'bg-white/10';
-            const featClr  = isFeatured || isEnt ? 'text-white/90' : 'text-white/75';
-            const checkActive  = isFeatured || isEnt ? 'text-white'        : 'text-primary';
-            const checkOff     = isFeatured || isEnt ? 'text-white/25'     : 'text-white/15';
-            const btnClass     = isFeatured || isEnt
-              ? 'bg-white text-gray-900 hover:bg-white/90 font-extrabold'
-              : 'bg-primary text-white hover:bg-primary/80 font-extrabold shadow-lg shadow-primary/30';
-            const shadow = isFeatured
-              ? 'shadow-[0_20px_60px_rgba(79,108,247,0.35)]'
-              : isEnt ? 'shadow-[0_20px_60px_rgba(155,94,162,0.3)]' : 'shadow-lg';
-            const scale = '';
+            const cardBg = isFeatured 
+              ? 'bg-gradient-to-b from-[#1a1438]/95 via-[#110d29]/95 to-[#0b081e]/95 backdrop-blur-2xl' 
+              : isEnt 
+              ? 'bg-gradient-to-b from-[#1c1130]/90 via-[#130b22]/90 to-[#0c0717]/95 backdrop-blur-2xl' 
+              : 'bg-gradient-to-b from-white/[0.07] via-white/[0.03] to-white/[0.01] backdrop-blur-2xl';
+              
+            const border = isFeatured 
+              ? 'border-2 border-primary shadow-[0_0_50px_rgba(99,102,241,0.28)] hover:shadow-[0_0_70px_rgba(99,102,241,0.4)]' 
+              : isEnt 
+              ? 'border border-purple-500/40 hover:border-purple-500/60 shadow-[0_0_40px_rgba(168,85,247,0.18)]' 
+              : 'border border-white/[0.08] hover:border-white/20 shadow-xl hover:shadow-2xl';
+
+            const priceClr = isFeatured 
+              ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-primary' 
+              : isEnt 
+              ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-purple-400' 
+              : 'text-white';
+              
+            const nameClr  = isFeatured ? 'text-primary' : isEnt ? 'text-purple-300' : 'text-white';
+            const divClr   = isFeatured ? 'bg-gradient-to-r from-transparent via-primary/50 to-transparent' : isEnt ? 'bg-gradient-to-r from-transparent via-purple-500/50 to-transparent' : 'bg-white/10';
+            const featClr  = 'text-white/90 font-semibold';
+            const checkOff = 'text-white/25';
+            
+            const btnClass = isFeatured
+              ? 'bg-gradient-to-r from-primary via-indigo-500 to-purple-600 hover:brightness-110 text-white font-black shadow-[0_0_25px_rgba(99,102,241,0.45)]'
+              : isEnt
+              ? 'bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 border border-purple-500/40 font-extrabold shadow-lg'
+              : 'bg-white/10 hover:bg-white/20 text-white font-bold border border-white/10 shadow-md';
+              
+            const scale = isFeatured ? 'lg:scale-[1.04] z-10' : '';
 
             const price = plan.price === '$18' && billing === 'annual' ? '$14' : plan.price;
 
@@ -208,59 +223,73 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className={`relative flex flex-col rounded-[24px] border ${border} ${cardBg} ${shadow} ${scale} p-5 backdrop-blur-xl transition-transform duration-300`}
+                className={`relative flex flex-col rounded-[32px] ${border} ${cardBg} ${scale} p-7 transition-all duration-500 hover:-translate-y-1.5`}
               >
                 {/* Popular badge */}
                 {plan.badge && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1 rounded-full bg-white text-[#4F6CF7] text-[10px] font-extrabold tracking-widest uppercase shadow-lg">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full bg-gradient-to-r from-primary via-indigo-500 to-purple-600 text-white text-[11px] font-black tracking-widest uppercase shadow-[0_0_25px_rgba(99,102,241,0.6)] border border-white/25">
                     {plan.badge}
                   </div>
                 )}
 
-                {/* Plan name — centered */}
-                <h3 className={`text-center text-base font-extrabold mb-2 ${nameClr}`}>{plan.name}</h3>
-
-                {/* Price — large centered */}
-                <div className="text-center mb-1">
-                  <span className={`text-5xl font-extrabold leading-none ${priceClr}`}>{price}</span>
+                {/* Plan name */}
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className={`text-xl font-black uppercase tracking-wider ${nameClr}`}>{plan.name}</h3>
+                  <span className={`text-xs px-3 py-1 rounded-full font-bold font-mono ${isFeatured ? 'bg-primary/20 text-primary border border-primary/30' : isEnt ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 'bg-white/10 text-white/70'}`}>
+                    {plan.id === 'growth' ? 'Popular' : plan.id === 'enterprise' ? 'Pro' : 'Free'}
+                  </span>
                 </div>
-                {plan.id === 'growth' && billing === 'annual' && plan.price !== 'Contact Us' && (
-                  <p className="text-center text-white/60 text-[10px] font-bold mb-1">Save $48/seat/year</p>
-                )}
-                <p className={`text-center text-[11px] mb-4 ${isFeatured || isEnt ? 'text-white/50' : 'text-white/35'} font-mono`}>
-                  {plan.price === 'Custom' ? 'contact us' : plan.period}
-                </p>
+
+                {/* Price */}
+                <div className="my-3">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className={`text-6xl font-black leading-none ${priceClr}`}>{price}</span>
+                  </div>
+                  {plan.id === 'growth' && billing === 'annual' && plan.price !== 'Contact Us' && (
+                    <p className="text-emerald-400 text-xs font-bold mt-1">✓ Save $48/seat/year</p>
+                  )}
+                  <p className="text-xs text-white/50 font-mono mt-2">
+                    {plan.price === 'Custom' ? 'custom SLA & billing' : plan.period}
+                  </p>
+                </div>
 
                 {/* Divider */}
-                <div className={`w-full h-px ${divClr} mb-4`} />
+                <div className={`w-full h-px ${divClr} my-6`} />
 
                 {/* Features */}
-                <div className="flex flex-col gap-2.5 mb-5 flex-1">
+                <div className="flex flex-col gap-3.5 mb-8 flex-1">
                   {plan.features.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
-                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                    <div key={i} className="flex items-center gap-3">
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${
                         f.on
-                          ? (isFeatured || isEnt ? 'border-white bg-white/20' : 'border-primary bg-primary/10')
-                          : (isFeatured || isEnt ? 'border-white/20 bg-white/5' : 'border-white/10 bg-transparent')
+                          ? (isFeatured ? 'bg-primary/20 border border-primary text-primary shadow-[0_0_10px_rgba(99,102,241,0.5)]' : isEnt ? 'bg-purple-500/20 border border-purple-400 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.4)]' : 'bg-emerald-500/20 border border-emerald-400 text-emerald-400')
+                          : 'bg-white/5 border border-white/10 text-white/20'
                       }`}>
                         {f.on && (
-                          <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
-                            <path d="M2 5L4 7L8 3" stroke={isFeatured || isEnt ? 'white' : 'var(--color-primary, #8b5cf6)'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                            <path d="M2 5L4 7L8 3" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                         )}
                       </div>
-                      <span className={`text-xs ${f.on ? featClr : checkOff}`}>{f.text}</span>
+                      <span className={`text-sm ${f.on ? featClr : checkOff}`}>{f.text}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Select button */}
                 <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={`w-full py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${btnClass}`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => {
+                    if (plan.id === 'enterprise') {
+                      if (onOpenDemo || onOpenLogin) (onOpenDemo || onOpenLogin)();
+                    } else {
+                      window.location.href = 'https://razorpay.com/?utm_source=bing&utm_medium=cpc&utm_campaign=&utm_adgroup=&utm_content=RPSME-Brand-050724&utm_term=razorpay&utm_gclid=&utm_campaignID=580151510&utm_adgroupID=1260041977203200&utm_adID=&utm_network=o&utm_device=c&msclkid=7b7948332aeb1d3cedd4227be092bd89';
+                    }
+                  }}
+                  className={`w-full py-4 rounded-2xl text-sm transition-all cursor-pointer ${btnClass}`}
                 >
-                  {plan.id === 'enterprise' ? 'Contact Sales' : plan.id === 'free' ? 'Start Free' : 'Get Started'}
+                  {plan.btnLabel}
                 </motion.button>
               </motion.div>
             );
@@ -268,43 +297,71 @@ export default function Pricing() {
         </div>
 
 
-        {/* ── FEATURE COMPARISON TABLE ── */}
+        {/* ── FEATURE COMPARISON TABLE (Modern Glassmorphic UI) ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-20"
         >
-          <h2 className="text-base font-bold text-white/60 text-center mb-5 uppercase tracking-widest font-mono">Compare Plans</h2>
-
-          <div className="rounded-3xl border border-white/[0.07] overflow-hidden">
-            {/* Table header */}
-            <div className="grid grid-cols-4 bg-white/[0.03] border-b border-white/[0.05] px-4 py-2">
-              <div className="text-[10px] font-mono text-white/25 uppercase tracking-widest">Feature</div>
-              {['Starter', 'Pro', 'Enterprise'].map((h, i) => (
-                <div key={i} className={`text-[10px] font-bold text-center ${i === 1 ? 'text-primary' : i === 2 ? 'text-violet-400' : 'text-white/40'}`}>{h}</div>
-              ))}
-            </div>
-
-            {COMPARISON.map((group, gi) => (
-              <div key={gi}>
-                {/* Category row */}
-                <div className="px-5 py-2 bg-white/[0.015] border-b border-white/[0.04]">
-                  <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">{group.category}</span>
+          <div className="overflow-x-auto rounded-[32px] shadow-[0_25px_70px_rgba(0,0,0,0.6)] border border-white/10 bg-gradient-to-b from-[#110e24]/90 via-[#0a0816]/95 to-[#07060f]/95 backdrop-blur-2xl">
+            <div className="min-w-[900px]">
+              {/* Table header */}
+              <div className="grid grid-cols-4 border-b border-white/15 px-8 py-6 bg-[#0c0a1a]/80 items-center">
+                <div className="text-xl font-black text-white uppercase tracking-wider flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center text-primary text-base shadow-[0_0_15px_rgba(99,102,241,0.4)]">⚡</span>
+                  <span>Compare Plans</span>
                 </div>
-                {group.features.map((feat, fi) => (
-                  <div
-                    key={fi}
-                    className={`grid grid-cols-4 items-center px-4 py-2 border-b border-white/[0.03] ${fi % 2 === 0 ? '' : 'bg-white/[0.01]'}`}
-                  >
-                    <span className="text-white/55 text-[11px]">{feat.name}</span>
-                    <div className="text-center"><Cell val={feat.free} /></div>
-                    <div className="text-center"><Cell val={feat.pro} /></div>
-                    <div className="text-center"><Cell val={feat.ent} /></div>
-                  </div>
+                {['Starter', 'Growth ⭐', 'Enterprise'].map((h, i) => (
+                  <div key={i} className={`text-lg font-extrabold text-center ${i === 1 ? 'text-primary bg-primary/10 py-2 rounded-2xl border border-primary/30 shadow-sm' : i === 2 ? 'text-purple-300' : 'text-white/80'}`}>{h}</div>
                 ))}
               </div>
-            ))}
+
+              {COMPARISON.map((group, gi) => (
+                <div key={gi}>
+                  {group.features.map((feat, fi) => (
+                    <div
+                      key={fi}
+                      className={`grid grid-cols-4 items-center px-8 py-5 border-b border-white/[0.06] hover:bg-white/[0.04] transition-all duration-300`}
+                    >
+                      <span className="text-[#e2e8f0] font-semibold text-base">{feat.name}</span>
+                      <div className="text-center"><Cell val={feat.free} /></div>
+                      <div className="text-center"><Cell val={feat.pro} /></div>
+                      <div className="text-center"><Cell val={feat.ent} /></div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              
+              {/* CTA Button Row */}
+              <div className="grid grid-cols-4 items-center px-8 py-7 bg-white/[0.02] border-t border-white/10">
+                <span className="text-lg font-bold text-white">Ready to get started?</span>
+                <div className="text-center">
+                  <button
+                    onClick={() => window.location.href = 'https://razorpay.com/?utm_source=bing&utm_medium=cpc&utm_campaign=&utm_adgroup=&utm_content=RPSME-Brand-050724&utm_term=razorpay&utm_gclid=&utm_campaignID=580151510&utm_adgroupID=1260041977203200&utm_adID=&utm_network=o&utm_device=c&msclkid=7b7948332aeb1d3cedd4227be092bd89'}
+                    className="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all duration-300 cursor-pointer border border-white/10 shadow-sm"
+                  >
+                    Get Started
+                  </button>
+                </div>
+                <div className="text-center bg-primary/[0.05] py-2.5 rounded-2xl border border-primary/20">
+                  <button
+                    onClick={() => window.location.href = 'https://razorpay.com/?utm_source=bing&utm_medium=cpc&utm_campaign=&utm_adgroup=&utm_content=RPSME-Brand-050724&utm_term=razorpay&utm_gclid=&utm_campaignID=580151510&utm_adgroupID=1260041977203200&utm_adID=&utm_network=o&utm_device=c&msclkid=7b7948332aeb1d3cedd4227be092bd89'}
+                    className="px-7 py-3 rounded-2xl bg-gradient-to-r from-primary via-indigo-500 to-purple-600 text-white font-black text-sm shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:brightness-110 transition-all duration-300 cursor-pointer border-none"
+                  >
+                    Get Started
+                  </button>
+                </div>
+                <div className="text-center">
+                  <button
+                    onClick={onOpenDemo || onOpenLogin}
+                    className="px-6 py-3 rounded-2xl bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 font-bold text-sm border border-purple-500/40 transition-all duration-300 cursor-pointer shadow-sm"
+                  >
+                    Contact Us
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
 

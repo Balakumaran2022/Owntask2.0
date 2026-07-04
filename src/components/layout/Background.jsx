@@ -210,7 +210,7 @@ export default function Background() {
             left: 0,
             width: '100%',
             height: '100%',
-            opacity: 0.85, // Keep it subtle and readable
+            opacity: 0.55, // Prominent interactive particles
           }}
         />
 

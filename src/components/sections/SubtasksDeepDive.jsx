@@ -57,20 +57,20 @@ export default function SubtasksDeepDive() {
   }, [completionRule]);
 
   return (
-    <section className="relative z-10 py-24 lg:py-32 overflow-hidden bg-transparent">
+    <section className="relative z-10 py-10 lg:py-14 overflow-hidden bg-transparent">
       {/* Background glowing effects */}
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[700px] h-[500px] bg-primary/5 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-0 left-1/3 w-[500px] h-[300px] bg-violet-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-5 md:px-8 max-w-[1240px] relative z-10">
+      <div className="container mx-auto px-5 md:px-8 max-w-[1420px] relative z-10">
         
-        {/* Centered Header Section */}
-        <div className="text-center mb-16 max-w-4xl mx-auto">
+        {/* Centered Header Section (Compact for Single Screen) */}
+        <div className="text-center mb-8 max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 border border-[#8b5cf6]/30 rounded-full bg-[#8b5cf6]/10 text-[#a78bfa] text-xs font-bold tracking-wide"
+            className="inline-flex items-center gap-2 mb-3 px-3.5 py-1 border border-[#8b5cf6]/30 rounded-full bg-[#8b5cf6]/10 text-[#a78bfa] text-xs font-bold tracking-wide"
           >
             <Settings2 size={13} className="animate-pulse" />
             <span>Modular Task Hierarchy</span>
@@ -81,7 +81,7 @@ export default function SubtasksDeepDive() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-2xl md:text-[2.25rem] lg:text-[2.5rem] tracking-tight leading-tight font-sans font-extrabold mb-6"
+            className="text-2xl md:text-3xl lg:text-4xl tracking-tight leading-tight font-sans font-extrabold mb-3"
           >
             <span className="text-white">Break big work </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#8b5cf6]">into traceable pieces.</span>
@@ -92,84 +92,114 @@ export default function SubtasksDeepDive() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="text-white/55 text-base md:text-lg leading-relaxed"
+            className="text-white/65 text-sm md:text-base leading-relaxed font-medium"
           >
             Subtasks share the exact same model schema as parent tasks. No performance overhead, no separate systems to manage, and no extra learning curves. Every subtask is a fully-featured item with its own assignees, priorities, status flows, and due dates.
           </motion.p>
         </div>
 
         {/* Split Layout Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           
-          {/* LEFT: Feature Description Bullets */}
+          {/* LEFT: Feature Description Cards (Ultra-Modern Glassmorphic 2026 UI) */}
           <div className="lg:col-span-6 flex flex-col justify-center">
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               {[
                 { 
                   title: 'Live Parent Counters', 
+                  badge: 'LIVE',
+                  badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40 shadow-[0_0_12px_rgba(52,211,153,0.3)] animate-pulse',
                   desc: 'Track progress at a glance with real-time subtaskCount and completedSubtaskCount properties.',
-                  color: 'group-hover:text-emerald-400'
+                  icon: Clock,
+                  iconStyle: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/50 text-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.3)]',
+                  glow: 'via-emerald-500/80',
+                  borderHover: 'hover:border-emerald-500/60'
                 },
                 { 
                   title: 'Custom Completion Rules', 
+                  badge: 'POLICY',
+                  badgeColor: 'bg-violet-500/20 text-violet-300 border-violet-500/40 shadow-[0_0_12px_rgba(139,92,246,0.3)]',
                   desc: 'Enforce policies: Manual (parent stays open) or All (parent auto-closes when the final subtask resolves).',
-                  color: 'group-hover:text-violet-400'
+                  icon: Sliders,
+                  iconStyle: 'from-violet-500/20 to-purple-500/20 border-violet-500/50 text-violet-300 shadow-[0_0_20px_rgba(139,92,246,0.3)]',
+                  glow: 'via-violet-500/80',
+                  borderHover: 'hover:border-violet-500/60'
                 },
                 { 
                   title: 'Push-on-Assign Alerts', 
+                  badge: 'INSTANT',
+                  badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.3)]',
                   desc: 'Instant notifications dispatch to watchers and assignees the second a subtask is delegated.',
-                  color: 'group-hover:text-amber-400'
+                  icon: Bell,
+                  iconStyle: 'from-amber-500/20 to-rose-500/20 border-amber-500/50 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.3)]',
+                  glow: 'via-amber-500/80',
+                  borderHover: 'hover:border-amber-500/60'
                 }
-              ].map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="relative flex gap-4 p-5 rounded-2xl bg-[#0D0D1C]/80 border border-white/[0.06] hover:border-white/15 transition-all group overflow-hidden shadow-lg"
-                >
-                  {/* Glowing top accent line */}
-                  <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  {/* Shimmer overlay */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  <div className="relative z-10 w-7 h-7 rounded-xl bg-white/5 flex items-center justify-center mt-0.5 group-hover:scale-110 group-hover:bg-primary/10 transition-all border border-white/5">
-                    <ChevronRight size={16} className="text-primary group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                  <div className="relative z-10">
-                    <h4 className="text-white font-bold text-base md:text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-[#8b5cf6] transition-all">
-                      {item.title}
-                    </h4>
-                    <p className="text-white/45 text-sm mt-1.5 leading-relaxed group-hover:text-white/70 transition-colors">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -4, scale: 1.015 }}
+                    transition={{ duration: 0.4, delay: idx * 0.1 }}
+                    className={`relative flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-r from-[#13122b]/95 via-[#181638]/95 to-[#13122b]/95 border border-white/20 ${item.borderHover} transition-all duration-300 group overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl w-full shrink-0 h-auto`}
+                  >
+                    {/* Glowing top accent line */}
+                    <div className={`absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent ${item.glow} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                    
+                    {/* Shimmer overlay */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    
+                    {/* Glowing Icon Box */}
+                    <div className={`relative z-10 w-12 h-12 rounded-2xl bg-gradient-to-br ${item.iconStyle} flex items-center justify-center mt-0.5 group-hover:scale-110 transition-all border shrink-0`}>
+                      <Icon size={22} strokeWidth={2.5} />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 flex-1 min-w-0 pr-1">
+                      <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
+                        <h4 className="text-white font-black text-base md:text-lg tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-primary transition-all leading-snug">
+                          {item.title}
+                        </h4>
+                        {item.badge && (
+                          <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-black font-mono tracking-wider border uppercase shadow-sm ${item.badgeColor}`}>
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-white/90 text-xs md:text-sm leading-relaxed font-bold block w-full whitespace-normal break-words">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
 
-          {/* RIGHT: Subtask Engine Mock */}
+          {/* RIGHT: Subtask Engine Mock (Compact Single-Page UI) */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="w-full max-w-[570px] rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_32px_80px_rgba(0,0,0,0.65)] relative"
-              style={{ background: 'linear-gradient(160deg, #090911 0%, #0d0d1b 100%)' }}
+            <div className="w-full max-w-[620px] rounded-[28px] overflow-hidden border border-white/20 shadow-[0_32px_90px_rgba(0,0,0,0.85)] relative"
+              style={{ background: 'linear-gradient(160deg, #13122b 0%, #0d0c1f 100%)' }}
             >
               {/* Chrome header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05]">
+              <div className="flex items-center justify-between px-6 py-3.5 border-b border-white/10 bg-[#0a0a16]/80 backdrop-blur-md">
                 <div className="flex items-center gap-2">
-                  <div className="w-3.5 h-3.5 rounded-full bg-red-400/40 border border-red-400/60" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-amber-400/40 border border-amber-400/60" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-emerald-400/40 border border-emerald-400/60" />
+                  <div className="w-3 h-3 rounded-full bg-red-500/80 border border-red-400 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
+                  <div className="w-3 h-3 rounded-full bg-amber-500/80 border border-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80 border border-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-white/[0.04] border border-white/[0.06]">
-                  <span className="text-xs font-mono text-white/40">Subtask Engine Mock</span>
+                <div className="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-white/10 border border-white/15 shadow-inner">
+                  <span className="text-xs font-mono font-bold text-white/90 tracking-wide">Subtask Engine Mock</span>
                 </div>
-                <span className="text-[10px] font-mono text-emerald-400/80 tracking-wider">TSK-4089</span>
+                <span className="text-[11px] font-mono font-black text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/30">TSK-4089</span>
               </div>
 
-              {/* Mock UI Content */}
-              <div className="p-4 md:p-5 flex flex-col gap-4 relative">
+              {/* Mock UI Content (Compact for Single Screen) */}
+              <div className="p-5 md:p-6 flex flex-col gap-4 relative bg-gradient-to-b from-transparent via-white/[0.01] to-transparent">
                 
                 {/* Simulated Push Notification Toast */}
                 <AnimatePresence>
@@ -178,106 +208,114 @@ export default function SubtasksDeepDive() {
                       initial={{ opacity: 0, y: -20, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                      className="absolute top-3 left-4 right-4 z-25 p-3 rounded-xl bg-[#14142B]/95 border border-primary/20 shadow-2xl flex items-start gap-2.5 backdrop-blur-md"
+                      className="absolute top-3 left-4 right-4 z-25 p-3 rounded-xl bg-[#181636]/95 border border-primary/50 shadow-[0_10px_40px_rgba(99,102,241,0.5)] flex items-start gap-3 backdrop-blur-xl"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30 shrink-0">
-                        <Bell size={14} className="text-primary animate-bounce" />
+                      <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/40 shrink-0 shadow-sm">
+                        <Bell size={16} className="text-primary animate-bounce" />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="text-[11px] font-bold text-white">Subtask Assigned</h4>
-                        <p className="text-[10px] text-white/50 mt-0.5">Alice K. was assigned to "Perform security compliance audit"</p>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-[11px] font-black text-white uppercase tracking-wider">Subtask Assigned</h4>
+                        <p className="text-xs font-medium text-white/85 mt-0.5 truncate">Alice K. was assigned to "Perform security compliance audit"</p>
                       </div>
-                      <span className="text-[8px] font-mono text-white/30">Just now</span>
+                      <span className="text-[9px] font-mono font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20 shrink-0">Just now</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Parent Task Header Card */}
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] flex flex-col gap-3">
-                  <div className="flex justify-between items-start gap-4">
+                {/* Parent Task Header Card (Compact Glassmorphic Gradient) */}
+                <div className="p-4 md:p-5 rounded-2xl bg-gradient-to-br from-[#1c1a3e]/90 via-[#161432]/90 to-[#121028]/90 border border-primary/40 flex flex-col gap-3.5 shadow-[0_15px_40px_rgba(99,102,241,0.25)] backdrop-blur-xl relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-emerald-400 to-purple-500 shadow-[0_0_15px_rgba(52,211,153,0.8)]" />
+                  
+                  <div className="flex justify-between items-start gap-3 pt-0.5">
                     <div>
-                      <span className="text-[9px] font-mono text-white/30 tracking-widest uppercase">Parent Task</span>
-                      <h3 className="text-white font-bold text-base mt-0.5">Setup Production API Environment</h3>
+                      <span className="text-[11px] font-mono font-black text-primary tracking-widest uppercase block mb-0.5">Parent Task</span>
+                      <h3 className="text-white font-black text-base md:text-lg tracking-wide">Setup Production API Environment</h3>
                     </div>
                     
                     {/* Parent Status Badge */}
                     <motion.span
                       animate={{
-                        color: parentStatus === 'Completed' ? '#34d399' : '#a78bfa',
-                        borderColor: parentStatus === 'Completed' ? 'rgba(52,211,153,0.3)' : 'rgba(167,139,250,0.3)',
-                        backgroundColor: parentStatus === 'Completed' ? 'rgba(52,211,153,0.06)' : 'rgba(167,139,250,0.06)'
+                        color: parentStatus === 'Completed' ? '#34d399' : '#e9d5ff',
+                        borderColor: parentStatus === 'Completed' ? 'rgba(52,211,153,0.6)' : 'rgba(192,132,252,0.6)',
+                        backgroundColor: parentStatus === 'Completed' ? 'rgba(52,211,153,0.2)' : 'rgba(168,85,247,0.2)'
                       }}
-                      className="px-2 py-0.5 rounded border text-[10px] font-bold font-mono tracking-wide"
+                      className="px-3 py-0.5 rounded-full border text-[11px] font-black font-mono tracking-wider shadow-[0_0_15px_rgba(168,85,247,0.3)] uppercase shrink-0"
                     >
                       {parentStatus}
                     </motion.span>
                   </div>
 
                   {/* Subtask Counters */}
-                  <div className="flex items-center justify-between text-[11px] border-t border-white/[0.04] pt-2">
-                    <div className="flex items-center gap-3 text-white/50">
-                      <div>
-                        <span className="font-mono text-white/20 mr-1">subtaskCount:</span>
-                        <span className="font-bold text-white/80">{totalCount}</span>
+                  <div className="flex items-center justify-between text-xs font-mono border-t border-white/15 pt-3">
+                    <div className="flex items-center gap-3 text-white/90 flex-wrap">
+                      <div className="bg-white/10 px-3 py-1 rounded-lg border border-white/15 shadow-sm">
+                        <span className="text-white/60 mr-1">subtaskCount:</span>
+                        <span className="font-black text-white">{totalCount}</span>
                       </div>
-                      <div>
-                        <span className="font-mono text-white/20 mr-1">completedSubtaskCount:</span>
-                        <span className="font-bold text-white/80 tabular-nums">{completedCount}</span>
+                      <div className="bg-white/10 px-3 py-1 rounded-lg border border-white/15 shadow-sm">
+                        <span className="text-white/60 mr-1">completed:</span>
+                        <span className="font-black text-emerald-400 tabular-nums">{completedCount}</span>
                       </div>
                     </div>
-                    <span className="text-primary font-bold tabular-nums">{Math.round(progressPercent)}%</span>
+                    <span className="text-white font-black text-xs tabular-nums bg-gradient-to-r from-primary to-indigo-600 px-3 py-1 rounded-lg shadow-[0_0_15px_rgba(99,102,241,0.4)]">{Math.round(progressPercent)}%</span>
                   </div>
 
                   {/* Progress Bar */}
-                  <div className="relative h-1.5 bg-white/5 rounded-full overflow-hidden">
+                  <div className="relative h-2 bg-white/10 rounded-full overflow-hidden shadow-inner p-0.5">
                     <motion.div
                       animate={{ width: `${progressPercent}%` }}
                       transition={{ duration: 0.8, ease: 'easeOut' }}
                       className="absolute inset-y-0 left-0 rounded-full"
                       style={{ 
                         background: 'linear-gradient(90deg, #34d399, #8b5cf6)', 
-                        boxShadow: '0 0 10px rgba(52,211,153,0.4)' 
+                        boxShadow: '0 0 20px rgba(52,211,153,0.8)' 
                       }}
                     />
                   </div>
                 </div>
 
-                {/* Subtasks Hierarchy List */}
+                {/* Subtasks Hierarchy List (Compact High Visibility Cards) */}
                 <div className="flex flex-col gap-2">
-                  <span className="text-[9px] font-mono text-white/30 tracking-widest uppercase">Traceable Subtasks</span>
+                  <span className="text-[11px] font-mono font-black text-white/80 tracking-widest uppercase flex items-center gap-1.5">
+                    <span>Traceable Subtasks</span>
+                  </span>
                   {subtasks.map((task) => (
                     <motion.div
                       key={task.id}
                       animate={{
-                        opacity: task.done ? 0.75 : 1,
-                        borderColor: task.done ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.07)'
+                        opacity: task.done ? 0.9 : 1,
+                        borderColor: task.done ? 'rgba(52,211,153,0.4)' : 'rgba(255,255,255,0.2)'
                       }}
-                      className="p-2.5 rounded-xl border bg-white/[0.01] flex items-center justify-between gap-4 transition-all duration-300 hover:bg-white/[0.02]"
+                      className={`p-3 rounded-xl border flex items-center justify-between gap-3 transition-all duration-300 shadow-lg backdrop-blur-md ${
+                        task.done 
+                          ? 'bg-emerald-950/20 border-emerald-500/40 hover:bg-emerald-950/30' 
+                          : 'bg-[#181636]/80 border-white/20 hover:bg-[#201d48]/90 hover:border-white/35'
+                      }`}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <div className="cursor-pointer text-primary">
+                      <div className="flex items-center gap-3 min-w-0 pr-2">
+                        <div className="cursor-pointer text-primary transition-transform hover:scale-110 shrink-0">
                           {task.done ? (
-                            <CheckCircle2 size={16} className="text-emerald-400" />
+                            <CheckCircle2 size={18} className="text-emerald-400 stroke-[2.5]" />
                           ) : (
-                            <Square size={16} className="text-white/20 hover:text-white/40" />
+                            <Square size={18} className="text-white/50 hover:text-white" />
                           )}
                         </div>
-                        <span className={`text-xs text-white/80 ${task.done ? 'line-through text-white/40' : ''}`}>
+                        <span className={`text-xs md:text-sm font-bold tracking-wide truncate ${task.done ? 'line-through text-white/60' : 'text-white'}`}>
                           {task.text}
                         </span>
                       </div>
 
                       {/* Subtask fields meta tags */}
-                      <div className="flex items-center gap-2">
-                        <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold font-mono tracking-wide ${
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className={`px-2 py-0.5 rounded-full text-[9px] font-black font-mono tracking-wider uppercase shadow-sm ${
                           task.priority === 'Highest' || task.priority === 'High' 
-                            ? 'text-red-400 bg-red-400/10 border border-red-400/20' 
-                            : 'text-white/30 bg-white/5 border border-white/10'
+                            ? 'text-red-300 bg-red-500/20 border border-red-500/40' 
+                            : 'text-white/80 bg-white/10 border border-white/20'
                         }`}>
                           {task.priority}
                         </span>
-                        <div className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] text-white/45 bg-white/5 border border-white/5">
-                          <User size={9} />
+                        <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-bold text-white/90 bg-white/10 border border-white/20 shadow-sm">
+                          <User size={11} className="text-primary" />
                           <span>{task.assignee}</span>
                         </div>
                       </div>
@@ -285,37 +323,37 @@ export default function SubtasksDeepDive() {
                   ))}
                 </div>
 
-                {/* Rule configuration selector */}
-                <div className="mt-2 pt-3 border-t border-white/[0.05] flex flex-col gap-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1.5">
-                      <Sliders size={12} className="text-primary" />
-                      <span className="text-[10px] text-white/40 uppercase tracking-widest font-black">Completion Rule Policy</span>
+                {/* Rule configuration selector (Compact Single-Page Deck) */}
+                <div className="mt-1 p-4 rounded-xl bg-gradient-to-r from-primary/15 via-indigo-500/10 to-purple-500/15 border border-primary/30 shadow-inner flex flex-col gap-2">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2">
+                      <Sliders size={15} className="text-primary" />
+                      <span className="text-[11px] text-white uppercase tracking-widest font-black font-mono">Completion Rule Policy</span>
                     </div>
-                    <div className="flex rounded-lg bg-white/5 p-0.5 border border-white/10">
+                    <div className="flex rounded-lg bg-white/10 p-0.5 border border-white/15 shadow-inner">
                       <button
                         onClick={() => setCompletionRule('manual')}
-                        className={`px-2 py-0.5 rounded-md text-[9px] font-bold tracking-wide transition-all ${
+                        className={`px-3 py-1 rounded-md text-[11px] font-black tracking-wide transition-all cursor-pointer ${
                           completionRule === 'manual' 
-                            ? 'bg-primary text-black shadow-md' 
-                            : 'text-white/40 hover:text-white/70'
+                            ? 'bg-gradient-to-r from-primary to-indigo-600 text-white shadow-[0_0_15px_rgba(99,102,241,0.5)] border border-primary/50 scale-105' 
+                            : 'text-white/70 hover:text-white'
                         }`}
                       >
                         Manual
                       </button>
                       <button
                         onClick={() => setCompletionRule('all')}
-                        className={`px-2 py-0.5 rounded-md text-[9px] font-bold tracking-wide transition-all ${
+                        className={`px-3 py-1 rounded-md text-[11px] font-black tracking-wide transition-all cursor-pointer ${
                           completionRule === 'all' 
-                            ? 'bg-primary text-black shadow-md' 
-                            : 'text-white/40 hover:text-white/70'
+                            ? 'bg-gradient-to-r from-primary to-indigo-600 text-white shadow-[0_0_15px_rgba(99,102,241,0.5)] border border-primary/50 scale-105' 
+                            : 'text-white/70 hover:text-white'
                         }`}
                       >
                         All
                       </button>
                     </div>
                   </div>
-                  <p className="text-xs md:text-sm text-white/75 font-medium leading-relaxed mt-1">
+                  <p className="text-xs text-white/90 font-semibold leading-normal bg-[#0f0e24]/80 p-2.5 rounded-lg border border-white/15 shadow-sm">
                     {completionRule === 'all' 
                       ? '🔒 ALL: Parent task automatically morphs to "Completed" when the last subtask is closed.'
                       : '⚙️ MANUAL: Parent task stays in its current status even if all subtasks are finished.'

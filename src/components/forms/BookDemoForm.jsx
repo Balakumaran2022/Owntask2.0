@@ -3,16 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 const inputCls =
-  'w-full bg-[#0a120c] border border-[#1a3324] rounded-xl px-4 py-3 text-[#d1dfd7] text-sm placeholder:text-[#3d5e4b] outline-none transition-all focus:border-primary/60 focus:bg-[#0c160f] focus:ring-2 focus:ring-primary/10';
+  'w-full bg-[#0a120c] border border-[#1a3324] rounded-xl px-3.5 py-2 text-[#d1dfd7] text-xs md:text-sm placeholder:text-[#3d5e4b] outline-none transition-all focus:border-primary/60 focus:bg-[#0c160f] focus:ring-2 focus:ring-primary/10';
 
-const labelCls = 'text-[0.65rem] font-black text-[#628f78] uppercase tracking-widest mb-1.5 block';
+const labelCls = 'text-[0.62rem] font-black text-[#628f78] uppercase tracking-widest mb-1 block';
 
 const selectStyle = {
   backgroundImage:
     'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%23628f78\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")',
   backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'right 1rem center',
-  backgroundSize: '1rem',
+  backgroundPosition: 'right 0.75rem center',
+  backgroundSize: '0.9rem',
 };
 
 export default function BookDemoForm() {
@@ -51,11 +51,17 @@ export default function BookDemoForm() {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.4 }}
-            className="bg-[#050e09] border border-[#13281c] rounded-3xl p-6 md:p-8 shadow-[0_0_60px_rgba(99,102,241,0.07)] mx-auto max-w-[700px]"
+            transition={{ duration: 0.3 }}
+            className="p-5 md:p-6 w-full"
           >
+            {/* Header */}
+            <div className="mb-4 pb-3 border-b border-[#13281c] pr-8">
+              <h3 className="text-base md:text-lg font-black text-white m-0 tracking-tight">Book a Live Demo</h3>
+              <p className="text-xs text-[#628f78] m-0 mt-0.5">Get a personalized 15-min walkthrough with our product specialists.</p>
+            </div>
+
             {/* Row 1 — Full Name + Work Email */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div>
                 <label className={labelCls}>Full Name *</label>
                 <input
@@ -79,7 +85,7 @@ export default function BookDemoForm() {
             </div>
 
             {/* Row 2 — Phone + Company */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div>
                 <label className={labelCls}>Phone Number</label>
                 <input
@@ -103,7 +109,7 @@ export default function BookDemoForm() {
             </div>
 
             {/* Row 3 — Job Title + Company Size */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div>
                 <label className={labelCls}>Job Title</label>
                 <input
@@ -133,7 +139,7 @@ export default function BookDemoForm() {
             </div>
 
             {/* Row 4 — Industry + Primary Use Case */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div>
                 <label className={labelCls}>Industry</label>
                 <select
@@ -176,7 +182,7 @@ export default function BookDemoForm() {
             </div>
 
             {/* Row 5 — Preferred Demo Day + How did you hear */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div>
                 <label className={labelCls}>Preferred Demo Day</label>
                 <select
@@ -216,11 +222,11 @@ export default function BookDemoForm() {
             </div>
 
             {/* Row 6 — Additional Message */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className={labelCls}>Anything you'd like us to know?</label>
               <textarea
                 name="message"
-                rows={3}
+                rows={2}
                 placeholder="Tell us about your current workflow challenges or specific features you'd like to see..."
                 value={formData.message}
                 onChange={handleChange}
@@ -230,16 +236,16 @@ export default function BookDemoForm() {
 
             {/* Submit */}
             <motion.button
-              whileHover={{ scale: 1.02, boxShadow: '0 0 35px rgba(99,102,241,0.4)' }}
+              whileHover={{ scale: 1.01, boxShadow: '0 0 25px rgba(99,102,241,0.4)' }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full bg-primary hover:bg-[#34d399] text-[#050e09] font-black rounded-xl py-4 text-base flex items-center justify-center gap-2 transition-all cursor-pointer"
+              className="w-full bg-primary hover:bg-[#34d399] text-[#050e09] font-black rounded-xl py-3 text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               Book Demo — It's Free
-              <ArrowRight size={18} className="stroke-[3]" />
+              <ArrowRight size={16} className="stroke-[3]" />
             </motion.button>
 
-            <p className="text-center text-[0.68rem] text-muted-foreground mt-3 tracking-wide">
+            <p className="text-center text-[0.65rem] text-muted-foreground mt-2.5 tracking-wide m-0">
               No credit card required &nbsp;·&nbsp; 15-minute session &nbsp;·&nbsp; Personalised walkthrough
             </p>
           </motion.form>
@@ -249,7 +255,7 @@ export default function BookDemoForm() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center p-10 bg-[#050e09] border border-[#13281c] rounded-3xl mx-auto max-w-[640px] shadow-[0_0_60px_rgba(99,102,241,0.08)]"
+            className="text-center p-8 w-full"
           >
             <CheckCircle2 size={64} className="text-primary mx-auto mb-5 drop-shadow-[0_0_18px_rgba(99,102,241,0.5)]" />
             <h3 className="text-2xl md:text-3xl font-black text-foreground mb-3">Demo Request Received!</h3>

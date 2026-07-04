@@ -85,7 +85,10 @@
 :root { --accent-indigo: var(--accent); --accent-magenta: var(--accent-deep); --accent-green: var(--accent); }
 
 /* Font */
-:root { --font-sans: 'Inter', system-ui, sans-serif; }
+:root {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
 
 /* Typography Scale */
 .display  { font-size: clamp(2.5rem, 6vw, 5rem);   font-weight: 900; }
@@ -104,6 +107,11 @@
 html {
   font-family: var(--font-sans) !important;
   font-size: 16px;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
   background-color: var(--bg-deep);
   color: var(--text-primary);
@@ -162,10 +170,12 @@ span,
 p,
 h1, h2, h3, h4, h5, h6,
 li,
-td, th,
+table, thead, tbody, tfoot, tr, th, td, caption, col, colgroup,
 code,
 pre {
   font-family: var(--font-sans) !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 /* Step 5: Monospace overrides — only for code blocks */
@@ -327,6 +337,93 @@ p {
   border-color: var(--primary);
   box-shadow: 0 0 40px rgba(99,102,241,0.2), 0 4px 24px rgba(0,0,0,0.4);
   transform: translateY(-6px);
+}
+
+/* =============================================
+   Refined Luxury Enterprise Card System
+   Inspired by Uiverse & Adapted for ownTask Brand
+   ============================================= */
+.uiverse-card {
+  position: relative;
+  background-color: #0D0D1C;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%),
+    radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 60%),
+    radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 60%);
+  border-radius: 1.5rem;
+  box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.12) inset, 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.uiverse-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.25) inset, 0 30px 60px -15px rgba(99, 102, 241, 0.25);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.uiverse-card-border {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.uiverse-card:hover .uiverse-card-border,
+.uiverse-card-active .uiverse-card-border {
+  opacity: 1;
+}
+
+.uiverse-card-border::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: center;
+  width: 250%;
+  height: 250%;
+  background-image: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    #6366F1 40%,
+    #EC4899 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: rotate-border 8s linear infinite;
+}
+
+@keyframes rotate-border {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.uiverse-btn {
+  cursor: pointer;
+  width: 100%;
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 20px rgba(99, 102, 241, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.uiverse-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 12px 28px rgba(99, 102, 241, 0.5);
 }
 
 /* Scroll Animation classes */
@@ -3859,89 +3956,89 @@ header.scrolled .nav-container {
 
 /* Audit Timeline Specifics */
 .timeline-item {
-  display: flex !important;
-  gap: 1.1rem !important;
-  padding: 1.25rem !important;
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(10, 14, 28, 0.9)) !important;
-  border: 1px solid rgba(16, 185, 129, 0.25) !important;
-  border-radius: 16px !important;
-  font-family: 'Inter', system-ui, sans-serif !important;
-  color: #F8FAFC !important;
-  box-shadow: 0 14px 35px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.12) !important;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: flex;
+  gap: 1.1rem;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(10, 14, 28, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #F8FAFC;
+  box-shadow: 0 14px 35px -10px rgba(0, 0, 0, 0.6);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .timeline-item:hover {
-  transform: translateY(-6px) scale(1.01) !important;
-  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(16, 185, 129, 0.25) !important;
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(99, 102, 241, 0.15);
 }
 .timeline-line {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 .timeline-dot {
-  width: 30px !important;
-  height: 30px !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 0.85rem !important;
-  font-weight: 900 !important;
-  color: #050E09 !important;
-  flex-shrink: 0 !important;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.8) !important;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 .timeline-connector {
-  width: 2px !important;
-  flex-grow: 1 !important;
-  min-height: 24px !important;
-  border-radius: 2px !important;
+  width: 2px;
+  flex-grow: 1;
+  min-height: 24px;
+  border-radius: 2px;
 }
 .timeline-content {
-  flex: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.65rem !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 .timeline-header {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
-  flex-wrap: wrap !important;
-  font-size: 0.82rem !important;
-  width: 100% !important;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  width: 100%;
 }
 .action-type {
-  background: rgba(16, 185, 129, 0.2) !important;
-  color: #34D399 !important;
-  border: 1px solid rgba(16, 185, 129, 0.4) !important;
-  padding: 0.2rem 0.6rem !important;
-  border-radius: 6px !important;
-  font-weight: 800 !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 0.05em !important;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2) !important;
+  background: rgba(255, 255, 255, 0.08);
+  color: #F1F5F9;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
 }
 .performed-by {
-  font-weight: 700 !important;
-  color: #FFFFFF !important;
+  font-weight: 700;
+  color: #FFFFFF;
 }
 .performed-at {
-  color: #64748B !important;
-  font-size: 0.78rem !important;
-  margin-left: auto !important;
+  color: #64748B;
+  font-size: 0.78rem;
+  margin-left: auto;
 }
 .timeline-change {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
-  font-size: 0.85rem !important;
-  font-weight: 700 !important;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 .old-value, .new-value {
-  padding: 0.25rem 0.7rem !important;
-  border-radius: 6px !important;
+  padding: 0.25rem 0.7rem;
+  border-radius: 6px;
 }
 

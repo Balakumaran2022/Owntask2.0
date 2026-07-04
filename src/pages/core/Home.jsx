@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Hero from '../../components/sections/Hero';
 import StatsStrip from '../../components/sections/StatsStrip';
 import FeaturesGrid from '../../components/sections/FeaturesGrid';
 import Differentiators from '../../components/sections/Differentiators';
-import FeaturePreview from '../../components/sections/FeaturePreview';
-import SLADeepDive from '../../components/sections/SLADeepDive';
-import ApprovalsDeepDive from '../../components/sections/ApprovalsDeepDive';
-import SubtasksDeepDive from '../../components/sections/SubtasksDeepDive';
-import Templates from '../../components/sections/Templates';
-import BulkImport from '../../components/sections/BulkImport';
-import HowItWorks from '../../components/sections/HowItWorks';
-import Testimonials from '../../components/sections/Testimonials';
-import FAQ from '../../components/sections/FAQ';
-import Analytics from './Analytics';
-import UseCases from './UseCases';
-import Pricing from './Pricing';
-import About from './About';
 
+// Code-split below-the-fold components for optimal bundle size (< 500 kB)
+const Analytics = React.lazy(() => import('./Analytics'));
+const UseCases = React.lazy(() => import('./UseCases'));
+const Pricing = React.lazy(() => import('./Pricing'));
+const SLADeepDive = React.lazy(() => import('../../components/sections/SLADeepDive'));
+const ApprovalsDeepDive = React.lazy(() => import('../../components/sections/ApprovalsDeepDive'));
+const SubtasksDeepDive = React.lazy(() => import('../../components/sections/SubtasksDeepDive'));
+const Templates = React.lazy(() => import('../../components/sections/Templates'));
+const BulkImport = React.lazy(() => import('../../components/sections/BulkImport'));
+const HowItWorks = React.lazy(() => import('../../components/sections/HowItWorks'));
+const Testimonials = React.lazy(() => import('../../components/sections/Testimonials'));
+const FAQ = React.lazy(() => import('../../components/sections/FAQ'));
+
+const SectionLoader = () => (
+  <div className="w-full py-24 flex items-center justify-center bg-transparent">
+    <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin shadow-[0_0_20px_rgba(99,102,241,0.5)]" />
+  </div>
+);
 
 export default function Home({ onOpenLogin, onOpenDemo }) {
   return (
-    <div>
+    <div className="relative font-sans text-white z-10 bg-transparent">
+      {/* ── Above the Fold (Synchronous) ── */}
       <div id="home">
         <Hero onOpenLogin={onOpenLogin} onOpenDemo={onOpenDemo} />
         <StatsStrip />
@@ -34,72 +40,72 @@ export default function Home({ onOpenLogin, onOpenDemo }) {
         <Differentiators />
       </div>
 
-      {/* Spacer for a sleek gap effect */}
-      <div className="w-full py-12 lg:py-20" />
-
-      <div id="solutions">
-        <UseCases />
-      </div>
-
+      {/* ── Below the Fold (Code-Split & Aligned with Navbar Order) ── */}
       <div id="analytics">
-        <Analytics />
+        <Suspense fallback={<SectionLoader />}>
+          <Analytics />
+        </Suspense>
       </div>
 
-      {/* Spacer gap effect before Approvals */}
-      <div className="w-full py-8 lg:py-12" />
+      <div id="use-cases">
+        <Suspense fallback={<SectionLoader />}>
+          <UseCases />
+        </Suspense>
+      </div>
+
+      <div id="sla">
+        <Suspense fallback={<SectionLoader />}>
+          <SLADeepDive />
+        </Suspense>
+      </div>
 
       <div id="security">
-        <ApprovalsDeepDive />
+        <Suspense fallback={<SectionLoader />}>
+          <ApprovalsDeepDive />
+        </Suspense>
       </div>
-
-      {/* Spacer gap effect before Subtasks */}
-      <div className="w-full py-8 lg:py-12" />
 
       <div id="resources">
-        <SubtasksDeepDive />
+        <Suspense fallback={<SectionLoader />}>
+          <SubtasksDeepDive />
+        </Suspense>
       </div>
-
-      {/* Spacer gap effect before Templates */}
-      <div className="w-full py-8 lg:py-12" />
 
       <div id="templates">
-        <Templates />
+        <Suspense fallback={<SectionLoader />}>
+          <Templates />
+        </Suspense>
       </div>
-
-      {/* Spacer gap effect before BulkImport */}
-      <div className="w-full py-8 lg:py-12" />
 
       <div id="bulk-import">
-        <BulkImport />
+        <Suspense fallback={<SectionLoader />}>
+          <BulkImport />
+        </Suspense>
       </div>
-
-      {/* Spacer gap effect before HowItWorks */}
-      <div className="w-full py-8 lg:py-12" />
 
       <div id="workflow">
-        <HowItWorks />
+        <Suspense fallback={<SectionLoader />}>
+          <HowItWorks />
+        </Suspense>
       </div>
-
-      {/* Spacer gap effect before Testimonials */}
-      <div className="w-full py-8 lg:py-12" />
 
       <div id="pricing">
-        <Pricing />
+        <Suspense fallback={<SectionLoader />}>
+          <Pricing onOpenLogin={onOpenLogin} onOpenDemo={onOpenDemo} />
+        </Suspense>
       </div>
 
-      {/* Spacer gap effect before FAQ */}
-      <div className="w-full py-8 lg:py-12" />
-
-      <div id="about">
-        <About />
+      <div id="testimonials">
+        <Suspense fallback={<SectionLoader />}>
+          <Testimonials />
+        </Suspense>
       </div>
-
-      <div className="w-full py-8 lg:py-12" />
 
       <div id="faq">
-        <FAQ />
+        <Suspense fallback={<SectionLoader />}>
+          <FAQ />
+        </Suspense>
       </div>
-
     </div>
   );
 }

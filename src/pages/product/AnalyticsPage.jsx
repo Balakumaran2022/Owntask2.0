@@ -18,7 +18,7 @@ export default function AnalyticsPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h1 className="text-2xl md:text-4xl font-black text-[#F1F5F9] tracking-tight mb-6">
-            Enterprise <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#8B5CF6]">Analytics</span>
+            Know exactly where your team stands — <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#8B5CF6]">at any moment.</span>
           </h1>
           <p className="text-xl text-primary/60 leading-relaxed">
             Unprecedented visibility into your organization's operational velocity and health through beautiful, real-time dashboards.

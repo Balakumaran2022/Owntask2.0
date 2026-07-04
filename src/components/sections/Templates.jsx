@@ -91,20 +91,20 @@ export default function Templates() {
     : templateLibrary.filter(t => t.category === activeCategory);
 
   return (
-    <section className="relative z-10 py-24 lg:py-32 overflow-hidden bg-transparent">
+    <section className="relative z-10 py-10 lg:py-14 overflow-hidden bg-transparent">
       {/* Background glow light */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[550px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] bg-emerald-500/5 rounded-full blur-[110px] pointer-events-none" />
 
-      <div className="container mx-auto px-5 md:px-8 max-w-[1240px] relative z-10">
+      <div className="container mx-auto px-5 md:px-8 max-w-[1420px] relative z-10">
         
-        {/* Centered Section Header */}
-        <div className="text-center mb-16 md:mb-20">
+        {/* Centered Section Header (Compact for Single Screen) */}
+        <div className="text-center mb-8">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 border border-primary/30 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide"
+            className="inline-flex items-center gap-2 mb-3 px-3.5 py-1 border border-primary/30 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide"
           >
             <Grid size={13} className="animate-pulse" />
             <span>Modular Workflows</span>
@@ -115,7 +115,7 @@ export default function Templates() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-2xl md:text-[2.25rem] lg:text-[2.5rem] tracking-tight leading-tight font-sans font-extrabold mb-5"
+            className="text-2xl md:text-3xl lg:text-4xl tracking-tight leading-tight font-sans font-extrabold mb-3"
           >
             <span className="text-white">Start from a proven template. </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#8b5cf6]">Not from scratch.</span>
@@ -126,49 +126,49 @@ export default function Templates() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="text-white/55 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-white/65 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-medium"
           >
             The task library is a curated collection of pre-built subject templates for common business workflows. Install any template with one click — it automatically creates:
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           
-          {/* LEFT COLUMN: Library Browser Mock */}
+          {/* LEFT COLUMN: Library Browser Mock (High Visibility & Increased Width) */}
           <div className="lg:col-span-7 flex justify-center">
-            <div className="w-full max-w-[620px] rounded-[32px] overflow-hidden border border-white/[0.08] shadow-[0_32px_80px_rgba(0,0,0,0.65)] relative"
-              style={{ background: 'linear-gradient(160deg, #090911 0%, #0d0d1b 100%)' }}
+            <div className="w-full max-w-[780px] rounded-[28px] overflow-hidden border border-white/20 shadow-[0_32px_90px_rgba(0,0,0,0.85)] relative"
+              style={{ background: 'linear-gradient(160deg, #13122b 0%, #0d0c1f 100%)' }}
             >
               {/* Chrome Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05]">
+              <div className="flex items-center justify-between px-6 py-3.5 border-b border-white/10 bg-[#0a0a16]/80 backdrop-blur-md">
                 <div className="flex items-center gap-2">
-                  <div className="w-3.5 h-3.5 rounded-full bg-red-400/40 border border-red-400/60" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-amber-400/40 border border-amber-400/60" />
-                  <div className="w-3.5 h-3.5 rounded-full bg-emerald-400/40 border border-emerald-400/60" />
+                  <div className="w-3 h-3 rounded-full bg-red-500/80 border border-red-400 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
+                  <div className="w-3 h-3 rounded-full bg-amber-500/80 border border-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80 border border-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-white/[0.04] border border-white/[0.06]">
-                  <span className="text-sm md:text-base font-bold font-sans text-white/85 tracking-wide">Workflow Template Library</span>
+                <div className="flex items-center gap-2 px-3.5 py-1 rounded-xl bg-white/10 border border-white/15 shadow-inner">
+                  <span className="text-xs md:text-sm font-extrabold font-sans text-white tracking-wide">Workflow Template Library</span>
                 </div>
-                <span className="text-[10px] font-mono text-white/20 tracking-wider">v1.2.4</span>
+                <span className="text-[11px] font-mono font-black text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/30">v1.2.4</span>
               </div>
 
-              {/* Browser Body Grid */}
-              <div className="grid grid-cols-[160px_1fr] min-h-[380px] text-left">
+              {/* Browser Body Grid (Reduced Height for Single Page Viewability) */}
+              <div className="grid grid-cols-[135px_1fr] min-h-[380px] text-left bg-gradient-to-b from-transparent via-white/[0.01] to-transparent">
                 
                 {/* Browser Sidebar Categories */}
-                <div className="border-r border-white/[0.05] p-3.5 flex flex-col gap-1 bg-white/[0.01]">
-                  <div className="flex items-center gap-2 px-2.5 py-2 mb-2">
-                    <Compass size={13} className="text-primary" />
-                    <span className="text-[10px] font-black text-white/30 uppercase tracking-wider">Explore</span>
+                <div className="border-r border-white/10 p-2.5 flex flex-col gap-1 bg-[#0a0a16]/60 backdrop-blur-md">
+                  <div className="flex items-center gap-2 px-2 py-1 mb-1">
+                    <Compass size={14} className="text-primary animate-spin-slow" />
+                    <span className="text-[11px] font-mono font-black text-white/70 uppercase tracking-widest">Explore</span>
                   </div>
                   {categories.map(cat => (
                     <button
                       key={cat.id}
                       onClick={() => setActiveCategory(cat.id)}
-                      className={`px-3 py-2 rounded-xl text-left text-xs font-bold transition-all ${
+                      className={`px-3 py-1.5 rounded-xl text-left text-xs font-black transition-all cursor-pointer ${
                         activeCategory === cat.id 
-                          ? 'bg-white/10 text-white shadow-md' 
-                          : 'text-white/40 hover:text-white/70 hover:bg-white/[0.02]'
+                          ? 'bg-gradient-to-r from-primary to-indigo-600 text-white shadow-[0_0_20px_rgba(99,102,241,0.5)] scale-[1.02]' 
+                          : 'text-white/60 hover:text-white hover:bg-white/10'
                       }`}
                     >
                       {cat.label}
@@ -176,8 +176,8 @@ export default function Templates() {
                   ))}
                 </div>
 
-                {/* Templates Grid Viewer */}
-                <div className="p-5 overflow-y-auto max-h-[420px] flex flex-col gap-3 scrollbar-none" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                {/* Templates Grid Viewer (Compact max-h-[420px] with shrink-0 to prevent vertical clipping) */}
+                <div className="p-3.5 overflow-y-auto max-h-[420px] flex flex-col gap-2.5 scrollbar-none" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   
                   {/* Webkit scrollbar hiding rule */}
                   <style>{`
@@ -198,42 +198,43 @@ export default function Templates() {
                           initial={{ opacity: 0, scale: 0.95 }}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.95 }}
-                          whileHover={{ y: -4, scale: 1.02 }}
-                          transition={{ duration: 0.3 }}
-                          className="group p-4 rounded-2xl bg-[#0D0D1C]/80 border border-white/[0.06] hover:border-white/15 transition-all flex items-start gap-4 relative overflow-hidden shadow-md"
+                          whileHover={{ y: -2, scale: 1.01 }}
+                          transition={{ duration: 0.25 }}
+                          className="group p-3.5 rounded-2xl bg-[#13122b]/95 border border-white/20 hover:border-primary/60 hover:bg-[#1a1838] transition-all duration-300 flex items-start gap-3 relative overflow-hidden shadow-xl backdrop-blur-md w-full shrink-0 h-auto min-h-0"
                         >
                           {/* Glowing top accent line */}
                           <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                           {/* Shimmer overlay */}
-                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                          
                           {/* Installation step loader overlay */}
                           {isInstalling && (
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="absolute inset-0 bg-[#0A0A15]/95 flex flex-col items-center justify-center p-3 text-center z-20"
+                              className="absolute inset-0 bg-[#0f0e24]/95 flex flex-col items-center justify-center p-3 text-center z-20 backdrop-blur-md"
                             >
-                              <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin mb-2" />
-                              <span className="text-[10px] font-mono text-white/50 tracking-wider">
+                              <div className="w-6 h-6 border-3 border-primary border-t-transparent rounded-full animate-spin mb-1.5" />
+                              <span className="text-xs font-mono font-bold text-white tracking-wider">
                                 Generating pipeline, statuses, fields...
                               </span>
                             </motion.div>
                           )}
 
                           {/* Template Emoji */}
-                          <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-xl shrink-0 border border-white/5">
+                          <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-lg shrink-0 border border-white/15 shadow-sm group-hover:scale-110 group-hover:bg-primary/20 transition-all mt-0.5">
                             {template.emoji}
                           </div>
 
-                          {/* Info */}
-                          <div className="flex-1 min-w-0">
-                            <h4 className="text-white font-bold text-sm leading-snug">{template.title}</h4>
-                            <p className="text-white/45 text-[11px] leading-relaxed mt-0.5">{template.desc}</p>
+                          {/* Info (Maximized Subtitle Visibility without Vertical Bloat) */}
+                          <div className="flex-1 min-w-0 pr-1">
+                            <h4 className="text-white font-black text-sm md:text-base tracking-wide group-hover:text-primary transition-colors leading-snug">{template.title}</h4>
+                            <p className="text-white/90 text-xs leading-relaxed mt-1 font-bold block w-full whitespace-normal break-words">{template.desc}</p>
                             
                             {/* Workflow state badges */}
-                            <div className="flex items-center gap-1.5 mt-2.5 flex-wrap">
+                            <div className="flex items-center gap-1 mt-2 flex-wrap">
                               {template.statuses.map((s, idx) => (
-                                <span key={idx} className="px-1.5 py-0.5 rounded text-[8px] font-bold font-mono tracking-wide bg-white/5 text-white/40 border border-white/5">
+                                <span key={idx} className="px-2 py-0.5 rounded-full text-[9px] font-black font-mono tracking-wider bg-white/10 text-white/90 border border-white/20 shadow-sm uppercase">
                                   {s}
                                 </span>
                               ))}
@@ -244,10 +245,10 @@ export default function Templates() {
                           <button
                             onClick={() => handleInstall(template.id)}
                             disabled={isInstalled || installingId}
-                            className={`px-3 py-1.5 rounded-xl text-[10px] font-bold shrink-0 self-center transition-all ${
+                            className={`px-3 py-1.5 rounded-xl text-xs font-black shrink-0 self-center transition-all shadow-md ${
                               isInstalled
-                                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 cursor-default'
-                                : 'bg-primary text-black hover:scale-105 active:scale-95 cursor-pointer shadow-md'
+                                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 cursor-default shadow-[0_0_15px_rgba(52,211,153,0.3)]'
+                                : 'bg-gradient-to-r from-primary via-indigo-500 to-purple-600 text-white hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_20px_rgba(99,102,241,0.5)] border-none'
                             }`}
                           >
                             {isInstalled ? 'Installed ✓' : 'Install'}
@@ -263,11 +264,11 @@ export default function Templates() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Description content */}
+          {/* RIGHT COLUMN: Feature Cards (Compact Single-Page UI) */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             
             {/* Bullet List */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2.5">
               {[
                 { title: 'The Project', desc: 'Pre-creates project scope, access parameters, and default parameters.' },
                 { title: 'The Subject(s)', desc: 'Defines task classifications and categories instantly.' },
@@ -280,18 +281,21 @@ export default function Templates() {
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  whileHover={{ x: 8, scale: 1.01 }}
+                  whileHover={{ x: 6, scale: 1.01 }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.01] hover:bg-[#0D0D1C]/60 border border-transparent hover:border-white/10 transition-all group cursor-default"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-[#13122b]/90 border border-white/20 hover:border-primary/60 hover:bg-[#1a1838] transition-all duration-300 group cursor-default shadow-xl backdrop-blur-md relative overflow-hidden w-full shrink-0 h-auto"
                 >
-                  <div className="w-7 h-7 rounded-xl bg-primary/10 flex items-center justify-center mt-0.5 shrink-0 group-hover:scale-105 transition-transform border border-primary/20">
-                    <CheckCircle2 size={16} className="text-primary" />
+                  {/* Glowing top accent line */}
+                  <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center mt-0.5 shrink-0 group-hover:scale-110 group-hover:bg-primary/30 transition-all border border-primary/40 shadow-[0_0_15px_rgba(99,102,241,0.3)]">
+                    <CheckCircle2 size={16} className="text-primary stroke-[2.5]" />
                   </div>
-                  <div>
-                    <h4 className="text-white font-bold text-base md:text-lg leading-snug group-hover:text-primary transition-colors">
+                  <div className="flex-1 min-w-0 pr-1">
+                    <h4 className="text-white font-extrabold text-sm md:text-base leading-snug tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-primary transition-all">
                       {bullet.title}
                     </h4>
-                    <p className="text-white/55 text-sm md:text-base mt-1 leading-relaxed">
+                    <p className="text-white/85 text-xs mt-0.5 leading-relaxed font-semibold block w-full">
                       {bullet.desc}
                     </p>
                   </div>

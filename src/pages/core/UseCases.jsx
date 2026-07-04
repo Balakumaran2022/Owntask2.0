@@ -4,7 +4,7 @@ import {
   Headphones, Settings, Briefcase, Users, RotateCw, ShieldCheck,
   Clock, BarChart2, CheckCircle, AlertTriangle, Layers, Zap,
   ChevronRight, ArrowRight, Timer, UserCheck, TrendingUp,
-  Calendar, Folder, ClipboardCheck, GitBranch, Database, Eye
+  Calendar, Folder, ClipboardCheck, GitBranch, Database, Eye, Rocket
 } from 'lucide-react';
 
 const USE_CASES = [
@@ -52,9 +52,9 @@ const USE_CASES = [
   },
   {
     id: 'agencies',
-    emoji: '🏗️',
+    emoji: '🚀',
     tag: 'Project Management',
-    icon: <Briefcase size={22} />,
+    icon: <Rocket size={22} />,
     color: 'from-violet-500 to-purple-600',
     border: 'border-violet-500/20',
     bg: 'bg-violet-500/5',
@@ -77,14 +77,14 @@ export default function UseCases() {
   const [activeTab, setActiveTab] = useState('support');
 
   useEffect(() => {
-    document.title = "ownTask Use Cases — Support Teams, Operations & Project Management";
+    document.title = "OwnTasks | Intelligent Command Center";
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
       metaDesc = document.createElement('meta');
       metaDesc.name = "description";
       document.head.appendChild(metaDesc);
     }
-    metaDesc.content = "See how customer support teams, operations managers, and project-based agencies use ownTask to manage SLAs, recurring processes, multi-project tracking, and compliance.";
+    metaDesc.content = "See how support teams, ops managers, and agencies use ownTask to manage SLAs, recurring processes, and multi-project oversight.";
   }, []);
 
   const active = USE_CASES.find(u => u.id === activeTab);
@@ -99,7 +99,7 @@ export default function UseCases() {
       <div className="container mx-auto px-5 md:px-8 max-w-[1240px] relative z-10">
 
         {/* ── HERO HEADER ── */}
-        <div className="mb-16">
+        <div className="mb-16 text-center flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ export default function UseCases() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-white/55 text-lg leading-relaxed max-w-2xl"
+            className="text-white/55 text-lg leading-relaxed max-w-2xl mx-auto"
           >
             See how customer support teams, operations managers, and project-based agencies use ownTask to manage SLAs, recurring processes, multi-project tracking, and compliance.
           </motion.p>
@@ -140,7 +140,7 @@ export default function UseCases() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="flex flex-wrap gap-2 mb-10"
+          className="flex flex-wrap justify-center gap-2 mb-10"
         >
           {USE_CASES.map(uc => (
             <button
@@ -164,83 +164,191 @@ export default function UseCases() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className={`rounded-3xl border ${active.border} ${active.bg} p-8 md:p-12 backdrop-blur-xl flex flex-col lg:flex-row gap-12 items-start shadow-2xl`}
+          className={`rounded-3xl border ${active.border} ${active.bg} p-8 md:p-12 backdrop-blur-xl shadow-2xl flex flex-col`}
         >
-          {/* LEFT */}
-          <div className="flex-1 min-w-0">
-            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold mb-6 ${active.tagBg}`}>
+          {/* Centered Header */}
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-bold mb-6 ${active.tagBg} shadow-md`}>
               {active.icon}
               {active.title}
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
               {active.headline}
             </h2>
-            <p className="text-white/60 text-base leading-relaxed mb-8 max-w-lg">
+            <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
               {active.description}
             </p>
-
-            <div className="flex flex-col gap-4">
-              {active.bullets.map((b, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.07 }}
-                  className="flex items-start gap-3"
-                >
-                  <span className={`mt-0.5 shrink-0 ${active.iconColor}`}>{b.icon}</span>
-                  <span className="text-white/75 text-sm leading-snug">{b.text}</span>
-                </motion.div>
-              ))}
-            </div>
           </div>
 
-          {/* RIGHT — stat callout */}
-          <div className="lg:w-[280px] shrink-0 flex flex-col gap-5">
-            <div className={`p-7 rounded-2xl border ${active.border} bg-white/[0.03] flex flex-col items-center text-center`}>
-              <span className={`text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br ${active.color} mb-2`}>
-                {active.stat.val}
-              </span>
-              <span className="text-white/50 text-sm font-medium">{active.stat.label}</span>
+          {/* Two columns below centered header */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-6">
+            {/* Left: Modern glassmorphic feature cards */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {active.bullets.map((b, i) => {
+                const bulletStyle = active.id === 'support'
+                  ? 'bg-gradient-to-br from-sky-500/[0.15] via-blue-500/[0.05] to-transparent border-sky-500/30 hover:border-sky-400/60 hover:from-sky-500/[0.22] hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(14,165,233,0.25)]'
+                  : active.id === 'operations'
+                  ? 'bg-gradient-to-br from-amber-500/[0.15] via-orange-500/[0.05] to-transparent border-amber-500/30 hover:border-amber-400/60 hover:from-amber-500/[0.22] hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(245,158,11,0.25)]'
+                  : 'bg-gradient-to-br from-violet-500/[0.15] via-purple-500/[0.05] to-transparent border-violet-500/30 hover:border-violet-400/60 hover:from-violet-500/[0.22] hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(139,92,246,0.25)]';
+
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    className={`p-6 rounded-3xl border transition-all duration-300 flex items-start gap-4 shadow-xl group relative overflow-hidden backdrop-blur-xl ${bulletStyle}`}
+                  >
+                    {/* Hover top glow bar */}
+                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${active.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+                    {/* Glowing Icon Badge */}
+                    <div className={`p-3.5 rounded-2xl bg-gradient-to-br ${active.color} shadow-lg shrink-0 text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center`}>
+                      <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                        {React.cloneElement(b.icon, { size: 20 })}
+                      </span>
+                    </div>
+
+                    {/* Text content */}
+                    <span className="text-white text-base font-bold leading-relaxed pt-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/80 transition-all">
+                      {b.text}
+                    </span>
+                  </motion.div>
+                );
+              })}
             </div>
 
-            <div className="p-5 rounded-2xl border border-white/[0.05] bg-white/[0.01] flex flex-col gap-3">
-              <p className="text-white/40 text-xs font-mono uppercase tracking-widest">Works great with</p>
-              {['SLA Tracking', 'Recurring Tasks', 'Custom Workflows', 'Role-Based Access'].map((f, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs text-white/70">
-                  <ChevronRight size={12} className={active.iconColor} />
-                  {f}
+            {/* Right: Stat callout & Works Great With cards */}
+            <div className="lg:col-span-5 flex flex-col gap-5 w-full">
+              {/* Hero Stat Card */}
+              <div
+                className={`flex-1 p-8 rounded-3xl border transition-all duration-300 relative overflow-hidden backdrop-blur-xl flex flex-col items-center justify-center text-center shadow-2xl group hover:-translate-y-1 ${
+                  active.id === 'support'
+                    ? 'bg-gradient-to-br from-sky-500/[0.25] via-blue-600/[0.12] to-transparent border-sky-400/50 hover:border-sky-400/80 shadow-[0_20px_40px_rgba(14,165,233,0.3)]'
+                    : active.id === 'operations'
+                    ? 'bg-gradient-to-br from-amber-500/[0.25] via-orange-600/[0.12] to-transparent border-amber-400/50 hover:border-amber-400/80 shadow-[0_20px_40px_rgba(245,158,11,0.3)]'
+                    : 'bg-gradient-to-br from-violet-500/[0.25] via-purple-600/[0.12] to-transparent border-violet-400/50 hover:border-violet-400/80 shadow-[0_20px_40px_rgba(139,92,246,0.3)]'
+                }`}
+              >
+                {/* Ambient background glow */}
+                <div className={`absolute -inset-10 bg-gradient-to-br ${active.color} blur-3xl opacity-25 group-hover:opacity-45 transition-opacity duration-500 pointer-events-none`} />
+                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${active.color}`} />
+
+                <span className={`text-5xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br ${active.color} mb-3 drop-shadow-sm group-hover:scale-105 transition-transform duration-300`}>
+                  {active.stat.val}
+                </span>
+                <span className="text-white/90 text-sm sm:text-base font-extrabold uppercase tracking-widest font-mono">
+                  {active.stat.label}
+                </span>
+              </div>
+
+              {/* Works Great With Card */}
+              <div
+                className={`p-7 rounded-3xl border transition-all duration-300 relative overflow-hidden backdrop-blur-xl flex flex-col justify-between shadow-xl group hover:-translate-y-1 ${
+                  active.id === 'support'
+                    ? 'bg-gradient-to-br from-sky-500/[0.12] via-blue-600/[0.04] to-transparent border-sky-500/30 hover:border-sky-400/50'
+                    : active.id === 'operations'
+                    ? 'bg-gradient-to-br from-amber-500/[0.12] via-orange-600/[0.04] to-transparent border-amber-500/30 hover:border-amber-400/50'
+                    : 'bg-gradient-to-br from-violet-500/[0.12] via-purple-600/[0.04] to-transparent border-violet-500/30 hover:border-violet-400/50'
+                }`}
+              >
+                <div className="flex items-center gap-2.5 mb-4">
+                  <div className={`w-2.5 h-2.5 rounded-full bg-gradient-to-r ${active.color} animate-pulse`} />
+                  <p className="text-white/80 text-xs font-mono uppercase tracking-widest font-extrabold">
+                    Works Great With
+                  </p>
                 </div>
-              ))}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {['SLA Tracking', 'Recurring Tasks', 'Custom Workflows', 'Role-Based Access'].map((f, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.12] hover:border-white/25 transition-all text-xs sm:text-sm text-white font-bold shadow-sm"
+                    >
+                      <div className={`w-6 h-6 rounded-lg bg-gradient-to-br ${active.color} flex items-center justify-center text-white shrink-0 shadow-sm`}>
+                        <CheckCircle size={14} />
+                      </div>
+                      <span>{f}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
 
         {/* ── ALL CARDS GRID (always visible below) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-          {USE_CASES.map((uc, idx) => (
-            <motion.button
-              key={uc.id}
-              onClick={() => setActiveTab(uc.id)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className={`group text-left p-6 rounded-2xl border transition-all duration-300 ${
-                activeTab === uc.id
-                  ? `${uc.bg} ${uc.border} shadow-lg`
-                  : 'bg-white/[0.01] border-white/[0.05] hover:bg-white/[0.04] hover:border-white/10'
-              }`}
-            >
-              <div className={`text-3xl mb-4`}>{uc.emoji}</div>
-              <h3 className="text-white font-bold text-base mb-2">{uc.title}</h3>
-              <p className="text-white/45 text-sm leading-relaxed line-clamp-3">{uc.description}</p>
-              <div className={`flex items-center gap-1 text-xs font-bold mt-4 ${uc.iconColor} opacity-0 group-hover:opacity-100 transition-opacity`}>
-                Explore <ArrowRight size={12} />
-              </div>
-            </motion.button>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          {USE_CASES.map((uc, idx) => {
+            const isActive = activeTab === uc.id;
+            const cardBgStyle = isActive
+              ? uc.id === 'support'
+                ? 'bg-gradient-to-br from-sky-500/[0.22] via-blue-600/[0.12] to-transparent border-sky-400/60 shadow-[0_20px_50px_rgba(14,165,233,0.3)] ring-2 ring-sky-400/70 -translate-y-2'
+                : uc.id === 'operations'
+                ? 'bg-gradient-to-br from-amber-500/[0.22] via-orange-600/[0.12] to-transparent border-amber-400/60 shadow-[0_20px_50px_rgba(245,158,11,0.3)] ring-2 ring-amber-400/70 -translate-y-2'
+                : 'bg-gradient-to-br from-violet-500/[0.22] via-purple-600/[0.12] to-transparent border-violet-400/60 shadow-[0_20px_50px_rgba(139,92,246,0.3)] ring-2 ring-violet-400/70 -translate-y-2'
+              : uc.id === 'support'
+              ? 'bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.01] border-white/15 hover:border-sky-400/50 hover:from-sky-500/[0.15] hover:to-transparent shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_40px_rgba(14,165,233,0.25)] hover:-translate-y-1.5'
+              : uc.id === 'operations'
+              ? 'bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.01] border-white/15 hover:border-amber-400/50 hover:from-amber-500/[0.15] hover:to-transparent shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_40px_rgba(245,158,11,0.25)] hover:-translate-y-1.5'
+              : 'bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.01] border-white/15 hover:border-violet-400/50 hover:from-violet-500/[0.15] hover:to-transparent shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_40px_rgba(139,92,246,0.25)] hover:-translate-y-1.5';
+
+            return (
+              <motion.button
+                key={uc.id}
+                onClick={() => setActiveTab(uc.id)}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className={`group text-center p-8 sm:p-10 rounded-3xl border transition-all duration-300 relative overflow-hidden backdrop-blur-xl flex flex-col items-center justify-between ${cardBgStyle}`}
+              >
+                {/* Glowing Top Border Bar */}
+                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${uc.color} ${isActive ? 'opacity-100 shadow-[0_0_20px_currentColor]' : 'opacity-40 group-hover:opacity-100'} transition-all duration-500`} />
+
+                {/* Ambient Background Glow Orb */}
+                <div className={`absolute -top-24 -right-24 w-56 h-56 rounded-full bg-gradient-to-br ${uc.color} blur-3xl ${isActive ? 'opacity-35' : 'opacity-15 group-hover:opacity-30'} transition-opacity duration-500 pointer-events-none`} />
+
+                {/* Floating Glowing Icon Container */}
+                <div className="relative mb-6 mt-2">
+                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${uc.color} blur-xl opacity-40 group-hover:opacity-85 transition-opacity duration-300`} />
+                  <div className={`relative w-20 h-20 rounded-3xl bg-gradient-to-br ${uc.color} p-0.5 shadow-2xl group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300`}>
+                    <div className="w-full h-full bg-[#0D0D1A]/95 backdrop-blur-2xl rounded-[22px] flex items-center justify-center shadow-inner">
+                      <span className={`${uc.iconColor} drop-shadow-[0_0_15px_currentColor]`}>
+                        {React.cloneElement(uc.icon, { size: 38 })}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tag & Title & Description */}
+                <div className="w-full">
+                  <span className={`inline-block px-3.5 py-1 rounded-full text-xs font-mono font-extrabold uppercase tracking-wider mb-4 ${uc.tagBg} shadow-sm`}>
+                    {uc.tag}
+                  </span>
+                  <h3 className="text-white font-black text-xl sm:text-2xl mb-3.5 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/80 transition-all">
+                    {uc.title}
+                  </h3>
+                  <p className="text-white/75 text-sm sm:text-base leading-relaxed line-clamp-3 max-w-sm mx-auto font-medium mb-8">
+                    {uc.description}
+                  </p>
+                </div>
+
+                {/* Interactive CTA Button */}
+                <div
+                  className={`w-full max-w-[220px] py-3.5 px-6 rounded-full font-extrabold text-xs sm:text-sm tracking-wide transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md ${
+                    isActive
+                      ? `bg-gradient-to-r ${uc.color} text-white shadow-[0_5px_25px_rgba(0,0,0,0.5)] scale-105 ring-1 ring-white/20`
+                      : `bg-white/[0.08] border border-white/15 text-white/90 group-hover:bg-gradient-to-r group-hover:${uc.color} group-hover:border-transparent group-hover:text-white group-hover:shadow-lg`
+                  }`}
+                >
+                  <span>{isActive ? 'Active View' : 'Explore Use Case'}</span>
+                  <ArrowRight size={15} className="group-hover:translate-x-1.5 transition-transform" />
+                </div>
+              </motion.button>
+            );
+          })}
         </div>
 
         {/* ─── CUSTOMER SUPPORT DEEP DIVE ─── */}
@@ -248,126 +356,142 @@ export default function UseCases() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          className="mt-20 w-full"
+          className="mt-24 w-full"
         >
           {/* Section divider */}
-          <div className="flex items-center gap-4 mb-14">
+          <div className="flex items-center gap-4 mb-16">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             <span className="text-white/30 text-xs font-mono uppercase tracking-widest shrink-0">Detailed Use Case</span>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/10 to-transparent" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* ── CENTERED HEADER & PROBLEM STATEMENT ── */}
+          <div className="text-center max-w-4xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-bold tracking-wide shadow-[0_0_20px_rgba(56,189,248,0.15)]">
+              <Headphones size={14} />
+              <span>🎧 Customer Support</span>
+            </div>
 
-            {/* ── LEFT: TEXT ── */}
-            <div>
-              {/* Tag badge */}
-              <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-bold tracking-wide">
-                <Headphones size={13} />
-                <span>🎧 Customer Support</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+              Turn your inbox into an<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-500">accountable ticket system.</span>
+            </h2>
+
+            {/* Scenario narrative card */}
+            <div className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-gradient-to-r from-white/[0.04] via-white/[0.02] to-white/[0.04] backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.3)] text-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-mono font-bold uppercase tracking-widest mb-3">The Problem</span>
+              <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+                A support team managing 200+ tickets a day. Tickets fall through cracks. Agents have uneven workloads. There&apos;s no visibility into who&apos;s overloaded or which priority tickets are being ignored.
+              </p>
+            </div>
+          </div>
+
+          {/* ── TWO-COLUMN GRID: MODERN CARDS & MOCK BOARD ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            {/* LEFT: MODERN SOLUTION CARDS (2x3 GRID) */}
+            <div className="lg:col-span-6 flex flex-col gap-5">
+              <div className="flex items-center gap-2.5 px-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse shadow-[0_0_10px_rgba(56,189,248,0.8)]" />
+                <p className="text-xs font-mono text-white/70 uppercase tracking-widest font-extrabold">How ownTask Solves It</p>
               </div>
 
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5">
-                Turn your inbox into an<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">accountable ticket system.</span>
-              </h2>
-
-              {/* Scenario narrative */}
-              <div className="p-5 rounded-2xl border border-white/[0.05] bg-white/[0.02] mb-8">
-                <p className="text-xs font-mono text-white/35 uppercase tracking-widest mb-3">The Problem</p>
-                <p className="text-white/65 text-sm leading-relaxed">
-                  A support team managing 200+ tickets a day. Tickets fall through cracks. Agents have uneven workloads. There&apos;s no visibility into who&apos;s overloaded or which priority tickets are being ignored.
-                </p>
-              </div>
-
-              {/* Solution bullets */}
-              <p className="text-xs font-mono text-white/35 uppercase tracking-widest mb-5">How ownTask Solves It</p>
-              <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  { icon: <Layers size={15} />, color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20', title: 'Ticket Board project', desc: 'Create a structured project for "Customer Support" with custom statuses, fields, and subjects.' },
-                  { icon: <Users size={15} />, color: 'text-indigo-400', bg: 'bg-indigo-500/10 border-indigo-500/20', title: 'Round-robin assignment', desc: 'Auto-assign incoming tickets across agents — equitable workloads, automatically.' },
-                  { icon: <Timer size={15} />, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', title: 'SLA by priority', desc: 'Highest = 2h · High = 4h · Normal = 8h · Low = 24h — configured once, enforced always.' },
-                  { icon: <AlertTriangle size={15} />, color: 'text-rose-400', bg: 'bg-rose-500/10 border-rose-500/20', title: 'Status-based SLA alerts', desc: 'Alert when a ticket stays "In Review" beyond 2 hours — catch stalled work before breach.' },
-                  { icon: <TrendingUp size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20', title: 'Auto-escalation', desc: 'Auto-escalate to senior team if not resolved within 4 hours — no manual monitoring needed.' },
-                  { icon: <UserCheck size={15} />, color: 'text-violet-400', bg: 'bg-violet-500/10 border-violet-500/20', title: 'Customer linking + analytics', desc: 'Every ticket connected to a customer record. Pull per-agent completion rate, on-time rate, and SLA compliance.' },
+                  { icon: <Layers size={20} />, color: 'text-sky-400', bg: 'bg-sky-500/20 border-sky-500/40 shadow-[0_0_15px_rgba(56,189,248,0.2)]', title: 'Ticket Board project', desc: 'Create a structured project for "Customer Support" with custom statuses, fields, and subjects.' },
+                  { icon: <Users size={20} />, color: 'text-indigo-400', bg: 'bg-indigo-500/20 border-indigo-500/40 shadow-[0_0_15px_rgba(129,140,248,0.2)]', title: 'Round-robin assignment', desc: 'Auto-assign incoming tickets across agents — equitable workloads, automatically.' },
+                  { icon: <Timer size={20} />, color: 'text-amber-400', bg: 'bg-amber-500/20 border-amber-500/40 shadow-[0_0_15px_rgba(251,191,36,0.2)]', title: 'SLA by priority', desc: 'Highest = 2h · High = 4h · Normal = 8h · Low = 24h — configured once, enforced always.' },
+                  { icon: <AlertTriangle size={20} />, color: 'text-rose-400', bg: 'bg-rose-500/20 border-rose-500/40 shadow-[0_0_15px_rgba(251,113,133,0.2)]', title: 'Status-based SLA alerts', desc: 'Alert when a ticket stays "In Review" beyond 2 hours — catch stalled work before breach.' },
+                  { icon: <TrendingUp size={20} />, color: 'text-emerald-400', bg: 'bg-emerald-500/20 border-emerald-500/40 shadow-[0_0_15px_rgba(52,211,153,0.2)]', title: 'Auto-escalation', desc: 'Auto-escalate to senior team if not resolved within 4 hours — no manual monitoring needed.' },
+                  { icon: <UserCheck size={20} />, color: 'text-violet-400', bg: 'bg-violet-500/20 border-violet-500/40 shadow-[0_0_15px_rgba(167,139,250,0.2)]', title: 'Customer linking + analytics', desc: 'Every ticket connected to a customer record. Pull completion rate, on-time rate, and SLA compliance.' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.07 }}
-                    className="flex items-start gap-4"
+                    transition={{ delay: i * 0.08 }}
+                    className="p-5 rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.08] via-white/[0.03] to-white/[0.01] hover:from-white/[0.14] hover:to-white/[0.05] hover:border-white/30 transition-all duration-300 shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] group hover:-translate-y-1.5 flex flex-col justify-between relative overflow-hidden backdrop-blur-xl"
                   >
-                    <div className={`p-2.5 rounded-xl border shrink-0 ${item.bg}`}>
-                      <span className={item.color}>{item.icon}</span>
-                    </div>
+                    {/* Subtle top inner glow line */}
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
                     <div>
-                      <p className="text-white font-bold text-sm mb-0.5">{item.title}</p>
-                      <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
+                      <div className={`w-12 h-12 rounded-2xl border ${item.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <span className={item.color}>{item.icon}</span>
+                      </div>
+                      <h4 className="text-white font-extrabold text-base mb-2 group-hover:text-sky-300 transition-colors flex items-center justify-between">
+                        <span>{item.title}</span>
+                      </h4>
+                      <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-medium">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* ── RIGHT: KANBAN MOCK ── */}
+            {/* RIGHT: KANBAN MOCK */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="w-full"
+              className="lg:col-span-6 w-full"
             >
               {/* Board header */}
-              <div className="p-4 rounded-t-2xl border border-white/[0.07] bg-[#0D0D1A] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-sky-500" />
-                  <span className="text-white/80 text-sm font-bold">Ticket Board</span>
+              <div className="p-6 rounded-t-3xl border border-white/15 bg-gradient-to-r from-[#0D0D1A] to-[#121226] flex items-center justify-between shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-3.5 h-3.5 rounded-full bg-sky-400 animate-pulse shadow-[0_0_12px_rgba(56,189,248,0.9)]" />
+                  <span className="text-white text-lg font-black tracking-wide">Ticket Board</span>
                 </div>
-                <span className="text-[10px] font-mono text-white/30 bg-white/[0.03] border border-white/[0.05] px-2 py-0.5 rounded">Customer Support</span>
+                <span className="text-xs font-mono font-bold text-sky-300 bg-sky-500/20 border border-sky-400/30 px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(56,189,248,0.2)]">Customer Support</span>
               </div>
 
               {/* Kanban columns */}
-              <div className="grid grid-cols-3 gap-3 p-4 rounded-b-2xl border-x border-b border-white/[0.07] bg-[#090912]/90 backdrop-blur-xl">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-5 rounded-b-3xl border-x border-b border-white/15 bg-[#090912]/95 backdrop-blur-2xl shadow-2xl">
 
                 {/* To Do */}
-                <div className="flex flex-col gap-2.5">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-mono font-bold text-white/40 uppercase tracking-widest">To Do</span>
-                    <span className="text-[10px] font-bold text-white/40 bg-white/[0.04] px-1.5 py-0.5 rounded-full border border-white/[0.06]">3</span>
+                <div className="flex flex-col gap-3.5">
+                  <div className="flex items-center justify-between mb-1 px-1">
+                    <span className="text-xs font-mono font-extrabold text-white/60 uppercase tracking-widest">To Do</span>
+                    <span className="text-xs font-bold text-white/70 bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15">3</span>
                   </div>
                   {[
-                    { id: 'TKT-081', title: 'Login broken on mobile', badge: 'Highest', color: 'bg-rose-500/20 text-rose-400 border-rose-500/30' },
-                    { id: 'TKT-082', title: 'Payment gateway timeout', badge: 'High', color: 'bg-amber-500/20 text-amber-400 border-amber-500/30' },
-                    { id: 'TKT-083', title: 'CSV export corrupted', badge: 'Normal', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
+                    { id: 'TKT-081', title: 'Login broken on mobile', badge: 'Highest', color: 'bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-[0_0_10px_rgba(244,63,94,0.2)]' },
+                    { id: 'TKT-082', title: 'Payment gateway timeout', badge: 'High', color: 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]' },
+                    { id: 'TKT-083', title: 'CSV export corrupted', badge: 'Normal', color: 'bg-blue-500/20 text-blue-300 border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.2)]' },
                   ].map(t => (
-                    <div key={t.id} className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] flex flex-col gap-2">
-                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border self-start ${t.color}`}>{t.badge}</span>
-                      <p className="text-white/80 text-[11px] font-semibold leading-snug">{t.title}</p>
-                      <span className="text-[9px] text-white/25 font-mono">{t.id}</span>
+                    <div key={t.id} className="p-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.02] hover:from-white/[0.12] hover:to-white/[0.04] hover:border-white/25 transition-all duration-200 flex flex-col gap-2.5 shadow-md group cursor-pointer">
+                      <div className="flex items-center justify-between">
+                        <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-md border ${t.color}`}>{t.badge}</span>
+                        <span className="text-[10px] text-white/40 font-mono font-bold group-hover:text-white/70 transition-colors">{t.id}</span>
+                      </div>
+                      <p className="text-white/95 text-xs sm:text-sm font-bold leading-snug group-hover:text-sky-300 transition-colors">{t.title}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* In Progress */}
-                <div className="flex flex-col gap-2.5">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-mono font-bold text-indigo-400 uppercase tracking-widest">In Progress</span>
-                    <span className="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded-full border border-indigo-500/20">2</span>
+                <div className="flex flex-col gap-3.5">
+                  <div className="flex items-center justify-between mb-1 px-1">
+                    <span className="text-xs font-mono font-extrabold text-indigo-400 uppercase tracking-widest">In Progress</span>
+                    <span className="text-xs font-bold text-indigo-300 bg-indigo-500/20 px-2.5 py-0.5 rounded-full border border-indigo-500/30">2</span>
                   </div>
                   {[
-                    { id: 'TKT-077', title: 'API key not generating', badge: 'High', badgeColor: 'bg-amber-500/20 text-amber-400 border-amber-500/30', agent: 'John D.', sla: '2h 14m', slaColor: 'text-amber-400' },
-                    { id: 'TKT-079', title: 'Notification emails delayed', badge: 'Normal', badgeColor: 'bg-blue-500/20 text-blue-400 border-blue-500/30', agent: 'Jane D.', sla: '6h 02m', slaColor: 'text-emerald-400' },
+                    { id: 'TKT-077', title: 'API key not generating', badge: 'High', badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]', agent: 'John D.', sla: '2h 14m', slaColor: 'text-amber-400' },
+                    { id: 'TKT-079', title: 'Notification emails delayed', badge: 'Normal', badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.2)]', agent: 'Jane D.', sla: '6h 02m', slaColor: 'text-emerald-400' },
                   ].map(t => (
-                    <div key={t.id} className="p-3 rounded-xl border border-indigo-500/15 bg-indigo-500/[0.04] flex flex-col gap-2">
-                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border self-start ${t.badgeColor}`}>{t.badge}</span>
-                      <p className="text-white/85 text-[11px] font-semibold leading-snug">{t.title}</p>
+                    <div key={t.id} className="p-4 rounded-2xl border border-indigo-500/30 bg-gradient-to-b from-indigo-500/[0.12] to-indigo-500/[0.03] hover:from-indigo-500/[0.18] hover:to-indigo-500/[0.06] transition-all duration-200 flex flex-col gap-2.5 shadow-md group cursor-pointer">
                       <div className="flex items-center justify-between">
-                        <span className="text-[9px] text-white/30 font-mono">{t.agent}</span>
-                        <div className="flex items-center gap-1">
-                          <Timer size={9} className={t.slaColor} />
-                          <span className={`text-[9px] font-bold font-mono ${t.slaColor}`}>{t.sla}</span>
+                        <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-md border ${t.badgeColor}`}>{t.badge}</span>
+                        <span className="text-[10px] text-indigo-300/60 font-mono font-bold group-hover:text-indigo-200 transition-colors">{t.id}</span>
+                      </div>
+                      <p className="text-white text-xs sm:text-sm font-extrabold leading-snug group-hover:text-indigo-300 transition-colors">{t.title}</p>
+                      <div className="flex items-center justify-between mt-1 pt-2 border-t border-white/10">
+                        <span className="text-[11px] text-white/60 font-mono font-bold">{t.agent}</span>
+                        <div className="flex items-center gap-1.5 bg-black/30 px-2 py-0.5 rounded-md border border-white/5">
+                          <Timer size={12} className={t.slaColor} />
+                          <span className={`text-[10px] font-extrabold font-mono ${t.slaColor}`}>{t.sla}</span>
                         </div>
                       </div>
                     </div>
@@ -375,10 +499,10 @@ export default function UseCases() {
                 </div>
 
                 {/* Resolved */}
-                <div className="flex flex-col gap-2.5">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest">Resolved</span>
-                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20">5</span>
+                <div className="flex flex-col gap-3.5">
+                  <div className="flex items-center justify-between mb-1 px-1">
+                    <span className="text-xs font-mono font-extrabold text-emerald-400 uppercase tracking-widest">Resolved</span>
+                    <span className="text-xs font-bold text-emerald-300 bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/30">5</span>
                   </div>
                   {[
                     { id: 'TKT-071', title: 'Dashboard not loading' },
@@ -387,12 +511,14 @@ export default function UseCases() {
                     { id: 'TKT-074', title: 'Wrong email sent' },
                     { id: 'TKT-075', title: 'Account merge issue' },
                   ].map(t => (
-                    <div key={t.id} className="p-3 rounded-xl border border-emerald-500/10 bg-emerald-500/[0.03] flex flex-col gap-1.5">
-                      <div className="flex items-center gap-1.5">
-                        <CheckCircle size={10} className="text-emerald-400 shrink-0" />
-                        <p className="text-white/55 text-[11px] font-medium leading-snug">{t.title}</p>
+                    <div key={t.id} className="p-3.5 rounded-2xl border border-emerald-500/20 bg-gradient-to-b from-emerald-500/[0.08] to-emerald-500/[0.02] hover:from-emerald-500/[0.14] hover:to-emerald-500/[0.04] transition-all flex flex-col gap-1.5 shadow-sm group cursor-pointer">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <CheckCircle size={14} className="text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <p className="text-white/85 text-xs sm:text-sm font-bold leading-snug truncate group-hover:text-emerald-300 transition-colors">{t.title}</p>
+                        </div>
                       </div>
-                      <span className="text-[9px] text-white/20 font-mono">{t.id}</span>
+                      <span className="text-[10px] text-white/40 font-mono pl-5 font-bold">{t.id}</span>
                     </div>
                   ))}
                 </div>
@@ -400,15 +526,16 @@ export default function UseCases() {
               </div>
 
               {/* Board footer stats */}
-              <div className="mt-3 grid grid-cols-3 gap-3">
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
-                  { label: 'SLA Compliance', val: '94.2%', color: 'text-emerald-400' },
-                  { label: 'Avg Resolve Time', val: '3.4h', color: 'text-sky-400' },
-                  { label: 'Overdue', val: '1', color: 'text-rose-400' },
+                  { label: 'SLA Compliance', val: '94.2%', color: 'text-emerald-400', border: 'border-emerald-500/30', bg: 'bg-gradient-to-br from-emerald-500/20 via-emerald-500/5 to-transparent', shadow: 'shadow-[0_10px_25px_rgba(52,211,153,0.15)]' },
+                  { label: 'Avg Resolve Time', val: '3.4h', color: 'text-sky-400', border: 'border-sky-500/30', bg: 'bg-gradient-to-br from-sky-500/20 via-sky-500/5 to-transparent', shadow: 'shadow-[0_10px_25px_rgba(56,189,248,0.15)]' },
+                  { label: 'Overdue', val: '1', color: 'text-rose-400', border: 'border-rose-500/30', bg: 'bg-gradient-to-br from-rose-500/20 via-rose-500/5 to-transparent', shadow: 'shadow-[0_10px_25px_rgba(244,63,94,0.15)]' },
                 ].map((s, i) => (
-                  <div key={i} className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.01] text-center">
-                    <p className={`text-base font-extrabold font-mono ${s.color}`}>{s.val}</p>
-                    <p className="text-[10px] text-white/30 mt-0.5">{s.label}</p>
+                  <div key={i} className={`p-5 rounded-3xl border ${s.border} ${s.bg} text-center ${s.shadow} backdrop-blur-xl hover:scale-105 transition-transform duration-300 relative overflow-hidden group`}>
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                    <p className={`text-2xl sm:text-3xl font-black font-mono ${s.color} drop-shadow-[0_0_12px_currentColor]`}>{s.val}</p>
+                    <p className="text-xs font-bold text-white/70 mt-1.5 uppercase tracking-wider">{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -424,149 +551,163 @@ export default function UseCases() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          className="mt-20 w-full"
+          className="mt-24 w-full"
         >
-          <div className="flex items-center gap-4 mb-14">
+          <div className="flex items-center gap-4 mb-16">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             <span className="text-white/30 text-xs font-mono uppercase tracking-widest shrink-0">Detailed Use Case</span>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/10 to-transparent" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* ── CENTERED HEADER & PROBLEM STATEMENT ── */}
+          <div className="text-center max-w-4xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-bold tracking-wide shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+              <Settings size={14} />
+              <span>⚙️ Operations</span>
+            </div>
 
-            {/* LEFT: Recurring Config Mock */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+              Automate the processes your<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-rose-500">team runs every week.</span>
+            </h2>
+
+            <div className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-gradient-to-r from-white/[0.04] via-white/[0.02] to-white/[0.04] backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.3)] text-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-mono font-bold uppercase tracking-widest mb-3">The Problem</span>
+              <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+                An ops manager running the same 12-step process every Monday. Different team members responsible for different steps. Some forget. Some do it wrong. No accountability trail exists.
+              </p>
+            </div>
+          </div>
+
+          {/* ── TWO-COLUMN GRID: MODERN CARDS & MOCK BOARD ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            {/* LEFT: MODERN SOLUTION CARDS (2x3 GRID) */}
+            <div className="lg:col-span-6 flex flex-col gap-5">
+              <div className="flex items-center gap-2.5 px-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+                <p className="text-xs font-mono text-white/70 uppercase tracking-widest font-extrabold">How ownTask Solves It</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  { icon: <RotateCw size={20} />, color: 'text-amber-400', bg: 'bg-amber-500/20 border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.2)]', title: 'Weekly recurring tasks', desc: 'Create a recurring task per process step with skip-weekends enabled — auto-fires every Monday.' },
+                  { icon: <Users size={20} />, color: 'text-indigo-400', bg: 'bg-indigo-500/20 border-indigo-500/40 shadow-[0_0_15px_rgba(129,140,248,0.2)]', title: 'Round-robin rotation', desc: 'Rotate assignees automatically across your team so no one gets overloaded week after week.' },
+                  { icon: <ClipboardCheck size={20} />, color: 'text-emerald-400', bg: 'bg-emerald-500/20 border-emerald-500/40 shadow-[0_0_15px_rgba(52,211,153,0.2)]', title: 'Default checklists', desc: 'Each step has sub-items the assignee must check off before the task can be closed.' },
+                  { icon: <ShieldCheck size={20} />, color: 'text-sky-400', bg: 'bg-sky-500/20 border-sky-500/40 shadow-[0_0_15px_rgba(56,189,248,0.2)]', title: 'Approval workflows', desc: 'Enable sign-off requirements on final-step tasks — nothing closes without the right person approving.' },
+                  { icon: <Database size={20} />, color: 'text-violet-400', bg: 'bg-violet-500/20 border-violet-500/40 shadow-[0_0_15px_rgba(167,139,250,0.2)]', title: 'Full audit trail', desc: 'Every change logged — who did what, when, with before/after field values. Always compliance-ready.' },
+                  { icon: <BarChart2 size={20} />, color: 'text-rose-400', bg: 'bg-rose-500/20 border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.2)]', title: 'Project health cache', desc: 'Ops completion rate updated every morning — at-a-glance team health before standup.' },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="p-5 rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.08] via-white/[0.03] to-white/[0.01] hover:from-white/[0.14] hover:to-white/[0.05] hover:border-white/30 transition-all duration-300 shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] group hover:-translate-y-1.5 flex flex-col justify-between relative overflow-hidden backdrop-blur-xl"
+                  >
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                    <div>
+                      <div className={`w-12 h-12 rounded-2xl border ${item.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <span className={item.color}>{item.icon}</span>
+                      </div>
+                      <h4 className="text-white font-extrabold text-base mb-2 group-hover:text-amber-300 transition-colors flex items-center justify-between">
+                        <span>{item.title}</span>
+                      </h4>
+                      <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-medium">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT: RECURRING CONFIG MOCK */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.15 }}
-              className="w-full"
+              className="lg:col-span-6 w-full"
             >
               {/* Panel header */}
-              <div className="p-4 rounded-t-2xl border border-white/[0.07] bg-[#0D0D1A] flex items-center gap-3">
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                <span className="text-white/80 text-sm font-bold">Recurring Task Config</span>
-                <span className="ml-auto text-[10px] font-mono text-white/30 bg-white/[0.03] border border-white/[0.05] px-2 py-0.5 rounded">Monday Process</span>
+              <div className="p-6 rounded-t-3xl border border-white/15 bg-gradient-to-r from-[#0D0D1A] to-[#161224] flex items-center justify-between shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-3.5 h-3.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_12px_rgba(245,158,11,0.9)]" />
+                  <span className="text-white text-lg font-black tracking-wide">Recurring Task Config</span>
+                </div>
+                <span className="text-xs font-mono font-bold text-amber-300 bg-amber-500/20 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.2)]">Monday Process</span>
               </div>
 
               {/* Config rows */}
-              <div className="p-6 rounded-b-2xl border-x border-b border-white/[0.07] bg-[#090912]/90 backdrop-blur-xl flex flex-col gap-0 divide-y divide-white/[0.04]">
+              <div className="p-6 rounded-b-3xl border-x border-b border-white/15 bg-[#090912]/95 backdrop-blur-2xl flex flex-col gap-0 divide-y divide-white/10 shadow-2xl">
                 {[
-                  { label: 'Frequency', value: 'Weekly', icon: <RotateCw size={13} className="text-amber-400" /> },
-                  { label: 'Every', value: '1 week', icon: <Calendar size={13} className="text-amber-400" /> },
-                  { label: 'Days', value: 'Mon, Wed, Fri', icon: <Calendar size={13} className="text-amber-400" />, highlight: true },
-                  { label: 'Skip weekends', value: '✓ Enabled', icon: <CheckCircle size={13} className="text-emerald-400" />, valueColor: 'text-emerald-400' },
-                  { label: 'End', value: 'Never', icon: <Clock size={13} className="text-white/30" /> },
-                  { label: 'Next due', value: 'Jul 7, 09:00', icon: <Timer size={13} className="text-sky-400" />, valueColor: 'text-sky-400 font-bold' },
+                  { label: 'Frequency', value: 'Weekly', icon: <RotateCw size={16} className="text-amber-400" /> },
+                  { label: 'Every', value: '1 week', icon: <Calendar size={16} className="text-amber-400" /> },
+                  { label: 'Days', value: 'Mon, Wed, Fri', icon: <Calendar size={16} className="text-amber-400" />, highlight: true },
+                  { label: 'Skip weekends', value: '✓ Enabled', icon: <CheckCircle size={16} className="text-emerald-400" />, valueColor: 'text-emerald-400 font-bold' },
+                  { label: 'End', value: 'Never', icon: <Clock size={16} className="text-white/40" /> },
+                  { label: 'Next due', value: 'Jul 7, 09:00', icon: <Timer size={16} className="text-sky-400" />, valueColor: 'text-sky-300 font-extrabold' },
                 ].map((row, i) => (
-                  <div key={i} className="flex items-center justify-between py-3">
-                    <div className="flex items-center gap-2.5">
+                  <div key={i} className="flex items-center justify-between py-4 hover:bg-white/[0.02] px-2 rounded-xl transition-colors">
+                    <div className="flex items-center gap-3">
                       {row.icon}
-                      <span className="text-white/45 text-xs font-mono">{row.label}</span>
+                      <span className="text-white/70 text-xs sm:text-sm font-bold">{row.label}</span>
                     </div>
-                    <span className={`text-xs font-bold ${row.valueColor || 'text-white/80'} ${row.highlight ? 'bg-amber-500/10 border border-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full text-[10px]' : ''}`}>
+                    <span className={`text-xs sm:text-sm font-bold ${row.valueColor || 'text-white'} ${row.highlight ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/40 text-amber-300 px-3.5 py-1 rounded-full text-xs shadow-md' : ''}`}>
                       {row.value}
                     </span>
                   </div>
                 ))}
 
                 {/* Assignee round-robin */}
-                <div className="pt-4 pb-1">
-                  <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-3">Round-Robin Assignees</p>
-                  <div className="flex gap-2">
+                <div className="pt-5 pb-3 px-2">
+                  <p className="text-xs font-mono text-white/50 uppercase tracking-widest mb-3 font-extrabold">Round-Robin Assignees</p>
+                  <div className="flex gap-3">
                     {['JD', 'AM', 'KR', 'SB'].map((initials, i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500/30 to-orange-600/30 border border-amber-500/20 flex items-center justify-center text-[10px] font-bold text-amber-300">
+                      <div key={i} className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500/30 to-orange-600/30 border border-amber-400/40 flex items-center justify-center text-xs font-extrabold text-amber-300 shadow-[0_4px_12px_rgba(245,158,11,0.2)] hover:scale-110 transition-transform cursor-pointer">
                         {initials}
                       </div>
                     ))}
-                    <div className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-[10px] text-white/30 font-bold">+2</div>
+                    <div className="w-10 h-10 rounded-2xl bg-white/[0.05] border border-white/15 flex items-center justify-center text-xs text-white/70 font-extrabold hover:bg-white/10 transition-colors cursor-pointer">+2</div>
                   </div>
                 </div>
 
                 {/* Checklist preview */}
-                <div className="pt-4">
-                  <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-3">Default Checklist</p>
-                  <div className="flex flex-col gap-2">
+                <div className="pt-5 pb-3 px-2">
+                  <p className="text-xs font-mono text-white/50 uppercase tracking-widest mb-3 font-extrabold">Default Checklist</p>
+                  <div className="flex flex-col gap-2.5">
                     {[
                       { done: true, label: 'Review incoming requests' },
                       { done: true, label: 'Update status board' },
                       { done: false, label: 'Send weekly ops summary' },
                       { done: false, label: 'Approve pending sign-offs' },
                     ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 ${
-                          item.done ? 'bg-emerald-500/20 border-emerald-500/40' : 'border-white/15 bg-white/[0.02]'
+                      <div key={i} className="flex items-center gap-3.5 p-3 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/15 transition-all shadow-sm cursor-pointer">
+                        <div className={`w-5 h-5 rounded-lg border flex items-center justify-center shrink-0 ${
+                          item.done ? 'bg-emerald-500/20 border-emerald-500/60 shadow-[0_0_10px_rgba(16,185,129,0.4)]' : 'border-white/20 bg-white/[0.05]'
                         }`}>
-                          {item.done && <CheckCircle size={9} className="text-emerald-400" />}
+                          {item.done && <CheckCircle size={13} className="text-emerald-400" />}
                         </div>
-                        <span className={`text-[11px] ${item.done ? 'text-white/35 line-through' : 'text-white/65'}`}>{item.label}</span>
+                        <span className={`text-xs sm:text-sm font-bold ${item.done ? 'text-white/40 line-through' : 'text-white/90'}`}>{item.label}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Approval + audit footer */}
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-xl border border-amber-500/15 bg-amber-500/[0.04] flex items-center gap-2">
-                  <ClipboardCheck size={13} className="text-amber-400 shrink-0" />
-                  <span className="text-[10px] text-amber-300 font-bold">Approval required on close</span>
-                </div>
-                <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.01] flex items-center gap-2">
-                  <Database size={13} className="text-white/40 shrink-0" />
-                  <span className="text-[10px] text-white/45 font-bold">Full audit trail logged</span>
+                {/* Approval + audit footer */}
+                <div className="pt-5 mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4 px-2">
+                  <div className="p-4 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/20 via-amber-500/5 to-transparent flex items-center gap-3 shadow-[0_4px_15px_rgba(245,158,11,0.15)] group hover:scale-102 transition-transform">
+                    <ClipboardCheck size={18} className="text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span className="text-xs sm:text-sm text-amber-200 font-extrabold">Approval required on close</span>
+                  </div>
+                  <div className="p-4 rounded-2xl border border-white/15 bg-gradient-to-br from-white/10 via-white/5 to-transparent flex items-center gap-3 shadow-md group hover:scale-102 transition-transform">
+                    <Database size={18} className="text-sky-400 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span className="text-xs sm:text-sm text-white font-extrabold">Full audit trail logged</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
-
-            {/* RIGHT: Text */}
-            <div>
-              <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-bold tracking-wide">
-                <Settings size={13} />
-                <span>⚙️ Operations</span>
-              </div>
-
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5">
-                Automate the processes your<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">team runs every week.</span>
-              </h2>
-
-              <div className="p-5 rounded-2xl border border-white/[0.05] bg-white/[0.02] mb-8">
-                <p className="text-xs font-mono text-white/35 uppercase tracking-widest mb-3">The Problem</p>
-                <p className="text-white/65 text-sm leading-relaxed">
-                  An ops manager running the same 12-step process every Monday. Different team members responsible for different steps. Some forget. Some do it wrong. No accountability trail exists.
-                </p>
-              </div>
-
-              <p className="text-xs font-mono text-white/35 uppercase tracking-widest mb-5">How ownTask Solves It</p>
-              <div className="flex flex-col gap-4">
-                {[
-                  { icon: <RotateCw size={15} />, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', title: 'Weekly recurring tasks', desc: 'Create a recurring task per process step with skip-weekends enabled — auto-fires every Monday.' },
-                  { icon: <Users size={15} />, color: 'text-indigo-400', bg: 'bg-indigo-500/10 border-indigo-500/20', title: 'Round-robin rotation', desc: 'Rotate assignees automatically across your team so no one gets overloaded week after week.' },
-                  { icon: <ClipboardCheck size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20', title: 'Default checklists', desc: 'Each step has sub-items the assignee must check off before the task can be closed.' },
-                  { icon: <ShieldCheck size={15} />, color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20', title: 'Approval workflows', desc: 'Enable sign-off requirements on final-step tasks — nothing closes without the right person approving.' },
-                  { icon: <Database size={15} />, color: 'text-violet-400', bg: 'bg-violet-500/10 border-violet-500/20', title: 'Full audit trail', desc: 'Every change logged — who did what, when, with before/after field values. Always compliance-ready.' },
-                  { icon: <BarChart2 size={15} />, color: 'text-rose-400', bg: 'bg-rose-500/10 border-rose-500/20', title: 'Project health cache', desc: 'Ops completion rate updated every morning — at-a-glance team health before standup.' },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.07 }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className={`p-2.5 rounded-xl border shrink-0 ${item.bg}`}>
-                      <span className={item.color}>{item.icon}</span>
-                    </div>
-                    <div>
-                      <p className="text-white font-bold text-sm mb-0.5">{item.title}</p>
-                      <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
 
           </div>
         </motion.section>
@@ -578,88 +719,102 @@ export default function UseCases() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          className="mt-20 pb-10 w-full"
+          className="mt-24 pb-16 w-full"
         >
-          <div className="flex items-center gap-4 mb-14">
+          <div className="flex items-center gap-4 mb-16">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             <span className="text-white/30 text-xs font-mono uppercase tracking-widest shrink-0">Detailed Use Case</span>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/10 to-transparent" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* ── CENTERED HEADER & PROBLEM STATEMENT ── */}
+          <div className="text-center max-w-4xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-xs font-bold tracking-wide shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+              <Briefcase size={14} />
+              <span>🎯 Project Teams</span>
+            </div>
 
-            {/* LEFT: Text */}
-            <div>
-              <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-400 text-xs font-bold tracking-wide">
-                <Briefcase size={13} />
-                <span>🎯 Project Teams</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+              Full visibility across every<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-pink-500">client project, all at once.</span>
+            </h2>
+
+            <div className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-gradient-to-r from-white/[0.04] via-white/[0.02] to-white/[0.04] backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.3)] text-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-[11px] font-mono font-bold uppercase tracking-widest mb-3">The Problem</span>
+              <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+                A dev agency managing 8 active client projects. No single view of which projects are healthy, which are at risk, and where the team&apos;s time is going. PMs are always asking engineers for updates.
+              </p>
+            </div>
+          </div>
+
+          {/* ── TWO-COLUMN GRID: MODERN CARDS & MOCK BOARD ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            {/* LEFT: MODERN SOLUTION CARDS (2x3 GRID) */}
+            <div className="lg:col-span-6 flex flex-col gap-5">
+              <div className="flex items-center gap-2.5 px-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-violet-400 animate-pulse shadow-[0_0_10px_rgba(167,139,250,0.8)]" />
+                <p className="text-xs font-mono text-white/70 uppercase tracking-widest font-extrabold">How ownTask Solves It</p>
               </div>
 
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5">
-                Full visibility across every<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-500">client project, all at once.</span>
-              </h2>
-
-              <div className="p-5 rounded-2xl border border-white/[0.05] bg-white/[0.02] mb-8">
-                <p className="text-xs font-mono text-white/35 uppercase tracking-widest mb-3">The Problem</p>
-                <p className="text-white/65 text-sm leading-relaxed">
-                  A dev agency managing 8 active client projects. No single view of which projects are healthy, which are at risk, and where the team&apos;s time is going. PMs are always asking engineers for updates.
-                </p>
-              </div>
-
-              <p className="text-xs font-mono text-white/35 uppercase tracking-widest mb-5">How ownTask Solves It</p>
-              <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  { icon: <Folder size={15} />, color: 'text-violet-400', bg: 'bg-violet-500/10 border-violet-500/20', title: 'One project per client', desc: 'Each client gets an isolated workspace with its own team access, statuses, and settings.' },
-                  { icon: <Layers size={15} />, color: 'text-indigo-400', bg: 'bg-indigo-500/10 border-indigo-500/20', title: 'Subjects as work streams', desc: 'Group tasks into Design, Backend, QA, Deployment subjects — each with its own workflow.' },
-                  { icon: <GitBranch size={15} />, color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20', title: 'Custom fields per subject', desc: '"PR Link", "Browser Tested", "Design File URL" — typed metadata unique to that workstream.' },
-                  { icon: <Zap size={15} />, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', title: 'Template library', desc: 'Install Bug Tracker, Feature Backlog, or Sprint Board templates — full project scaffolding in one click.' },
-                  { icon: <Eye size={15} />, color: 'text-rose-400', bg: 'bg-rose-500/10 border-rose-500/20', title: 'Restricted visibility', desc: 'Each client project is visible only to its assigned team — zero cross-client data leakage.' },
-                  { icon: <BarChart2 size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20', title: 'Live project health', desc: 'Completion rate, overdue count, and SLA compliance per client — updated in real time, no manual reporting.' },
+                  { icon: <Folder size={20} />, color: 'text-violet-400', bg: 'bg-violet-500/20 border-violet-500/40 shadow-[0_0_15px_rgba(167,139,250,0.2)]', title: 'One project per client', desc: 'Each client gets an isolated workspace with its own team access, statuses, and settings.' },
+                  { icon: <Layers size={20} />, color: 'text-indigo-400', bg: 'bg-indigo-500/20 border-indigo-500/40 shadow-[0_0_15px_rgba(129,140,248,0.2)]', title: 'Subjects as work streams', desc: 'Group tasks into Design, Backend, QA, Deployment subjects — each with its own workflow.' },
+                  { icon: <GitBranch size={20} />, color: 'text-sky-400', bg: 'bg-sky-500/20 border-sky-500/40 shadow-[0_0_15px_rgba(56,189,248,0.2)]', title: 'Custom fields per subject', desc: '"PR Link", "Browser Tested", "Design File URL" — typed metadata unique to that workstream.' },
+                  { icon: <Zap size={20} />, color: 'text-amber-400', bg: 'bg-amber-500/20 border-amber-500/40 shadow-[0_0_15px_rgba(251,191,36,0.2)]', title: 'Template library', desc: 'Install Bug Tracker, Feature Backlog, or Sprint Board templates — full project scaffolding in one click.' },
+                  { icon: <Eye size={20} />, color: 'text-rose-400', bg: 'bg-rose-500/20 border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.2)]', title: 'Restricted visibility', desc: 'Each client project is visible only to its assigned team — zero cross-client data leakage.' },
+                  { icon: <BarChart2 size={20} />, color: 'text-emerald-400', bg: 'bg-emerald-500/20 border-emerald-500/40 shadow-[0_0_15px_rgba(52,211,153,0.2)]', title: 'Live project health', desc: 'Completion rate, overdue count, and SLA compliance per client — updated in real time, no manual reporting.' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.07 }}
-                    className="flex items-start gap-4"
+                    transition={{ delay: i * 0.08 }}
+                    className="p-5 rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.08] via-white/[0.03] to-white/[0.01] hover:from-white/[0.14] hover:to-white/[0.05] hover:border-white/30 transition-all duration-300 shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] group hover:-translate-y-1.5 flex flex-col justify-between relative overflow-hidden backdrop-blur-xl"
                   >
-                    <div className={`p-2.5 rounded-xl border shrink-0 ${item.bg}`}>
-                      <span className={item.color}>{item.icon}</span>
-                    </div>
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
                     <div>
-                      <p className="text-white font-bold text-sm mb-0.5">{item.title}</p>
-                      <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
+                      <div className={`w-12 h-12 rounded-2xl border ${item.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <span className={item.color}>{item.icon}</span>
+                      </div>
+                      <h4 className="text-white font-extrabold text-base mb-2 group-hover:text-violet-300 transition-colors flex items-center justify-between">
+                        <span>{item.title}</span>
+                      </h4>
+                      <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-medium">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* RIGHT: Multi-project health mock */}
+            {/* RIGHT: MULTI-PROJECT HEALTH MOCK */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="w-full"
+              className="lg:col-span-6 w-full"
             >
               {/* Panel header */}
-              <div className="p-4 rounded-t-2xl border border-white/[0.07] bg-[#0D0D1A] flex items-center gap-3">
-                <div className="w-2.5 h-2.5 rounded-full bg-violet-500" />
-                <span className="text-white/80 text-sm font-bold">Project Health Overview</span>
-                <span className="ml-auto text-[10px] font-mono text-white/30 bg-white/[0.03] border border-white/[0.05] px-2 py-0.5 rounded">8 active projects</span>
+              <div className="p-6 rounded-t-3xl border border-white/15 bg-gradient-to-r from-[#0D0D1A] to-[#1a132c] flex items-center justify-between shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-3.5 h-3.5 rounded-full bg-violet-400 animate-pulse shadow-[0_0_12px_rgba(167,139,250,0.9)]" />
+                  <span className="text-white text-lg font-black tracking-wide">Project Health Overview</span>
+                </div>
+                <span className="text-xs font-mono font-bold text-violet-300 bg-violet-500/20 border border-violet-400/30 px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(167,139,250,0.2)]">8 active projects</span>
               </div>
 
               {/* Project cards */}
-              <div className="p-4 rounded-b-2xl border-x border-b border-white/[0.07] bg-[#090912]/90 backdrop-blur-xl flex flex-col gap-3">
+              <div className="p-6 rounded-b-3xl border-x border-b border-white/15 bg-[#090912]/95 backdrop-blur-2xl flex flex-col gap-4 shadow-2xl">
                 {[
-                  { name: 'Acme Corp Redesign',    pct: 75, tasks: 84,  overdue: 2,  sla: '97.1%', status: 'On Track',   dot: 'bg-emerald-400', bar: 'from-emerald-500 to-teal-400',     border: 'border-emerald-500/15', bg: 'bg-emerald-500/[0.04]' },
-                  { name: 'Beta App v2.0',         pct: 45, tasks: 112, overdue: 9,  sla: '81.4%', status: 'At Risk',    dot: 'bg-amber-400',   bar: 'from-amber-500 to-orange-400',   border: 'border-amber-500/15',  bg: 'bg-amber-500/[0.04]' },
-                  { name: 'Gamma Support Portal',  pct: 91, tasks: 56,  overdue: 0,  sla: '99.6%', status: 'On Track',   dot: 'bg-emerald-400', bar: 'from-emerald-500 to-teal-400',   border: 'border-emerald-500/15', bg: 'bg-emerald-500/[0.04]' },
-                  { name: 'Delta Marketing Site',  pct: 30, tasks: 67,  overdue: 14, sla: '68.2%', status: 'Critical',   dot: 'bg-rose-400',    bar: 'from-rose-500 to-pink-500',      border: 'border-rose-500/15',   bg: 'bg-rose-500/[0.04]' },
-                  { name: 'Epsilon iOS App',        pct: 62, tasks: 98,  overdue: 4,  sla: '89.3%', status: 'On Track',   dot: 'bg-emerald-400', bar: 'from-sky-500 to-blue-500',       border: 'border-sky-500/15',    bg: 'bg-sky-500/[0.04]' },
+                  { name: 'Acme Corp Redesign',    pct: 75, tasks: 84,  overdue: 2,  sla: '97.1%', status: 'On Track',   dot: 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]', bar: 'from-emerald-500 via-teal-400 to-emerald-300',     border: 'border-emerald-500/30', bg: 'bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-transparent' },
+                  { name: 'Beta App v2.0',         pct: 45, tasks: 112, overdue: 9,  sla: '81.4%', status: 'At Risk',    dot: 'bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.9)]',   bar: 'from-amber-500 via-orange-400 to-amber-300',   border: 'border-amber-500/30',  bg: 'bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent' },
+                  { name: 'Gamma Support Portal',  pct: 91, tasks: 56,  overdue: 0,  sla: '99.6%', status: 'On Track',   dot: 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]', bar: 'from-emerald-500 via-teal-400 to-emerald-300',   border: 'border-emerald-500/30', bg: 'bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-transparent' },
+                  { name: 'Delta Marketing Site',  pct: 30, tasks: 67,  overdue: 14, sla: '68.2%', status: 'Critical',   dot: 'bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,0.9)]',    bar: 'from-rose-500 via-pink-500 to-rose-400',      border: 'border-rose-500/30',   bg: 'bg-gradient-to-r from-rose-500/10 via-rose-500/5 to-transparent' },
+                  { name: 'Epsilon iOS App',       pct: 62, tasks: 98,  overdue: 4,  sla: '89.3%', status: 'On Track',   dot: 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]', bar: 'from-sky-500 via-blue-500 to-sky-300',       border: 'border-sky-500/30',    bg: 'bg-gradient-to-r from-sky-500/10 via-sky-500/5 to-transparent' },
                 ].map((proj, i) => (
                   <motion.div
                     key={i}
@@ -667,17 +822,19 @@ export default function UseCases() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.25 + i * 0.07 }}
-                    className={`p-4 rounded-xl border ${proj.border} ${proj.bg} flex flex-col gap-3`}
+                    className={`p-4.5 rounded-2xl border ${proj.border} ${proj.bg} hover:bg-white/[0.08] hover:border-white/40 transition-all duration-300 flex flex-col gap-3.5 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer group`}
                   >
                     {/* Title row */}
                     <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <Folder size={13} className="text-white/40 shrink-0" />
-                        <span className="text-white/85 text-xs font-bold truncate">{proj.name}</span>
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform">
+                          <Folder size={16} className="text-violet-300 shrink-0" />
+                        </div>
+                        <span className="text-white text-sm sm:text-base font-extrabold truncate group-hover:text-violet-200 transition-colors">{proj.name}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <div className={`w-1.5 h-1.5 rounded-full ${proj.dot}`} />
-                        <span className={`text-[10px] font-bold ${
+                      <div className="flex items-center gap-2 shrink-0 bg-black/40 px-3 py-1 rounded-full border border-white/15 shadow-inner">
+                        <div className={`w-2 h-2 rounded-full ${proj.dot}`} />
+                        <span className={`text-xs font-black tracking-wide ${
                           proj.status === 'Critical' ? 'text-rose-400' :
                           proj.status === 'At Risk' ? 'text-amber-400' : 'text-emerald-400'
                         }`}>{proj.status}</span>
@@ -685,43 +842,43 @@ export default function UseCases() {
                     </div>
 
                     {/* Progress bar */}
-                    <div className="w-full h-1.5 rounded-full bg-white/[0.04] overflow-hidden">
+                    <div className="w-full h-2.5 rounded-full bg-black/50 overflow-hidden p-0.5 border border-white/10 shadow-inner">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${proj.pct}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.4 + i * 0.08 }}
-                        className={`h-full rounded-full bg-gradient-to-r ${proj.bar}`}
+                        className={`h-full rounded-full bg-gradient-to-r ${proj.bar} shadow-sm`}
                       />
                     </div>
 
                     {/* Stats row */}
-                    <div className="flex items-center justify-between text-[10px] font-mono">
-                      <span className="text-white/40">{proj.tasks} tasks</span>
-                      <span className="text-white/70 font-bold">{proj.pct}% complete</span>
-                      <span className={proj.overdue > 0 ? 'text-rose-400 font-bold' : 'text-emerald-400'}>
+                    <div className="flex items-center justify-between text-xs font-mono pt-1">
+                      <span className="text-white/60 font-bold">{proj.tasks} tasks</span>
+                      <span className="text-white font-extrabold">{proj.pct}% complete</span>
+                      <span className={proj.overdue > 0 ? 'text-rose-300 font-extrabold bg-rose-500/20 px-2.5 py-0.5 rounded-full border border-rose-500/40 shadow-sm' : 'text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20'}>
                         {proj.overdue > 0 ? `${proj.overdue} overdue` : '✓ No overdue'}
                       </span>
-                      <span className="text-white/40">SLA {proj.sla}</span>
+                      <span className="text-white/60 font-bold">SLA <span className="text-white font-black">{proj.sla}</span></span>
                     </div>
                   </motion.div>
                 ))}
 
                 {/* Remaining projects stub */}
-                <div className="p-3 rounded-xl border border-white/[0.04] bg-white/[0.01] flex items-center justify-center gap-2 text-white/25 text-[10px] font-mono">
-                  + 3 more projects
+                <div className="p-4 rounded-2xl border border-white/15 bg-white/[0.03] flex items-center justify-center gap-2 text-white/60 text-xs font-mono font-extrabold hover:bg-white/[0.08] hover:text-white transition-all cursor-pointer shadow-sm">
+                  + 3 more active projects (View All &rarr;)
                 </div>
               </div>
 
               {/* Footer priority/capacity note */}
-              <div className="mt-3 p-4 rounded-xl border border-violet-500/10 bg-violet-500/[0.03] flex items-center gap-3">
-                <div className="flex -space-x-1">
+              <div className="mt-4 p-5 rounded-2xl border border-violet-500/30 bg-gradient-to-br from-violet-500/20 via-violet-500/5 to-transparent flex items-center gap-4 shadow-lg group hover:scale-101 transition-transform">
+                <div className="flex -space-x-2 shrink-0">
                   {['bg-rose-500','bg-amber-500','bg-blue-500','bg-slate-500','bg-emerald-500'].map((c,i) => (
-                    <div key={i} className={`w-3 h-3 rounded-full ${c} border border-[#090912]`} />
+                    <div key={i} className={`w-5 h-5 rounded-full ${c} border-2 border-[#090912] shadow-md group-hover:scale-110 transition-transform`} style={{ transitionDelay: `${i * 30}ms` }} />
                   ))}
                 </div>
-                <span className="text-[11px] text-white/50 leading-snug">
-                  5-level priority + estimated hours — capacity planning built in
+                <span className="text-xs sm:text-sm font-extrabold text-white/90 leading-snug">
+                  5-level priority + estimated hours — team capacity & workload planning built directly in
                 </span>
               </div>
             </motion.div>
@@ -729,92 +886,9 @@ export default function UseCases() {
           </div>
         </motion.section>
 
-        {/* ─── ANIMATED CTA FOOTER ─── */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative mt-20 mb-4 overflow-hidden rounded-3xl border border-white/[0.08]"
-        >
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-600/10 via-primary/10 to-violet-600/10" />
-
-          {/* Animated glow orbs */}
-          <motion.div
-            animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.65, 0.4] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -top-10 -left-10 w-64 h-64 bg-sky-500/20 rounded-full blur-[80px] pointer-events-none"
-          />
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.55, 0.3] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-            className="absolute -bottom-10 -right-10 w-64 h-64 bg-violet-500/20 rounded-full blur-[80px] pointer-events-none"
-          />
-
-          {/* Shimmer top border line */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky-400/60 to-transparent" />
-
-          {/* Content */}
-          <div className="relative z-10 flex flex-col items-center text-center gap-6 px-8 py-14">
-            {/* Label */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold tracking-widest uppercase"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Get Started Today
-            </motion.div>
-
-            {/* Headline */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.15 }}
-              className="text-2xl md:text-3xl font-extrabold text-white leading-tight max-w-xl"
-            >
-              Every team is different.{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-violet-400">
-                ownTask adapts.
-              </span>
-            </motion.p>
-
-            {/* Sub text */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-white/45 text-sm max-w-md leading-relaxed"
-            >
-              Built for support teams, ops managers, and agencies — configure your workspace in minutes, not weeks.
-            </motion.p>
-
-            {/* Button */}
-            <motion.a
-              href="#home"
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25 }}
-              whileHover={{ scale: 1.04, boxShadow: '0 0 30px rgba(139,92,246,0.35)' }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-gradient-to-r from-sky-500 to-violet-600 text-white text-sm font-bold shadow-lg shadow-violet-500/20 transition-all"
-            >
-              Start Free · See All Features
-              <span className="text-white/70">→</span>
-            </motion.a>
-
-            {/* Trust micro-line */}
-            <p className="text-white/25 text-[11px] font-mono">No credit card required · 15-minute setup · Cancel anytime</p>
-          </div>
-        </motion.div>
 
       </div>
     </div>
   );
 }
+
