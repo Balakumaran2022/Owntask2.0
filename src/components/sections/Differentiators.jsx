@@ -33,16 +33,15 @@ export default function Differentiators() {
     <section id="differentiators" className="relative z-10 pt-10 pb-20 lg:pt-14 lg:pb-28 overflow-hidden bg-transparent">
       <div className="container mx-auto px-5 md:px-8 max-w-[1240px]">
         <div className="text-center mb-16 md:mb-20 flex justify-center">
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="text-3xl md:text-[2.75rem] tracking-tight pb-2 font-sans font-black"
           >
-            <h2 className="text-2xl md:text-[2.25rem] lg:text-[2.5rem] tracking-tight pb-2 font-serif font-black" style={{ fontFamily: '"Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif' }}>
-              <span className="text-white">Enterprise </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#8b5cf6]">Capabilities</span>
-            </h2>
-          </motion.div>
+            <span className="text-white">Enterprise </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#8b5cf6]">Capabilities</span>
+          </motion.h2>
         </div>
 
         <motion.div

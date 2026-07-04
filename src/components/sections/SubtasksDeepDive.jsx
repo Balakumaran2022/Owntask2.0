@@ -126,17 +126,22 @@ export default function SubtasksDeepDive() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
+                  whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="flex gap-4 p-5 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:border-white/10 hover:bg-white/[0.02] transition-all group"
+                  className="relative flex gap-4 p-5 rounded-2xl bg-[#0D0D1C]/80 border border-white/[0.06] hover:border-white/15 transition-all group overflow-hidden shadow-lg"
                 >
-                  <div className="w-7 h-7 rounded-xl bg-white/5 flex items-center justify-center mt-0.5 group-hover:scale-105 transition-transform">
-                    <ChevronRight size={16} className="text-primary" />
+                  {/* Glowing top accent line */}
+                  <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Shimmer overlay */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="relative z-10 w-7 h-7 rounded-xl bg-white/5 flex items-center justify-center mt-0.5 group-hover:scale-110 group-hover:bg-primary/10 transition-all border border-white/5">
+                    <ChevronRight size={16} className="text-primary group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                  <div>
-                    <h4 className="text-white font-bold text-base md:text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#34d399] group-hover:to-[#8b5cf6] transition-all">
+                  <div className="relative z-10">
+                    <h4 className="text-white font-bold text-base md:text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-[#8b5cf6] transition-all">
                       {item.title}
                     </h4>
-                    <p className="text-white/45 text-sm mt-1.5 leading-relaxed">
+                    <p className="text-white/45 text-sm mt-1.5 leading-relaxed group-hover:text-white/70 transition-colors">
                       {item.desc}
                     </p>
                   </div>

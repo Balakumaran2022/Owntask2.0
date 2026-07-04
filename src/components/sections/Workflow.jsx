@@ -79,25 +79,26 @@ export default function Workflow() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: step.delay, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{
-                  y: -7,
+                  y: -10,
+                  scale: 1.02,
                   boxShadow: `0 24px 56px -8px ${step.borderGlow}, 0 0 0 1px ${step.borderGlow}`,
                 }}
                 style={{
-                  background: 'rgba(8, 18, 12, 0.72)',
+                  background: 'rgba(18, 18, 40, 0.85)',
                   backdropFilter: 'blur(18px)',
                   WebkitBackdropFilter: 'blur(18px)',
-                  border: '1px solid rgba(99,102,241,0.10)',
-                  borderRadius: '24px',
-                  padding: '2rem 1.75rem 2rem',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  borderRadius: '28px',
+                  padding: '2.25rem 2rem 2.25rem',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '0',
                   position: 'relative',
                   overflow: 'hidden',
                   cursor: 'default',
-                  transition: 'box-shadow 0.35s ease, transform 0.35s ease',
+                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
-                className="group"
+                className="group shadow-xl"
               >
                 {/* Subtle top gradient shimmer stripe */}
                 <div
@@ -115,7 +116,7 @@ export default function Workflow() {
                   className="absolute bottom-4 right-5 select-none pointer-events-none font-black leading-none"
                   style={{
                     fontSize: '7rem',
-                    color: 'rgba(99,102,241,0.055)',
+                    color: 'rgba(99,102,241,0.06)',
                     lineHeight: 1,
                     letterSpacing: '-0.04em',
                     transition: 'color 0.4s ease',
@@ -126,7 +127,7 @@ export default function Workflow() {
 
                 {/* Icon */}
                 <div
-                  className="relative z-10 mb-6 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+                  className="relative z-10 mb-6 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-lg"
                   style={{
                     background: step.iconBg,
                     border: `1.5px solid ${step.iconBorder}`,
@@ -138,8 +139,8 @@ export default function Workflow() {
 
                 {/* Step label */}
                 <span
-                  className="relative z-10 text-[0.62rem] font-black uppercase tracking-[0.2em] mb-1.5"
-                  style={{ color: 'rgba(99,102,241,0.55)' }}
+                  className="relative z-10 text-[0.65rem] font-black uppercase tracking-[0.2em] mb-2"
+                  style={{ color: '#8B5CF6' }}
                 >
                   Step {step.id}
                 </span>
@@ -147,7 +148,7 @@ export default function Workflow() {
                 {/* Title */}
                 <h3
                   className="relative z-10 text-xl font-black mb-2.5 tracking-tight transition-colors duration-300 group-hover:text-primary"
-                  style={{ color: '#e8f5ef' }}
+                  style={{ color: '#F1F5F9' }}
                 >
                   {step.title}
                 </h3>
@@ -155,7 +156,7 @@ export default function Workflow() {
                 {/* Description */}
                 <p
                   className="relative z-10 text-sm leading-relaxed"
-                  style={{ color: 'rgba(180, 215, 200, 0.6)', fontWeight: 400 }}
+                  style={{ color: '#94A3B8', fontWeight: 400 }}
                 >
                   {step.description}
                 </p>

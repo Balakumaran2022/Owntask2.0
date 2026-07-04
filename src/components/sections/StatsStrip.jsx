@@ -11,11 +11,13 @@ const stats = [
 
 const StatCard = ({ stat }) => (
   <motion.div 
-    whileHover={{ y: -5, borderColor: 'rgba(99,102,241,0.4)', backgroundColor: 'rgba(255,255,255,0.04)' }}
-    className="flex-shrink-0 flex flex-col items-center justify-center w-[260px] p-6 rounded-[20px] bg-white/[0.02] border border-white/5 backdrop-blur-xl shadow-lg mx-3 transition-colors cursor-default"
+    whileHover={{ y: -6, scale: 1.05, borderColor: 'rgba(99,102,241,0.5)', backgroundColor: 'rgba(13,13,28,0.9)' }}
+    className="group relative flex-shrink-0 flex flex-col items-center justify-center w-[260px] p-6 rounded-[20px] bg-[#0D0D1C]/80 border border-white/[0.06] backdrop-blur-xl shadow-lg mx-3 transition-all cursor-default overflow-hidden"
   >
-    <span className="text-foreground font-black text-[1.35rem] tracking-tight mb-1.5 whitespace-nowrap">{stat.value}</span>
-    <span className="text-muted-foreground/80 text-[0.7rem] font-bold uppercase tracking-[0.15em] whitespace-nowrap">{stat.label}</span>
+    {/* Glowing top accent line */}
+    <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <span className="relative z-10 text-white font-black text-[1.35rem] tracking-tight mb-1.5 whitespace-nowrap group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-[#8b5cf6] transition-all">{stat.value}</span>
+    <span className="relative z-10 text-muted-foreground/80 text-[0.7rem] font-bold uppercase tracking-[0.15em] whitespace-nowrap group-hover:text-white/80 transition-colors">{stat.label}</span>
   </motion.div>
 );
 

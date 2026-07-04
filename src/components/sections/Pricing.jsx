@@ -133,14 +133,19 @@ export default function Pricing({ onOpenLogin }) {
               variants={itemVariants}
               whileHover={{ 
                 y: -12, 
-                scale: 1.02,
-                boxShadow: `0 25px 60px rgba(0,0,0,0.4), 0 0 40px ${plan.color}40`
+                scale: 1.03,
+                boxShadow: `0 25px 60px rgba(0,0,0,0.6), 0 0 40px ${plan.color}40`
               }}
-              className="bg-white rounded-[24px] flex flex-col relative overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition-all duration-400 ease-out border border-white/10"
+              className="group bg-[#0D0D1C]/90 rounded-[28px] flex flex-col relative overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out border border-white/[0.08] backdrop-blur-xl"
             >
+              {/* Glowing top accent line */}
+              <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
+              {/* Shimmer overlay */}
+              <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-primary/[0.05] to-[#8b5cf6]/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+
               {/* Overlapping Badge */}
               <div 
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[1px] bg-white text-base font-black uppercase tracking-widest px-10 py-2.5 rounded-b-[16px] z-10 shadow-sm"
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[1px] bg-[#1A1A35] text-white text-xs font-black uppercase tracking-widest px-8 py-2 rounded-b-[14px] z-20 shadow-md border-x border-b border-white/10"
                 style={{ color: plan.color }}
               >
                 {plan.name}
@@ -179,11 +184,11 @@ export default function Pricing({ onOpenLogin }) {
 
               {/* Bottom White Section - Feature List */}
               <div className="px-8 pb-10 flex flex-col flex-1">
-                <ul className="list-none p-0 my-4 flex-1">
+                <ul className="list-none p-0 my-4 flex-1 relative z-20">
                   {plan.features.map((feature, fIdx) => (
                     <li 
                       key={fIdx} 
-                      className={`flex items-center gap-4 py-4 text-gray-600 text-sm font-medium ${fIdx !== plan.features.length - 1 ? 'border-b border-gray-200' : ''}`}
+                      className={`flex items-center gap-4 py-4 text-white/80 group-hover:text-white transition-colors text-sm font-medium ${fIdx !== plan.features.length - 1 ? 'border-b border-white/[0.06]' : ''}`}
                     >
                       {feature.active ? (
                         <Check size={20} strokeWidth={3} color={plan.color} className="shrink-0" />
@@ -241,20 +246,20 @@ export default function Pricing({ onOpenLogin }) {
 
               {/* Rows */}
               {compareTable.map((row, rIdx) => (
-                <div key={rIdx} className="flex bg-white rounded-full shadow-sm items-center hover:shadow-md transition-shadow">
-                  <div className="flex-[1.5] py-5 px-10 text-gray-700 font-bold text-sm">
+                <motion.div whileHover={{ scale: 1.01, x: 4, backgroundColor: 'rgba(255,255,255,0.04)' }} key={rIdx} className="flex bg-[#0D0D1C]/80 border border-white/[0.06] rounded-2xl shadow-md items-center transition-all">
+                  <div className="flex-[1.5] py-5 px-10 text-white/90 font-bold text-sm">
                     {row.feature}
                   </div>
                   <div className="flex-1 py-5 px-4 flex justify-center">
-                    {row.basic === '✓' ? <Check size={22} strokeWidth={3} color={plans[0].color} /> : row.basic === '✗' ? <X size={22} strokeWidth={3} color="#ef4444" /> : <span className="text-gray-700 font-bold text-sm">{row.basic}</span>}
+                    {row.basic === '✓' ? <Check size={22} strokeWidth={3} color={plans[0].color} /> : row.basic === '✗' ? <X size={22} strokeWidth={3} color="#ef4444" /> : <span className="text-white/80 font-bold text-sm">{row.basic}</span>}
                   </div>
                   <div className="flex-1 py-5 px-4 flex justify-center">
-                    {row.standard === '✓' ? <Check size={22} strokeWidth={3} color={plans[1].color} /> : row.standard === '✗' ? <X size={22} strokeWidth={3} color="#ef4444" /> : <span className="text-gray-700 font-bold text-sm">{row.standard}</span>}
+                    {row.standard === '✓' ? <Check size={22} strokeWidth={3} color={plans[1].color} /> : row.standard === '✗' ? <X size={22} strokeWidth={3} color="#ef4444" /> : <span className="text-white/80 font-bold text-sm">{row.standard}</span>}
                   </div>
                   <div className="flex-1 py-5 px-4 flex justify-center">
-                    {row.premium === '✓' ? <Check size={22} strokeWidth={3} color={plans[2].color} /> : row.premium === '✗' ? <X size={22} strokeWidth={3} color="#ef4444" /> : <span className="text-gray-700 font-bold text-sm">{row.premium}</span>}
+                    {row.premium === '✓' ? <Check size={22} strokeWidth={3} color={plans[2].color} /> : row.premium === '✗' ? <X size={22} strokeWidth={3} color="#ef4444" /> : <span className="text-white/80 font-bold text-sm">{row.premium}</span>}
                   </div>
-                </div>
+                </motion.div>
               ))}
 
               {/* Footer Buttons */}

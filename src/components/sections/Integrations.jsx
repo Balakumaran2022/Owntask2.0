@@ -95,9 +95,13 @@ export default function Integrations() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -6 }}
-              className="bg-card/60 backdrop-blur-md border border-border rounded-3xl p-6 md:p-8 flex flex-col items-start gap-5 hover:border-primary/40 hover:shadow-[0_20px_50px_rgba(99,102,241,0.18)] transition-all cursor-pointer group"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="relative bg-[#0D0D1C]/80 backdrop-blur-xl border border-white/[0.06] rounded-3xl p-6 md:p-8 flex flex-col items-start gap-5 hover:border-primary/40 hover:shadow-[0_20px_50px_rgba(99,102,241,0.22)] transition-all cursor-pointer group overflow-hidden"
             >
+              {/* Glowing top accent line */}
+              <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Shimmer overlay */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/[0.05] to-[#8b5cf6]/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <div className="bg-background/80 w-14 h-14 flex items-center justify-center rounded-2xl border border-primary/10 group-hover:border-primary/30 group-hover:bg-primary/5 transition-all shadow-inner">
                 {getLogo(item.name)}
               </div>

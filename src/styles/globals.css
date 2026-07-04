@@ -4,38 +4,53 @@
 
 @layer base {
   :root {
-    --font: 'Inter', system-ui, sans-serif;
-    --background: 132 29% 3%; /* #060B07 */
-    --foreground: 153 32% 94%; /* #E8F5EF */
-    --card: 135 29% 5%; /* #0A120C */
-    --card-foreground: 153 32% 94%;
-    --popover: 132 29% 3%;
-    --popover-foreground: 153 32% 94%;
-    --primary: 156 54% 46%; /* #2CC085 */
-    --primary-foreground: 132 29% 3%;
-    --secondary: 151 18% 22%; /* #4A7060 */
-    --secondary-foreground: 153 32% 94%;
-    --muted: 151 18% 12%;
-    --muted-foreground: 153 23% 66%; /* #7AAF96 */
-    --accent: 151 18% 12%;
-    --accent-foreground: 153 32% 94%;
-    --destructive: 0 62% 30%;
+    --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --background: 240 36% 5%; /* #07070F */
+    --foreground: 210 40% 98%; /* #F1F5F9 */
+    --card: 240 38% 11%; /* #121228 */
+    --card-foreground: 210 40% 98%;
+    --popover: 240 36% 5%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 238 84% 67%; /* #6366F1 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 258 90% 66%; /* #8B5CF6 */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 223 15% 15%;
+    --muted-foreground: 215 20% 65%; /* #94A3B8 */
+    --accent: 330 81% 60%; /* #EC4899 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 156 54% 15%; /* #2cc085 at 15% opacity */
-    --input: 156 54% 15%;
-    --ring: 156 54% 46%;
-    --radius: 0.5rem;
+    --border: 255 255% 100% / 0.07;
+    --input: 240 38% 15%;
+    --ring: 238 84% 67%;
+    --radius: 0.75rem;
+    --bg: #07070F;
+    --surface: #0D0D1C;
+    --card-hex: #121228;
+    --card-hover: #1A1A35;
+    --primary-hex: #6366F1;
+    --secondary-hex: #8B5CF6;
+    --accent-hex: #EC4899;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --error: #EF4444;
+    --text: #F1F5F9;
+    --faint: #64748B;
+    --border-hex: rgba(255,255,255,0.07);
+    --border-glow: rgba(99,102,241,0.35);
   }
 }
 
 @layer base {
   * {
     border-color: hsl(var(--border));
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   }
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   }
 }
 
@@ -76,33 +91,33 @@
 /* ── Reset & Unified Typography Guarantee ── */
 *, *::before, *::after {
   box-sizing: border-box; margin: 0; padding: 0;
-  font-family: 'Inter', system-ui, sans-serif !important;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  background: var(--bg);
-  color: var(--text);
+  background: #07070F;
+  color: #F1F5F9;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 body {
   min-height: 100vh;
-  background: linear-gradient(170deg, #060B07 0%, #0A140F 50%, #060B07 100%);
+  background: #07070F;
   line-height: 1.6;
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; background: none; border: none; font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
+a { color: inherit; text-decoration: none; font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
+button { cursor: pointer; background: none; border: none; font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
 img { max-width: 100%; display: block; }
 ul, ol { list-style: none; }
-input, textarea, select { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
+input, textarea, select { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
 
-/* Scrollbar - wider and permanently visible green track indicator */
+/* Scrollbar - wider and permanently visible indigo track indicator */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -111,11 +126,11 @@ input, textarea, select { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, 
   background: rgba(0, 0, 0, 0.2);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(44, 192, 133, 0.3);
+  background: rgba(99, 102, 241, 0.3);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  background: #6366F1;
 }
 
 /* ── Layout ── */
@@ -140,7 +155,7 @@ input, textarea, select { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, 
 
 /* ── Typography ── */
 .teal {
-  background: linear-gradient(135deg, #2CC085, #34d399);
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -150,17 +165,17 @@ input, textarea, select { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, 
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   gap: 0.5rem; padding: 0.75rem 1.6rem;
-  border-radius: var(--r2); font-size: 0.9rem; font-weight: 600;
-  transition: all 0.25s var(--ease); cursor: pointer;
+  border-radius: var(--radius); font-size: 0.9rem; font-weight: 600;
+  transition: all 0.25s ease; cursor: pointer;
   white-space: nowrap; text-decoration: none; border: none;
 }
 .btn-primary {
-  background: linear-gradient(135deg, #2CC085, #1f9a6b);
-  color: #fff; box-shadow: 0 4px 16px rgba(44,192,133,0.3);
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  color: #fff; box-shadow: 0 4px 16px rgba(99,102,241,0.3);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(44,192,133,0.45);
+  box-shadow: 0 8px 28px rgba(99,102,241,0.45);
   filter: brightness(1.08);
 }
 .btn-ghost {

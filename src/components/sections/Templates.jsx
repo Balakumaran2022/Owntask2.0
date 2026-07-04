@@ -198,9 +198,14 @@ export default function Templates() {
                           initial={{ opacity: 0, scale: 0.95 }}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.95 }}
+                          whileHover={{ y: -4, scale: 1.02 }}
                           transition={{ duration: 0.3 }}
-                          className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-white/10 transition-colors flex items-start gap-4 relative overflow-hidden"
+                          className="group p-4 rounded-2xl bg-[#0D0D1C]/80 border border-white/[0.06] hover:border-white/15 transition-all flex items-start gap-4 relative overflow-hidden shadow-md"
                         >
+                          {/* Glowing top accent line */}
+                          <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          {/* Shimmer overlay */}
+                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                           {/* Installation step loader overlay */}
                           {isInstalling && (
                             <motion.div
@@ -275,8 +280,9 @@ export default function Templates() {
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
+                  whileHover={{ x: 8, scale: 1.01 }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="flex items-start gap-4 group"
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.01] hover:bg-[#0D0D1C]/60 border border-transparent hover:border-white/10 transition-all group cursor-default"
                 >
                   <div className="w-7 h-7 rounded-xl bg-primary/10 flex items-center justify-center mt-0.5 shrink-0 group-hover:scale-105 transition-transform border border-primary/20">
                     <CheckCircle2 size={16} className="text-primary" />

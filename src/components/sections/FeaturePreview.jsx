@@ -277,8 +277,7 @@ export default function FeaturePreview() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-[2.75rem] tracking-tight mb-5 font-serif font-black"
-            style={{ fontFamily: '"Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif' }}
+            className="text-3xl md:text-[2.75rem] tracking-tight mb-5 font-sans font-black"
           >
             <span className="text-white">See it in </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#8b5cf6]">action</span>

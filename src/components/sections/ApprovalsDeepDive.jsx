@@ -82,14 +82,19 @@ export default function ApprovalsDeepDive() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              whileHover={{ y: -6, scale: 1.02 }}
               transition={{ duration: 0.5, delay: 0.1 + idx * 0.08 }}
-              className="flex flex-col gap-3 p-6 rounded-2xl bg-[#0D0D1C]/60 border border-white/[0.04] hover:border-white/10 hover:bg-[#0D0D1C]/80 transition-all group cursor-default"
-              style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}
+              className="relative flex flex-col gap-3 p-6 rounded-2xl bg-[#0D0D1C]/80 border border-white/[0.06] hover:border-white/15 transition-all group cursor-default overflow-hidden"
+              style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.3)' }}
             >
-              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:scale-105 transition-transform">
-                <item.icon size={18} className="text-violet-400" />
+              {/* Glowing top accent line */}
+              <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full bg-gradient-to-r from-transparent via-violet-500/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Shimmer overlay */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="relative z-10 w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-violet-500/10 transition-all border border-white/5">
+                <item.icon size={18} className="text-violet-400 group-hover:text-white transition-colors" />
               </div>
-              <span className="text-white/70 font-semibold text-sm leading-snug">{item.label}</span>
+              <span className="relative z-10 text-white/70 font-semibold text-sm leading-snug group-hover:text-white transition-colors">{item.label}</span>
             </motion.div>
           ))}
         </div>
