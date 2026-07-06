@@ -241,9 +241,6 @@ export default function FeaturesGrid() {
               className={`group relative overflow-hidden p-6 md:p-7 rounded-3xl bg-[#0e0e1e]/95 bg-gradient-to-br ${f.gradient} border ${f.border} flex flex-col gap-4 cursor-default transition-all duration-300`}
               style={{ boxShadow: f.cardGlow }}
             >
-              {/* Always-visible top accent bar */}
-              <div className={`absolute top-0 left-0 right-0 h-[2.5px] rounded-b-none rounded-t-3xl bg-gradient-to-r ${f.topBar} opacity-75 group-hover:opacity-100 transition-opacity duration-300`} />
-
               {/* Ambient glow orb */}
               <div className="absolute -top-8 -right-8 w-36 h-36 rounded-full blur-[60px] opacity-20 pointer-events-none"
                 style={{ background: `radial-gradient(circle, white 0%, transparent 70%)` }} />

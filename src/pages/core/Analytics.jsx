@@ -254,9 +254,6 @@ export default function Analytics() {
               className="relative group flex flex-col justify-between min-h-[140px] p-5 rounded-2xl bg-[#0A0A15]/90 border border-white/10 backdrop-blur-2xl overflow-hidden cursor-default transition-all duration-300"
               style={{ boxShadow: card.glow }}
             >
-              {/* Top gradient accent bar */}
-              <div className={`absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r ${card.topBar} opacity-80 group-hover:opacity-100 transition-opacity`} />
-
               {/* Icon + trend */}
               <div className="flex items-center justify-between">
                 <div className={`p-2 rounded-xl border ${card.iconBg} ${card.iconColor} shadow-sm`}>
@@ -549,9 +546,6 @@ export default function Analytics() {
                 className={`group relative overflow-hidden p-6 md:p-7 rounded-3xl bg-gradient-to-br ${feature.gradient} ${feature.border} border backdrop-blur-2xl flex flex-col gap-4 cursor-default transition-all duration-300`}
                 style={{ boxShadow: feature.glow }}
               >
-                {/* Top accent bar */}
-                <div className={`absolute top-0 left-5 right-5 h-[2px] rounded-full bg-gradient-to-r ${feature.topBar} opacity-70 group-hover:opacity-100 transition-opacity`} />
-
                 {/* Icon */}
                 <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 ${feature.iconBg} ${feature.iconColor} shadow-lg transition-transform duration-300 group-hover:scale-110`}>
                   {feature.icon}

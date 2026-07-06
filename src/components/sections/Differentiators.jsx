@@ -108,9 +108,6 @@ export default function Differentiators() {
               className={`group relative overflow-hidden p-7 md:p-8 rounded-3xl bg-gradient-to-br ${item.gradient} border ${item.border} backdrop-blur-2xl flex flex-col gap-5 cursor-default transition-all duration-300`}
               style={{ boxShadow: item.glow }}
             >
-              {/* Top glowing accent bar — always visible */}
-              <div className={`absolute top-0 left-0 right-0 h-[2.5px] rounded-b-none rounded-t-3xl bg-gradient-to-r ${item.topBar} opacity-80 group-hover:opacity-100 transition-opacity duration-300`} />
-
               {/* Ambient glow orb top-right */}
               <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full opacity-30 blur-[50px] pointer-events-none"
                 style={{ background: `radial-gradient(circle, ${item.iconColor.replace('text-', '')} 0%, transparent 70%)` }} />
