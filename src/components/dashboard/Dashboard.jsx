@@ -397,60 +397,60 @@ export default function Dashboard({ onLogout }) {
             >
               {/* ── Tab: Overview ── */}
               {activeTab === 'Overview' && (
-                <div className="space-y-8">
+                <div className="space-y-8 pb-12">
                   {/* Cards Row 1 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {/* Card 1: Total Tasks */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden backdrop-blur-md shadow-sm">
+                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
                       <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">Total Tasks</p>
-                      <h2 className="text-4xl font-extrabold text-white mb-4">{totalTasks}</h2>
+                      <h2 className="text-4xl font-extrabold text-white mb-4">0</h2>
                       <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[0.68rem] font-bold">
-                        Workspace Total
+                        ✓ All completed
                       </div>
                       <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#94A3B8]">
                         <Clipboard size={16} />
                       </div>
                     </div>
 
-                    {/* Card 2: Completed */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden backdrop-blur-md shadow-sm">
-                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">Completed</p>
-                      <h2 className="text-4xl font-extrabold text-white mb-4">{completedTasks}</h2>
+                    {/* Card 2: SLA Targets */}
+                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
+                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">SLA Targets</p>
+                      <h2 className="text-4xl font-extrabold text-white mb-4">0</h2>
                       <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[0.68rem] font-bold">
-                        Success Rate {successRate}%
+                        ✓ No active targets
                       </div>
-                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                        <Check size={16} strokeWidth={2.5} />
+                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#94A3B8]">
+                        <Activity size={16} />
                       </div>
                     </div>
 
-                    {/* Card 3: Open Tasks */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden backdrop-blur-md shadow-sm">
-                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">Open Tasks</p>
-                      <h2 className="text-4xl font-extrabold text-white mb-4">{openTasks}</h2>
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary-light text-[0.68rem] font-bold">
-                        Active Workspace
+                    {/* Card 3: SLA Breaches */}
+                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
+                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">SLA Breaches</p>
+                      <h2 className="text-4xl font-extrabold text-white mb-4">0</h2>
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[0.68rem] font-bold">
+                        ✓ No active breaches
                       </div>
-                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#94A3B8]">
                         <Clock size={16} />
                       </div>
                     </div>
 
-                    {/* Card 4: Overdue */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden backdrop-blur-md shadow-sm">
-                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">Overdue</p>
-                      <h2 className="text-4xl font-extrabold text-[#EF4444] mb-4">{overdueTasks}</h2>
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 text-[0.68rem] font-bold">
-                        Needs Attention
+                    {/* Card 4: SLA Fails */}
+                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
+                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">SLA Fails</p>
+                      <h2 className="text-4xl font-extrabold text-red-500 mb-4">20</h2>
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/10 text-red-400 text-[0.68rem] font-bold">
+                        100% compliance target
                       </div>
-                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400">
                         <AlertTriangle size={16} />
                       </div>
                     </div>
                   </div>
 
                   {/* SLA Monitoring Block */}
-                  <div className="bg-[#0D0D1C]/40 border border-white/5 rounded-[2.25rem] p-6 md:p-8 backdrop-blur-xl">
+                  <div className="bg-[#0D0D1C]/40 border border-white/5 rounded-[2.25rem] p-6 md:p-8">
                     <div className="flex items-center gap-2.5 mb-6">
                       <Clock className="text-primary animate-pulse" size={20} />
                       <div>
@@ -461,36 +461,36 @@ export default function Dashboard({ onLogout }) {
 
                     {/* SLA Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                      {/* SLA Tracked */}
+                      {/* SLA Met */}
                       <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
-                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">SLA Tracked</p>
-                        <h3 className="text-3xl font-extrabold text-white mb-3">{slaTracked}</h3>
-                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-primary/10 text-primary-light px-2.5 py-1 rounded-full">
-                          SLA Coverage
+                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">Total Met</p>
+                        <h3 className="text-3xl font-extrabold text-white mb-3">0</h3>
+                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full">
+                          ✓ No active targets
                         </span>
-                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                          <Activity size={14} />
+                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                          <Check size={14} strokeWidth={2.5} />
                         </div>
                       </div>
 
                       {/* SLA Breached */}
                       <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
-                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">SLA Breached</p>
-                        <h3 className="text-3xl font-extrabold text-[#EF4444] mb-3">{slaBreached}</h3>
-                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-rose-500/10 text-rose-400 px-2.5 py-1 rounded-full">
-                          Urgent Attention
+                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">Total Breached</p>
+                        <h3 className="text-3xl font-extrabold text-white mb-3">0</h3>
+                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full">
+                          ✓ No active breaches
                         </span>
-                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                           <AlertTriangle size={14} />
                         </div>
                       </div>
 
-                      {/* SLA Completed */}
+                      {/* Total Escalated */}
                       <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
-                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">SLA Completed</p>
-                        <h3 className="text-3xl font-extrabold text-white mb-3">{slaCompleted}</h3>
+                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">Total Escalated</p>
+                        <h3 className="text-3xl font-extrabold text-white mb-3">0</h3>
                         <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full">
-                          On-Time Resolution
+                          ✓ No escalated tasks
                         </span>
                         <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                           <Check size={14} strokeWidth={2.5} />
@@ -500,14 +500,204 @@ export default function Dashboard({ onLogout }) {
                       {/* SLA Compliance */}
                       <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
                         <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">SLA Compliance</p>
-                        <h3 className="text-3xl font-extrabold text-emerald-400 mb-3">{slaCompliance}%</h3>
-                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full">
-                          Efficiency Rate
+                        <h3 className="text-3xl font-extrabold text-red-500 mb-3">0%</h3>
+                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-red-500/10 text-red-400 px-2.5 py-1 rounded-full">
+                          100% compliance target
                         </span>
-                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400">
                           <Trophy size={14} />
                         </div>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Activity Details & Weekly Progress */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* Activity Details Chart */}
+                    <div className="lg:col-span-8 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6 flex flex-col justify-between">
+                      <div className="flex items-center justify-between mb-6">
+                        <h3 className="text-sm font-black text-white uppercase tracking-wider">Activity Details</h3>
+                        <div className="flex items-center gap-2 bg-[#070710] p-1 rounded-lg border border-white/10">
+                          <span className="px-2 py-0.5 text-[10px] font-bold text-white bg-primary rounded-md">Activity</span>
+                          <span className="px-2 py-0.5 text-[10px] font-bold text-white/50">Weekly Progress</span>
+                        </div>
+                      </div>
+                      <div className="h-44 w-full relative">
+                        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                          <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+                          <line x1="0" y1="40" x2="100" y2="40" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+                          <line x1="0" y1="60" x2="100" y2="60" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+                          <line x1="0" y1="80" x2="100" y2="80" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+                          {/* Flat Activity Line */}
+                          <line x1="0" y1="90" x2="100" y2="90" stroke="#3b82f6" strokeWidth="2" strokeDasharray="2 2" />
+                        </svg>
+                      </div>
+                      <div className="flex justify-between text-[0.62rem] text-primary/50 font-bold uppercase tracking-wider mt-4">
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+                      </div>
+                    </div>
+
+                    {/* Weekly Progress */}
+                    <div className="lg:col-span-4 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6 flex flex-col justify-between text-center">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider text-left mb-6">Weekly Progress</h3>
+                      <div className="flex-1 flex flex-col items-center justify-center py-4">
+                        <div className="w-24 h-24 rounded-full border-4 border-white/5 flex items-center justify-center text-white/30 text-xs font-mono font-bold">
+                          No progress
+                        </div>
+                      </div>
+                      <p className="text-[0.68rem] text-white/40 font-bold mt-4">No data logged for the current period</p>
+                    </div>
+                  </div>
+
+                  {/* Dashboard Timeline */}
+                  <div className="bg-[#0D0D1C]/40 border border-white/5 rounded-[2.25rem] p-6 md:p-8">
+                    <h3 className="text-sm font-black text-white uppercase tracking-wider mb-6">Dashboard Timeline</h3>
+                    <div className="h-28 w-full relative">
+                      <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(255,255,255,0.02)" strokeWidth="0.5" />
+                        <line x1="0" y1="90" x2="100" y2="90" stroke="#3b82f6" strokeWidth="1.5" />
+                      </svg>
+                    </div>
+                    <div className="flex justify-between text-[0.62rem] text-primary/50 font-bold uppercase tracking-wider mt-4">
+                      <span>Jan</span>
+                      <span>Feb</span>
+                      <span>Mar</span>
+                      <span>Apr</span>
+                      <span>May</span>
+                      <span>Jun</span>
+                      <span>Jul</span>
+                    </div>
+                  </div>
+
+                  {/* Team Performance: Agent Scorecard & Team Scoreboard */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* Agent Scorecard */}
+                    <div className="lg:col-span-8 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Agent Scorecard</h3>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs border-collapse">
+                          <thead>
+                            <tr className="border-b border-white/5 text-primary/50 font-bold uppercase tracking-wider">
+                              <th className="pb-3">Agent</th>
+                              <th className="pb-3">Status</th>
+                              <th className="pb-3">Progress</th>
+                              <th className="pb-3">SLA</th>
+                              <th className="pb-3 text-right">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="border-b border-white/5">
+                              <td colSpan="5" className="py-8 text-center text-white/30 font-bold">No agents active in this queue</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    {/* Team Scoreboard */}
+                    <div className="lg:col-span-4 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6 flex flex-col justify-between">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Team Scoreboard</h3>
+                      <div className="flex-1 flex items-center justify-center py-6 text-white/30 font-bold text-xs">
+                        No scores recorded
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Work Categories Health: Unassigned Analytics & Subject Summary */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* Unassigned Analytics */}
+                    <div className="lg:col-span-4 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6 flex flex-col justify-between text-center">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider text-left mb-6">Unassigned Analytics</h3>
+                      <div className="flex-1 flex flex-col items-center justify-center py-4">
+                        <h2 className="text-5xl font-extrabold text-white mb-2">0</h2>
+                        <span className="text-[0.62rem] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full">
+                          ✓ No unassigned tasks
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Subject Summary */}
+                    <div className="lg:col-span-8 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Subject Summary</h3>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs border-collapse">
+                          <thead>
+                            <tr className="border-b border-white/5 text-primary/50 font-bold uppercase tracking-wider">
+                              <th className="pb-3">Subject</th>
+                              <th className="pb-3">Tasks</th>
+                              <th className="pb-3">Status</th>
+                              <th className="pb-3 text-right">Completion</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-white/5">
+                            {[
+                              { name: 'Engineering', count: 0, status: 'On Track' },
+                              { name: 'QA Testing', count: 0, status: 'On Track' },
+                              { name: 'Operations', count: 0, status: 'On Track' },
+                              { name: 'Marketing', count: 0, status: 'On Track' }
+                            ].map((sub, i) => (
+                              <tr key={i} className="hover:bg-white/[0.02]">
+                                <td className="py-3 font-bold text-white">{sub.name}</td>
+                                <td className="py-3 text-[#94A3B8] font-semibold">{sub.count}</td>
+                                <td className="py-3 text-emerald-400 font-semibold">{sub.status}</td>
+                                <td className="py-3 text-right font-black text-[#94A3B8]">0%</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top Resource Ranking & Strategic Insights */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Top Resource Ranking */}
+                    <div className="bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Top Resource Ranking</h3>
+                      <div className="py-8 text-center text-white/30 font-bold text-xs">
+                        No resource data available
+                      </div>
+                    </div>
+
+                    {/* Strategic Insights */}
+                    <div className="bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Strategic Insights</h3>
+                      <div className="py-8 text-center text-white/30 font-bold text-xs">
+                        No insights generated yet
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Volume Comparison & Top Performers */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* Volume Comparison */}
+                    <div className="lg:col-span-8 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Volume Comparison</h3>
+                      <div className="py-8 text-center text-white/30 font-bold text-xs">
+                        No volume data to display
+                      </div>
+                    </div>
+
+                    {/* Top Performers */}
+                    <div className="lg:col-span-4 bg-[#0D0D1C]/40 border border-white/5 rounded-3xl p-6 flex flex-col justify-between">
+                      <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4">Top Performers</h3>
+                      <div className="flex-1 flex items-center justify-center py-6 text-white/30 font-bold text-xs">
+                        No data
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Activity Actions */}
+                  <div className="bg-[#0D0D1C]/40 border border-white/5 rounded-[2.25rem] p-6 md:p-8">
+                    <h3 className="text-sm font-black text-white uppercase tracking-wider mb-6">Activity Actions</h3>
+                    <div className="py-8 text-center text-white/30 font-bold text-xs">
+                      No activity actions recorded
                     </div>
                   </div>
                 </div>
