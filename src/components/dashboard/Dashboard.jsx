@@ -80,6 +80,102 @@ const INITIAL_TASKS = [
   }
 ];
 
+const PROJECT_OPTIONS = [
+  { value: 'All Projects', label: 'All Projects' },
+  { value: 'Development', label: 'Development' }
+];
+
+const PERIOD_OPTIONS = [
+  { value: 'Today', label: 'Today' },
+  { value: 'Yesterday', label: 'Yesterday' },
+  { value: 'Last 7 days', label: 'Last 7 days' },
+  { value: 'Current week', label: 'Current week' },
+  { value: 'Last week', label: 'Last week' },
+  { value: 'Current month', label: 'Current month' },
+  { value: 'Last month', label: 'Last month' },
+  { value: 'Current year', label: 'Current year' }
+];
+
+const SUBJECT_OPTIONS = [
+  { value: 'All Subjects', label: 'All Subjects' },
+  { value: 'Back End Tasks', label: 'Back End Tasks' },
+  { value: 'dev team', label: 'dev team' },
+  { value: 'TEST_AUTO_SEC_SUB_1', label: 'TEST_AUTO_SEC_SUB_1' },
+  { value: 'TEST_AUTO_SEC_SUB_2', label: 'TEST_AUTO_SEC_SUB_2' }
+];
+
+function CustomSelect({ value, onChange, options, icon: Icon, placeholder }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = React.useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="pl-10 pr-8 py-1.5 bg-[#0D0D1C]/80 border border-white/10 hover:border-white/20 rounded-xl text-xs font-bold text-[#D1DFD7] transition-all flex items-center gap-1.5 cursor-pointer relative min-w-[140px] text-left select-none outline-none"
+      >
+        {Icon && <Icon className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/50" size={13} />}
+        <span>{value || placeholder}</span>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/60 transition-transform duration-200" style={{ transform: isOpen ? 'translateY(-50%) rotate(180deg)' : 'translateY(-50%)' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-3 h-3 stroke-[2.5]">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 4 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full right-0 mt-1 z-50 min-w-[160px] bg-[#0D0D1C] border border-white/10 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden"
+          >
+            <div className="py-1 max-h-60 overflow-y-auto">
+              {options.map((opt) => {
+                const isSelected = opt.value === value;
+                return (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => {
+                      onChange(opt.value);
+                      setIsOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 text-[11px] font-bold transition-colors cursor-pointer select-none flex items-center justify-between outline-none border-none
+                      ${isSelected 
+                        ? 'text-white bg-primary/20' 
+                        : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
+                      }
+                    `}
+                  >
+                    <span>{opt.label}</span>
+                    {isSelected && (
+                      <span className="text-primary text-[10px]">✓</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Dashboard({ onLogout }) {
   const [tasks, setTasks] = useState(INITIAL_TASKS);
   const [activeTab, setActiveTab] = useState('Overview');
@@ -313,69 +409,36 @@ export default function Dashboard({ onLogout }) {
           <div className="flex items-center gap-2 md:gap-3">
             
             {/* Project Filter */}
-            <div className="relative hidden md:block">
-              <Folder className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/50" size={13} />
-              <select 
-                value={selectedProject}
-                onChange={e => setSelectedProject(e.target.value)}
-                className="pl-10 pr-8 py-1.5 bg-[#0D0D1C]/80 border border-white/10 rounded-xl text-xs font-bold text-[#D1DFD7] outline-none appearance-none cursor-pointer hover:border-white/20 transition-all"
-                style={{
-                  backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%236366F1\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2.5\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'right 0.75rem center',
-                  backgroundSize: '0.75rem'
-                }}
-              >
-                <option value="All Projects">All Projects</option>
-                <option value="Development">Development</option>
-              </select>
+            <div className="hidden md:block">
+              <CustomSelect 
+                value={selectedProject} 
+                onChange={setSelectedProject} 
+                options={PROJECT_OPTIONS} 
+                icon={Folder} 
+                placeholder="All Projects" 
+              />
             </div>
 
             {/* Period Filter */}
-            <div className="relative">
-              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/50" size={13} />
-              <select 
-                value={selectedPeriod}
-                onChange={e => setSelectedPeriod(e.target.value)}
-                className="pl-10 pr-8 py-1.5 bg-[#0D0D1C]/80 border border-white/10 rounded-xl text-xs font-bold text-[#D1DFD7] outline-none appearance-none cursor-pointer hover:border-white/20 transition-all"
-                style={{
-                  backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%236366F1\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2.5\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'right 0.75rem center',
-                  backgroundSize: '0.75rem'
-                }}
-              >
-                <option value="Today">Today</option>
-                <option value="Yesterday">Yesterday</option>
-                <option value="Last 7 days">Last 7 days</option>
-                <option value="Current week">Current week</option>
-                <option value="Last week">Last week</option>
-                <option value="Current month">Current month</option>
-                <option value="Last month">Last month</option>
-                <option value="Current year">Current year</option>
-              </select>
+            <div>
+              <CustomSelect 
+                value={selectedPeriod} 
+                onChange={setSelectedPeriod} 
+                options={PERIOD_OPTIONS} 
+                icon={Calendar} 
+                placeholder="Today" 
+              />
             </div>
 
             {/* Subject Filter */}
-            <div className="relative hidden lg:block">
-              <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/50" size={13} />
-              <select 
-                value={selectedSubject}
-                onChange={e => setSelectedSubject(e.target.value)}
-                className="pl-10 pr-8 py-1.5 bg-[#0D0D1C]/80 border border-white/10 rounded-xl text-xs font-bold text-[#D1DFD7] outline-none appearance-none cursor-pointer hover:border-white/20 transition-all"
-                style={{
-                  backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%236366F1\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2.5\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'right 0.75rem center',
-                  backgroundSize: '0.75rem'
-                }}
-              >
-                <option value="All Subjects">All Subjects</option>
-                <option value="Back End Tasks">Back End Tasks</option>
-                <option value="dev team">dev team</option>
-                <option value="TEST_AUTO_SEC_SUB_1">TEST_AUTO_SEC_SUB_1</option>
-                <option value="TEST_AUTO_SEC_SUB_2">TEST_AUTO_SEC_SUB_2</option>
-              </select>
+            <div className="hidden lg:block">
+              <CustomSelect 
+                value={selectedSubject} 
+                onChange={setSelectedSubject} 
+                options={SUBJECT_OPTIONS} 
+                icon={Filter} 
+                placeholder="All Subjects" 
+              />
             </div>
 
             {/* Refresh Button */}
