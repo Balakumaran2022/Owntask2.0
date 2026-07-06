@@ -116,7 +116,9 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
             <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-0.5">
               {NAV_LINKS.map((link) => {
                 const linkId = link.path.replace(/^\//, '') || 'home';
-                const isActive = location.pathname === link.path || activeSection === linkId;
+                const isActive = location.pathname === '/'
+                  ? (link.path === '/' ? activeSection === 'home' : activeSection === linkId)
+                  : location.pathname === link.path;
                 return (
                   <Link
                     key={link.path}
@@ -214,8 +216,9 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
               {/* Navigation Links */}
               <div className="flex flex-col gap-4 mt-6">
                 {NAV_LINKS.map((link) => {
-                  const linkId = link.path.replace(/^\//, '') || 'home';
-                  const isActive = location.pathname === link.path || activeSection === linkId;
+                  const isActive = location.pathname === '/'
+                    ? (link.path === '/' ? activeSection === 'home' : activeSection === linkId)
+                    : location.pathname === link.path;
                   return (
                     <Link
                       key={link.path}
