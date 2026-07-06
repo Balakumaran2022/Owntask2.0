@@ -376,23 +376,23 @@ export default function Analytics() {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -4, scale: 1.01 }}
               transition={{ delay: 0.4 }}
-              className="relative overflow-hidden p-6 md:p-7 rounded-3xl border border-indigo-500/25 bg-gradient-to-br from-indigo-500/[0.12] via-[#0A0A15]/90 to-[#0A0A15]/80 backdrop-blur-2xl flex flex-col transition-all duration-300"
-              style={{ boxShadow: '0 8px 28px rgba(99,102,241,0.12)' }}
+              className="relative overflow-hidden p-6 md:p-7 rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/[0.12] via-[#0A0A15]/90 to-[#0A0A15]/80 flex flex-col transition-all duration-300"
+              style={{ boxShadow: '0 8px 28px rgba(59,130,246,0.12)' }}
             >
-              <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-transparent opacity-70" />
-              <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500/8 rounded-full blur-[60px] pointer-events-none" />
+              <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-primary via-blue-400 to-transparent opacity-70" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/8 rounded-full blur-[60px] pointer-events-none" />
 
               <h3 className="text-base font-black text-white tracking-tight mb-5 relative z-10">By Status</h3>
               <div className="flex flex-col gap-4 relative z-10">
                 {[
-                  { label: 'In Progress', val: 45, max: 100, bar: 'from-indigo-400 to-violet-500', glow: 'rgba(99,102,241,0.5)', dot: 'bg-indigo-400' },
-                  { label: 'To Do',       val: 23, max: 100, bar: 'from-slate-400 to-slate-500',  glow: 'rgba(148,163,184,0.4)', dot: 'bg-slate-400' },
-                  { label: 'In Review',   val: 12, max: 100, bar: 'from-amber-400 to-orange-500', glow: 'rgba(251,191,36,0.5)',  dot: 'bg-amber-400' },
-                  { label: 'Done',        val: 87, max: 100, bar: 'from-emerald-400 to-teal-500', glow: 'rgba(52,211,153,0.5)', dot: 'bg-emerald-400' },
+                  { label: 'In Progress', val: 45, max: 100, bar: 'from-blue-500 to-sky-400', glow: 'rgba(59,130,246,0.5)', dot: 'bg-blue-400' },
+                  { label: 'To Do',       val: 23, max: 100, bar: 'from-blue-400 to-blue-500', glow: 'rgba(37,99,235,0.4)', dot: 'bg-blue-300' },
+                  { label: 'In Review',   val: 12, max: 100, bar: 'from-sky-400 to-blue-400',  glow: 'rgba(56,189,248,0.5)', dot: 'bg-sky-400' },
+                  { label: 'Done',        val: 87, max: 100, bar: 'from-cyan-400 to-blue-400', glow: 'rgba(34,211,238,0.5)', dot: 'bg-cyan-400' },
                 ].map((stat, i) => (
                   <div key={i} className="flex flex-col gap-1.5">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="flex items-center gap-1.5 text-white/70 font-bold">
+                       <span className="flex items-center gap-1.5 text-white/70 font-bold">
                         <span className={`w-2 h-2 rounded-full ${stat.dot}`} />
                         {stat.label}
                       </span>
@@ -419,19 +419,19 @@ export default function Analytics() {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -4, scale: 1.01 }}
               transition={{ delay: 0.5 }}
-              className="relative overflow-hidden p-6 md:p-7 rounded-3xl border border-rose-500/25 bg-gradient-to-br from-rose-500/[0.1] via-[#0A0A15]/90 to-[#0A0A15]/80 backdrop-blur-2xl flex flex-col transition-all duration-300"
-              style={{ boxShadow: '0 8px 28px rgba(244,63,94,0.1)' }}
+              className="relative overflow-hidden p-6 md:p-7 rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/[0.1] via-[#0A0A15]/90 to-[#0A0A15]/80 flex flex-col transition-all duration-300"
+              style={{ boxShadow: '0 8px 28px rgba(59,130,246,0.1)' }}
             >
-              <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-rose-400 via-orange-400 to-transparent opacity-70" />
-              <div className="absolute top-0 right-0 w-40 h-40 bg-rose-500/8 rounded-full blur-[60px] pointer-events-none" />
+              <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-primary via-blue-400 to-transparent opacity-70" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/8 rounded-full blur-[60px] pointer-events-none" />
 
               <h3 className="text-base font-black text-white tracking-tight mb-5 relative z-10">By Priority</h3>
               <div className="flex flex-col gap-4 relative z-10">
                 {[
-                  { label: 'Highest', val: 8,  max: 40, bar: 'from-rose-400 to-pink-500',    glow: 'rgba(244,63,94,0.55)',   dot: 'bg-rose-400' },
-                  { label: 'High',    val: 15, max: 40, bar: 'from-orange-400 to-amber-500', glow: 'rgba(251,146,60,0.55)',  dot: 'bg-orange-400' },
-                  { label: 'Normal',  val: 31, max: 40, bar: 'from-blue-400 to-indigo-500',  glow: 'rgba(59,130,246,0.5)',   dot: 'bg-blue-400' },
-                  { label: 'Low',     val: 18, max: 40, bar: 'from-slate-400 to-slate-500',  glow: 'rgba(148,163,184,0.35)', dot: 'bg-slate-400' },
+                  { label: 'Highest', val: 8,  max: 40, bar: 'from-blue-600 to-blue-500', glow: 'rgba(29,78,216,0.55)',   dot: 'bg-blue-500' },
+                  { label: 'High',    val: 15, max: 40, bar: 'from-blue-500 to-sky-400', glow: 'rgba(59,130,246,0.55)',  dot: 'bg-blue-400' },
+                  { label: 'Normal',  val: 31, max: 40, bar: 'from-sky-400 to-sky-300',  glow: 'rgba(56,189,248,0.5)',   dot: 'bg-sky-300' },
+                  { label: 'Low',     val: 18, max: 40, bar: 'from-cyan-500 to-blue-400', glow: 'rgba(6,182,212,0.35)', dot: 'bg-cyan-400' },
                 ].map((stat, i) => (
                   <div key={i} className="flex flex-col gap-1.5">
                     <div className="flex justify-between items-center text-xs">

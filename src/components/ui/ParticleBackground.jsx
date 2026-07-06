@@ -28,12 +28,12 @@ export default function ParticleBackground() {
 
     window.addEventListener('resize', handleResize);
 
-    // Particle colors matching luxury indigo/violet/magenta palette
+    // Particle colors matching premium blue/green/teal palette
     const colors = [
-      'rgba(99, 102, 241, 0.7)',   // Primary Indigo
-      'rgba(139, 92, 246, 0.6)',   // Secondary Violet
-      'rgba(236, 72, 153, 0.5)',   // Accent Magenta
-      'rgba(56, 189, 248, 0.5)',   // Sky Cyan
+      'rgba(59, 130, 246, 0.7)',   // Primary Blue
+      'rgba(16, 185, 129, 0.6)',   // Success Green
+      'rgba(20, 184, 166, 0.5)',   // Teal
+      'rgba(6, 182, 212, 0.5)',    // Cyan
       'rgba(255, 255, 255, 0.4)'   // White
     ];
 
@@ -118,7 +118,7 @@ export default function ParticleBackground() {
 
           if (dist < 150) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(139, 92, 246, ${0.35 * (1 - dist / 150)})`;
+            ctx.strokeStyle = `rgba(59, 130, 246, ${0.35 * (1 - dist / 150)})`;
             ctx.lineWidth = 1.0;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);

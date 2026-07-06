@@ -9,8 +9,8 @@ const PLANS = [
     price: 'Free',
     period: 'forever · no card needed',
     badge: null,
-    bestFor: 'Individuals and small teams',
-    btnLabel: 'Get Started',
+    bestFor: 'individuals and small teams',
+    btnLabel: 'Start Free →',
     features: [
       { text: 'Up to 3 Projects', on: true },
       { text: 'Up to 5 Team Members', on: true },
@@ -33,8 +33,8 @@ const PLANS = [
     price: 'Contact Us',
     period: 'recommended for teams',
     badge: '⭐ MOST POPULAR',
-    bestFor: 'Growing teams and businesses',
-    btnLabel: 'Get Started',
+    bestFor: 'growing teams and businesses',
+    btnLabel: 'Contact Us →',
     features: [
       { text: 'Unlimited Projects', on: true },
       { text: 'Up to 50 Team Members', on: true },
@@ -57,8 +57,8 @@ const PLANS = [
     price: 'Contact Us',
     period: 'for large organisations',
     badge: null,
-    bestFor: 'Large organisations with compliance needs',
-    btnLabel: 'Contact Us',
+    bestFor: 'large organisations with compliance needs',
+    btnLabel: 'Contact Sales →',
     features: [
       { text: 'Everything in Growth', on: true },
       { text: 'Unlimited Team Members', on: true },
@@ -101,6 +101,14 @@ const Cell = ({ val }) => {
 
 export default function Pricing({ onOpenLogin, onOpenDemo }) {
   const [billing, setBilling] = useState('monthly');
+  const [expandedPlans, setExpandedPlans] = useState({});
+
+  const togglePlanFeatures = (planId) => {
+    setExpandedPlans(prev => ({
+      ...prev,
+      [planId]: !prev[planId]
+    }));
+  };
 
   useEffect(() => {
     document.title = "OwnTasks | Intelligent Command Center";
@@ -178,43 +186,33 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
         </div>
 
         {/* ── PRICING CARDS (Ultra-Modern Glassmorphic UI) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto items-stretch">
           {PLANS.map((plan, idx) => {
             const isFeatured = plan.id === 'growth';
             const isEnt      = plan.id === 'enterprise';
 
-            const cardBg = isFeatured 
-              ? 'bg-gradient-to-b from-[#1a1438]/95 via-[#110d29]/95 to-[#0b081e]/95 backdrop-blur-2xl' 
-              : isEnt 
-              ? 'bg-gradient-to-b from-[#1c1130]/90 via-[#130b22]/90 to-[#0c0717]/95 backdrop-blur-2xl' 
-              : 'bg-gradient-to-b from-white/[0.07] via-white/[0.03] to-white/[0.01] backdrop-blur-2xl';
+            const cardBg = 'bg-gradient-to-b from-[#0c1a2e]/95 via-[#071324]/95 to-[#040c17]/95';
               
             const border = isFeatured 
-              ? 'border-2 border-primary shadow-[0_0_50px_rgba(99,102,241,0.28)] hover:shadow-[0_0_70px_rgba(99,102,241,0.4)]' 
-              : isEnt 
-              ? 'border border-purple-500/40 hover:border-purple-500/60 shadow-[0_0_40px_rgba(168,85,247,0.18)]' 
-              : 'border border-white/[0.08] hover:border-white/20 shadow-xl hover:shadow-2xl';
+              ? 'border-2 border-primary shadow-[0_0_40px_rgba(59,130,246,0.25)] hover:shadow-[0_0_55px_rgba(59,130,246,0.35)]' 
+              : 'border border-primary/50 shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:shadow-[0_0_45px_rgba(59,130,246,0.25)]';
 
-            const priceClr = isFeatured 
-              ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-primary' 
-              : isEnt 
-              ? 'text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-purple-400' 
-              : 'text-white';
+            const priceClr = 'text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-primary';
               
-            const nameClr  = isFeatured ? 'text-primary' : isEnt ? 'text-purple-300' : 'text-white';
-            const divClr   = isFeatured ? 'bg-gradient-to-r from-transparent via-primary/50 to-transparent' : isEnt ? 'bg-gradient-to-r from-transparent via-purple-500/50 to-transparent' : 'bg-white/10';
+            const nameClr  = 'text-primary';
+            const divClr   = 'bg-gradient-to-r from-transparent via-primary/50 to-transparent';
             const featClr  = 'text-white/90 font-semibold';
             const checkOff = 'text-white/25';
             
             const btnClass = isFeatured
-              ? 'bg-gradient-to-r from-primary via-indigo-500 to-purple-600 hover:brightness-110 text-white font-black shadow-[0_0_25px_rgba(99,102,241,0.45)]'
-              : isEnt
-              ? 'bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 border border-purple-500/40 font-extrabold shadow-lg'
-              : 'bg-white/10 hover:bg-white/20 text-white font-bold border border-white/10 shadow-md';
+              ? 'bg-gradient-to-r from-primary via-blue-500 to-emerald-600 hover:brightness-110 text-white font-black shadow-[0_0_20px_rgba(59,130,246,0.35)]'
+              : 'bg-primary/20 hover:bg-primary/35 text-blue-200 border border-primary/40 font-extrabold shadow-md';
               
-            const scale = isFeatured ? 'lg:scale-[1.04] z-10' : '';
+            const scale = isFeatured ? 'lg:scale-[1.03] z-10' : '';
 
             const price = plan.price === '$18' && billing === 'annual' ? '$14' : plan.price;
+            const isExpanded = expandedPlans[plan.id];
+            const visibleFeatures = isExpanded ? plan.features : plan.features.slice(0, 5);
 
             return (
               <motion.div
@@ -223,63 +221,72 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className={`relative flex flex-col rounded-[32px] ${border} ${cardBg} ${scale} p-7 transition-all duration-500 hover:-translate-y-1.5`}
+                className={`relative flex flex-col rounded-[24px] ${border} ${cardBg} ${scale} p-6 transition-all duration-500 hover:-translate-y-1`}
               >
                 {/* Popular badge */}
                 {plan.badge && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full bg-gradient-to-r from-primary via-indigo-500 to-purple-600 text-white text-[11px] font-black tracking-widest uppercase shadow-[0_0_25px_rgba(99,102,241,0.6)] border border-white/25">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1 rounded-full bg-gradient-to-r from-primary via-blue-500 to-emerald-600 text-white text-[10px] font-black tracking-widest uppercase shadow-[0_0_20px_rgba(59,130,246,0.5)] border border-white/20">
                     {plan.badge}
                   </div>
                 )}
 
                 {/* Plan name */}
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className={`text-xl font-black uppercase tracking-wider ${nameClr}`}>{plan.name}</h3>
-                  <span className={`text-xs px-3 py-1 rounded-full font-bold font-mono ${isFeatured ? 'bg-primary/20 text-primary border border-primary/30' : isEnt ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 'bg-white/10 text-white/70'}`}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className={`text-lg font-black uppercase tracking-wider ${nameClr}`}>{plan.name}</h3>
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-full font-bold font-mono bg-primary/20 text-primary border border-primary/30">
                     {plan.id === 'growth' ? 'Popular' : plan.id === 'enterprise' ? 'Pro' : 'Free'}
                   </span>
                 </div>
 
                 {/* Price */}
-                <div className="my-3">
-                  <div className="flex items-baseline gap-1.5">
-                    <span className={`text-6xl font-black leading-none ${priceClr}`}>{price}</span>
+                <div className="my-2">
+                  <div className="flex items-baseline gap-1">
+                    <span className={`text-4xl sm:text-[2.75rem] font-black leading-none ${priceClr}`}>{price}</span>
                   </div>
                   {plan.id === 'growth' && billing === 'annual' && plan.price !== 'Contact Us' && (
-                    <p className="text-emerald-400 text-xs font-bold mt-1">✓ Save $48/seat/year</p>
+                    <p className="text-emerald-400 text-[10px] font-bold mt-1">✓ Save $48/seat/year</p>
                   )}
-                  <p className="text-xs text-white/50 font-mono mt-2">
+                  <p className="text-[10px] text-white/50 font-mono mt-1">
                     {plan.price === 'Custom' ? 'custom SLA & billing' : plan.period}
                   </p>
                 </div>
 
                 {/* Divider */}
-                <div className={`w-full h-px ${divClr} my-6`} />
+                <div className={`w-full h-px ${divClr} my-4`} />
 
                 {/* Features */}
-                <div className="flex flex-col gap-3.5 mb-8 flex-1">
-                  {plan.features.map((f, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${
+                <div className="flex flex-col gap-2 mb-6 flex-1">
+                  {visibleFeatures.map((f, i) => (
+                    <div key={i} className="flex items-center gap-2.5">
+                      <div className={`w-[18px] h-[18px] rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105 ${
                         f.on
-                          ? (isFeatured ? 'bg-primary/20 border border-primary text-primary shadow-[0_0_10px_rgba(99,102,241,0.5)]' : isEnt ? 'bg-purple-500/20 border border-purple-400 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.4)]' : 'bg-emerald-500/20 border border-emerald-400 text-emerald-400')
+                          ? 'bg-primary/20 border border-primary text-primary shadow-[0_0_8px_rgba(59,130,246,0.3)]'
                           : 'bg-white/5 border border-white/10 text-white/20'
                       }`}>
                         {f.on && (
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                            <path d="M2 5L4 7L8 3" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
+                            <path d="M2 5L4 7L8 3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                         )}
                       </div>
-                      <span className={`text-sm ${f.on ? featClr : checkOff}`}>{f.text}</span>
+                      <span className={`text-xs ${f.on ? featClr : checkOff}`}>{f.text}</span>
                     </div>
                   ))}
+                  
+                  {plan.features.length > 5 && (
+                    <button
+                      onClick={() => togglePlanFeatures(plan.id)}
+                      className="self-start text-[11px] font-bold mt-1.5 cursor-pointer bg-transparent border-none p-0 hover:underline transition-colors text-primary hover:text-blue-300"
+                    >
+                      {isExpanded ? 'Show Less' : 'Show All'}
+                    </button>
+                  )}
                 </div>
 
                 {/* Select button */}
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                   onClick={() => {
                     if (plan.id === 'enterprise') {
                       if (onOpenDemo || onOpenLogin) (onOpenDemo || onOpenLogin)();
@@ -287,7 +294,7 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
                       window.location.href = 'https://razorpay.com/?utm_source=bing&utm_medium=cpc&utm_campaign=&utm_adgroup=&utm_content=RPSME-Brand-050724&utm_term=razorpay&utm_gclid=&utm_campaignID=580151510&utm_adgroupID=1260041977203200&utm_adID=&utm_network=o&utm_device=c&msclkid=7b7948332aeb1d3cedd4227be092bd89';
                     }
                   }}
-                  className={`w-full py-4 rounded-2xl text-sm transition-all cursor-pointer ${btnClass}`}
+                  className={`w-full py-3.5 rounded-xl text-xs transition-all cursor-pointer ${btnClass}`}
                 >
                   {plan.btnLabel}
                 </motion.button>
@@ -304,8 +311,8 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <div className="overflow-x-auto rounded-[32px] shadow-[0_25px_70px_rgba(0,0,0,0.6)] border border-white/10 bg-gradient-to-b from-[#110e24]/90 via-[#0a0816]/95 to-[#07060f]/95 backdrop-blur-2xl">
-            <div className="min-w-[900px]">
+          <div className="overflow-x-auto rounded-[32px] shadow-[0_25px_70px_rgba(0,0,0,0.6)] border border-white/10 bg-gradient-to-b from-[#110e24]/90 via-[#0a0816]/95 to-[#07060f]/95">
+            <div className="w-full">
               {/* Table header */}
               <div className="grid grid-cols-4 border-b border-white/15 px-8 py-6 bg-[#0c0a1a]/80 items-center">
                 <div className="text-xl font-black text-white uppercase tracking-wider flex items-center gap-2.5">

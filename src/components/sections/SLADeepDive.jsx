@@ -1,290 +1,301 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Timer, ShieldCheck, AlertTriangle, CheckCircle2, BarChart2 } from 'lucide-react';
-
-const analytics = [
-  { label: 'SLA Tracked Count',      val: '48',   color: 'text-blue-400' },
-  { label: 'SLA Breached Count',     val: '3',    color: 'text-red-400' },
-  { label: 'Status SLA Alerts Sent', val: '1',    color: 'text-amber-400' },
-  { label: 'SLA Completed Count',    val: '42',   color: 'text-emerald-400' },
-  { label: 'SLA Compliance Rate',    val: '94.2%',color: 'text-primary' },
-];
+import { Timer, ShieldCheck, AlertTriangle, Clock, Bell } from 'lucide-react';
 
 export default function SLADeepDive() {
+  const [activeTicket, setActiveTicket] = useState(0);
+
+  // Active SLA Tickets data for the interactive live dashboard
+  const activeTickets = [
+    {
+      id: 'TSK-104',
+      title: 'API Gateway Timeout Investigation',
+      status: 'In Review',
+      timeLeft: '32m remaining',
+      priority: 'Highest',
+      slaType: 'Status SLA (Max 2h)',
+      level: 'alert',
+      pct: 26,
+    },
+    {
+      id: 'TSK-210',
+      title: 'Customer Billing Dispute Escalation',
+      status: 'In QA',
+      timeLeft: '1h 45m remaining',
+      priority: 'High',
+      slaType: 'Deadline SLA (Total 4h)',
+      level: 'normal',
+      pct: 68,
+    },
+    {
+      id: 'TSK-182',
+      title: 'Quarterly SOC2 Audit Pre-Check',
+      status: 'Pending Approval',
+      timeLeft: '4h 12m remaining',
+      priority: 'Normal',
+      slaType: 'Deadline SLA (Total 24h)',
+      level: 'normal',
+      pct: 85,
+    }
+  ];
+
   return (
-    <section className="relative z-10 pt-10 pb-24 lg:pt-14 lg:pb-32 overflow-hidden bg-transparent">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-emerald-500/5 rounded-full blur-[130px] pointer-events-none" />
+    <section className="relative z-10 pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden bg-transparent font-sans">
+      {/* Ambient glow blobs - strictly Blue */}
+      <div className="absolute top-1/3 left-1/3 w-[600px] h-[400px] bg-blue-500/[0.04] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/3 w-[500px] h-[350px] bg-blue-600/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-5 md:px-8 max-w-[1240px] relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-blue-500/25 bg-blue-500/10 text-blue-400 text-xs font-black uppercase tracking-widest"
+          >
+            <Timer size={14} className="animate-pulse" />
+            <span>Guaranteed Timelines</span>
+          </motion.div>
 
-        {/* Section header */}
-        <div className="text-center mb-20">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-2xl md:text-[2.25rem] lg:text-[2.5rem] tracking-tight leading-tight font-sans font-extrabold mb-5"
+            transition={{ delay: 0.08 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-5"
           >
-            <span className="text-white">SLA System </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#8b5cf6]">— Deep Dive</span>
+            <span className="text-white">Enterprise-Grade </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-400">SLA System</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.18 }}
-            className="text-white/45 text-xl max-w-2xl mx-auto leading-relaxed"
+            transition={{ delay: 0.15 }}
+            className="text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            SLA tracking that goes beyond a simple deadline.
+            Track completion targets dynamically. Guard response phases, trigger alerts before breach, and log every event immutably.
           </motion.p>
         </div>
 
-        {/* 2×2 Grid layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-          {/* TOP LEFT — Level 1 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -6, scale: 1.01 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.0 }}
-            className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#13122b]/95 via-[#181638]/95 to-[#13122b]/95 border border-emerald-500/40 hover:border-emerald-400 transition-all duration-500 overflow-hidden shadow-[0_20px_50px_rgba(16,185,129,0.2)] backdrop-blur-2xl"
-          >
-            <div className="absolute top-0 left-8 right-8 h-[2px] rounded-full bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_15px_rgba(52,211,153,0.8)]" />
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-500/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        {/* Split Layout: Narrative & Interactive Dashboard */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+          
+          {/* LEFT: SLA Capability Narrative */}
+          <div className="lg:col-span-5 flex flex-col justify-center gap-6">
             
-            <div className="flex items-center justify-between gap-4 mb-6 relative z-10 flex-wrap">
-              <div className="flex items-center gap-3.5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-500/30 flex items-center justify-center border border-emerald-500/50 shadow-[0_0_25px_rgba(52,211,153,0.4)] group-hover:scale-110 transition-all shrink-0">
-                  <ShieldCheck size={26} className="text-emerald-400 group-hover:text-white transition-colors" strokeWidth={2.5} />
+            {/* Feature 1: Deadline SLA */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent border border-white/10 hover:border-blue-500/40 transition-all duration-300 group cursor-default"
+            >
+              <div className="flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400 group-hover:bg-blue-500/20 group-hover:scale-105 transition-all">
+                  <ShieldCheck size={22} />
                 </div>
                 <div>
-                  <h3 className="text-white font-black text-xl md:text-2xl tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-emerald-300 transition-all">
-                    Level 1 — Deadline SLA
-                  </h3>
-                  <span className="text-xs font-mono font-bold text-emerald-300/80 tracking-wide uppercase block">
-                    Absolute Time Tracking
-                  </span>
+                  <h3 className="text-white font-bold text-lg mb-1.5 group-hover:text-blue-300 transition-colors">Level 1 — Absolute Deadline SLA</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    Configure custom overall target hours for completion based on project and priority levels. The system dynamically monitors progress and marks warnings automatically.
+                  </p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-[10px] font-black font-mono tracking-widest bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-[0_0_12px_rgba(52,211,153,0.3)] uppercase">
-                ABSOLUTE
-              </span>
-            </div>
+            </motion.div>
 
-            <p className="relative z-10 text-white/90 text-sm md:text-base leading-relaxed font-semibold">
-              Set an absolute SLA deadline per task. The system tracks when a breach happened (
-              <code className="text-xs font-mono bg-emerald-950/60 text-emerald-300 px-2 py-0.5 rounded-lg border border-emerald-500/30 mx-1 font-bold shadow-sm">slaBreachedAt</code>
-              ) and who owned the task at time of breach (
-              <code className="text-xs font-mono bg-emerald-950/60 text-emerald-300 px-2 py-0.5 rounded-lg border border-emerald-500/30 mx-1 font-bold shadow-sm">slaBreachedBy</code>
-              ). Full breach history in the audit log.
-            </p>
-          </motion.div>
-
-          {/* TOP RIGHT — Level 2 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -6, scale: 1.01 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#13122b]/95 via-[#181638]/95 to-[#13122b]/95 border border-amber-500/40 hover:border-amber-400 transition-all duration-500 overflow-hidden shadow-[0_20px_50px_rgba(245,158,11,0.2)] backdrop-blur-2xl"
-          >
-            <div className="absolute top-0 left-8 right-8 h-[2px] rounded-full bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_15px_rgba(245,158,11,0.8)]" />
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-amber-500/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            
-            <div className="flex items-center justify-between gap-4 mb-6 relative z-10 flex-wrap">
-              <div className="flex items-center gap-3.5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/30 to-orange-500/30 flex items-center justify-center border border-amber-500/50 shadow-[0_0_25px_rgba(245,158,11,0.4)] group-hover:scale-110 transition-all shrink-0">
-                  <AlertTriangle size={26} className="text-amber-400 group-hover:text-white transition-colors" strokeWidth={2.5} />
+            {/* Feature 2: Status SLA */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent border border-white/10 hover:border-blue-500/40 transition-all duration-300 group cursor-default"
+            >
+              <div className="flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400 group-hover:bg-blue-500/20 group-hover:scale-105 transition-all">
+                  <Clock size={22} />
                 </div>
                 <div>
-                  <h3 className="text-white font-black text-xl md:text-2xl tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-amber-300 transition-all">
-                    Level 2 — Status-Based SLA
-                  </h3>
-                  <span className="text-xs font-mono font-bold text-amber-300/80 tracking-wide uppercase block">
-                    Dynamic Phase Rules
-                  </span>
+                  <h3 className="text-white font-bold text-lg mb-1.5 group-hover:text-blue-300 transition-colors">Level 2 — Status-Based Phase SLA</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    Set limits for specific steps (e.g. "In Review" must not exceed 4 hours). Avoid bottlenecks by tracking phase durations and flagging stuck tickets in real time.
+                  </p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-[10px] font-black font-mono tracking-widest bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.3)] uppercase">
-                DYNAMIC
-              </span>
-            </div>
+            </motion.div>
 
-            <p className="relative z-10 text-white/90 text-sm md:text-base leading-relaxed font-semibold">
-              Set a maximum time a task can stay in any given status (e.g., <span className="text-white font-black underline decoration-amber-400 decoration-2 underline-offset-4">"In Review"</span> must not exceed 4 hours). The system records when the task entered the status (
-              <code className="text-xs font-mono bg-amber-950/60 text-amber-300 px-2 py-0.5 rounded-lg border border-amber-500/30 mx-1 font-bold shadow-sm">statusEnteredAt</code>
-              ), fires an alert before breach, and logs&nbsp;
-              <code className="text-xs font-mono bg-amber-950/60 text-amber-300 px-2 py-0.5 rounded-lg border border-amber-500/30 mx-1 font-bold shadow-sm">statusSlaAlertSent</code>.
-            </p>
-          </motion.div>
-
-          {/* BOTTOM LEFT — Analytics Tracked */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="group relative p-8 rounded-3xl bg-gradient-to-br from-[#13122b]/95 via-[#181638]/95 to-[#13122b]/95 border border-violet-500/40 hover:border-violet-400 transition-all duration-500 shadow-[0_20px_50px_rgba(139,92,246,0.2)] backdrop-blur-2xl flex flex-col justify-between"
-          >
-            <div className="absolute top-0 left-8 right-8 h-[2px] rounded-full bg-gradient-to-r from-transparent via-violet-400 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_15px_rgba(139,92,246,0.8)]" />
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-500/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-            <div className="flex items-center justify-between gap-4 mb-6 relative z-10">
-              <div className="flex items-center gap-3.5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500/30 to-purple-600/30 flex items-center justify-center border border-violet-500/50 shadow-[0_0_25px_rgba(139,92,246,0.4)] group-hover:scale-110 transition-all shrink-0">
-                  <BarChart2 size={26} className="text-violet-300 group-hover:text-white transition-colors" strokeWidth={2.5} />
+            {/* Feature 3: Smart Warning Actions */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent border border-white/10 hover:border-blue-500/40 transition-all duration-300 group cursor-default"
+            >
+              <div className="flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400 group-hover:bg-blue-500/20 group-hover:scale-105 transition-all">
+                  <AlertTriangle size={22} />
                 </div>
                 <div>
-                  <h3 className="text-white font-black text-xl md:text-2xl tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-violet-300 transition-all">
-                    Analytics Tracked
-                  </h3>
-                  <span className="text-xs font-mono font-bold text-violet-300/80 tracking-wide uppercase block">
-                    Real-Time SLA Metrics
-                  </span>
+                  <h3 className="text-white font-bold text-lg mb-1.5 group-hover:text-blue-300 transition-colors">Automated Escalations & Warnings</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    Send automated warnings to assignees, notify team leads via email or hooks, and auto-elevate ticket priority dynamically when SLA thresholds are crossed.
+                  </p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-[10px] font-black font-mono tracking-widest bg-violet-500/20 text-violet-300 border border-violet-500/40 shadow-[0_0_12px_rgba(139,92,246,0.3)] uppercase">
-                METRICS
-              </span>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col gap-3.5 relative z-10">
-              {analytics.map((a, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.07 + 0.2 }}
-                  whileHover={{ scale: 1.02, x: 4 }}
-                  className="flex items-center justify-between py-3.5 px-5 rounded-2xl bg-gradient-to-r from-white/[0.06] via-white/[0.09] to-white/[0.06] border border-white/20 hover:border-white/50 transition-all shadow-lg group/row backdrop-blur-xl"
-                >
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center border border-white/10 group-hover/row:scale-110 transition-transform shadow-sm">
-                      <CheckCircle2 size={16} className={a.color} strokeWidth={2.5} />
+          </div>
+
+          {/* RIGHT: Live High-Fidelity SLA Dashboard Mockup */}
+          <div className="lg:col-span-7 flex flex-col justify-between">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="rounded-3xl border border-white/10 bg-[#0c0c1a]/90 shadow-2xl flex flex-col overflow-hidden h-full"
+            >
+              {/* Chrome Mock Window Bar */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-black/40">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/60 border border-red-500/30" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60 border border-yellow-500/30" />
+                  <div className="w-3 h-3 rounded-full bg-blue-500/60 border border-blue-500/30" />
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 border border-white/10 shadow-inner">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                  <span className="text-[11px] font-mono font-bold text-white/70 uppercase tracking-widest">SLA CONTROL PANEL</span>
+                </div>
+                <span className="text-[10px] font-mono font-black text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/25">LIVE</span>
+              </div>
+
+              {/* Control Panel Grid */}
+              <div className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 flex-1 items-stretch">
+                
+                {/* Gauge & Main SLA stats (Left Side of mockup) */}
+                <div className="md:col-span-5 flex flex-col justify-between gap-6 border-r-0 md:border-r border-white/5 md:pr-6">
+                  
+                  {/* Gauge */}
+                  <div className="flex flex-col items-center justify-center text-center p-4 bg-white/[0.02] border border-white/[0.05] rounded-2xl relative overflow-hidden">
+                    <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+                      {/* Background circle */}
+                      <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.03)" strokeWidth="8" fill="none" />
+                      {/* Active path */}
+                      <motion.circle 
+                        cx="50" 
+                        cy="50" 
+                        r="42" 
+                        stroke="#3b82f6" 
+                        strokeWidth="8" 
+                        fill="none" 
+                        strokeDasharray="263.8"
+                        initial={{ strokeDashoffset: 263.8 }}
+                        whileInView={{ strokeDashoffset: 263.8 * (1 - 0.942) }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.5, ease: 'easeOut' }}
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center mt-3">
+                      <span className="text-3xl font-black text-white leading-none">94.2%</span>
+                      <span className="text-[9px] font-extrabold text-white/50 uppercase tracking-widest mt-1">SLA MET</span>
                     </div>
-                    <span className="text-white font-bold text-sm md:text-base group-hover/row:text-white transition-colors">{a.label}</span>
                   </div>
-                  <span className={`text-xl md:text-2xl font-black ${a.color} tabular-nums tracking-tight drop-shadow-sm`}>{a.val}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
 
-          {/* BOTTOM RIGHT — SLA Compliance Dashboard */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-            className="group rounded-3xl overflow-hidden border border-white/20 hover:border-emerald-500/50 shadow-[0_24px_60px_rgba(0,0,0,0.7)] transition-all duration-500 bg-gradient-to-br from-[#121226]/95 via-[#161633]/95 to-[#121226]/95 backdrop-blur-2xl flex flex-col justify-between"
-          >
-            {/* Chrome bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black/40">
-              <div className="flex items-center gap-2.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-red-500/80 border border-red-400 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
-                <div className="w-3.5 h-3.5 rounded-full bg-amber-500/80 border border-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
-                <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/80 border border-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-              </div>
-              <div className="flex items-center gap-2.5 px-3.5 py-1 rounded-xl bg-white/10 border border-white/15 shadow-inner">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
-                <span className="text-xs font-mono font-bold text-white/80 tracking-wider">SLA Compliance Dashboard</span>
-              </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-black shadow-sm">
-                <Timer size={13} className="text-emerald-400 animate-spin-slow" />
-                <span>LIVE</span>
-              </div>
-            </div>
+                  {/* Micro stats cards */}
+                  <div className="flex flex-col gap-2">
+                    <div className="flex justify-between items-center py-2 px-3 bg-white/[0.02] border border-white/[0.04] rounded-xl">
+                      <span className="text-xs text-white/60 font-bold">Tracked Tasks</span>
+                      <span className="text-sm font-black text-white font-mono">48</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 px-3 bg-white/[0.02] border border-white/[0.04] rounded-xl">
+                      <span className="text-xs text-white/60 font-bold">SLA Breaches</span>
+                      <span className="text-sm font-black text-blue-400 font-mono">0</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 px-3 bg-white/[0.02] border border-white/[0.04] rounded-xl">
+                      <span className="text-xs text-white/60 font-bold">Warnings Fired</span>
+                      <span className="text-sm font-black text-blue-400 font-mono">1</span>
+                    </div>
+                  </div>
 
-            {/* Dashboard content */}
-            <div className="p-6 flex flex-col gap-5 flex-1 justify-between">
-              {/* Compliance Rate bar */}
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/20 shadow-lg flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-black text-white/80 uppercase tracking-widest flex items-center gap-2">
-                    <ShieldCheck size={18} className="text-emerald-400" />
-                    Compliance Rate
-                  </span>
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
-                    className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200 tabular-nums drop-shadow-sm"
-                  >94.2%</motion.span>
                 </div>
-                <div className="relative h-4 bg-black/40 rounded-full overflow-hidden p-0.5 border border-white/10 shadow-inner">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '94.2%' }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.8, ease: 'easeOut', delay: 0.4 }}
-                    className="absolute inset-y-0.5 left-0.5 rounded-full bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-500 shadow-[0_0_15px_rgba(52,211,153,0.8)]"
-                  />
+
+                {/* Live Ticket Monitors (Right Side of mockup) */}
+                <div className="md:col-span-7 flex flex-col gap-4">
+                  <span className="text-xs font-mono font-black text-white/40 uppercase tracking-wider block">Active SLA Monitors</span>
+                  
+                  {activeTickets.map((t, idx) => {
+                    const isSelected = activeTicket === idx;
+                    
+                    return (
+                      <div
+                        key={t.id}
+                        onClick={() => setActiveTicket(idx)}
+                        className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 flex flex-col gap-2.5 relative ${
+                          isSelected 
+                            ? 'bg-blue-500/10 border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.15)] scale-[1.01]' 
+                            : 'bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.04]'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-mono font-extrabold text-blue-400">{t.id}</span>
+                            <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded ${
+                              t.priority === 'Highest' 
+                                ? 'bg-red-500/15 text-red-400' 
+                                : t.priority === 'High' 
+                                ? 'bg-orange-500/15 text-orange-400' 
+                                : 'bg-blue-500/15 text-blue-400'
+                            }`}>{t.priority}</span>
+                          </div>
+                          <span className="text-[10px] font-mono font-black flex items-center gap-1 text-blue-400">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" />
+                            {t.timeLeft}
+                          </span>
+                        </div>
+
+                        <h4 className="text-white font-bold text-xs truncate">{t.title}</h4>
+
+                        <div className="flex items-center justify-between text-[9px] font-mono text-white/50">
+                          <span>{t.slaType}</span>
+                          <span className="text-white/80 font-black">{t.status}</span>
+                        </div>
+
+                        {/* Visual Progress Bar */}
+                        <div className="h-1 bg-black/40 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full rounded-full bg-blue-500 transition-all duration-500"
+                            style={{ width: `${t.pct}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+
                 </div>
+
               </div>
 
-              {/* Row 1: Tasks Tracked | Breached */}
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: 'Tasks Tracked', val: '48', sub: 'total SLA tasks',   cls: 'text-blue-400', border: 'hover:border-blue-400/60', bg: 'from-blue-500/[0.12] to-transparent' },
-                  { label: 'Breached',      val: '3',  sub: '6.2% breach rate',  cls: 'text-red-400',  border: 'hover:border-red-400/60',  bg: 'from-red-500/[0.12] to-transparent' },
-                ].map((s, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.1 }}
-                    whileHover={{ scale: 1.04, y: -2 }}
-                    className={`p-5 rounded-2xl bg-gradient-to-br ${s.bg} bg-white/[0.05] border border-white/20 ${s.border} transition-all duration-300 flex flex-col gap-1.5 cursor-default shadow-lg group/card`}
-                  >
-                    <span className="text-xs font-black text-white/60 uppercase tracking-widest group-hover/card:text-white transition-colors">{s.label}</span>
-                    <span className={`text-3xl md:text-4xl font-black ${s.cls} tabular-nums drop-shadow-sm`}>{s.val}</span>
-                    <span className="text-xs text-white/50 font-bold">{s.sub}</span>
-                  </motion.div>
-                ))}
+              {/* Live activity feed bar */}
+              <div className="flex items-center gap-3 px-6 py-4 border-t border-white/5 bg-black/20 text-[11px] font-mono text-white/55">
+                <Bell size={13} className="text-blue-400 shrink-0 animate-bounce" />
+                <div className="truncate flex-1">
+                  <span className="text-white/80 font-bold">Activity:</span> Warning alert triggered for TSK-104. Priority raised to Highest.
+                </div>
+                <span className="text-[10px] text-white/30 shrink-0 font-bold">Just Now</span>
               </div>
 
-              {/* Row 2: Status SLA Alerts | Completed w/ SLA */}
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: 'Status SLA Alerts', val: '1',  sub: 'alert fired today',   cls: 'text-amber-400',   border: 'hover:border-amber-400/60',   bg: 'from-amber-500/[0.12] to-transparent' },
-                  { label: 'Completed w/ SLA',  val: '42', sub: 'on-time completions', cls: 'text-emerald-400', border: 'hover:border-emerald-400/60', bg: 'from-emerald-500/[0.12] to-transparent' },
-                ].map((s, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + i * 0.1 }}
-                    whileHover={{ scale: 1.04, y: -2 }}
-                    className={`p-5 rounded-2xl bg-gradient-to-br ${s.bg} bg-white/[0.05] border border-white/20 ${s.border} transition-all duration-300 flex flex-col gap-1.5 cursor-default shadow-lg group/card`}
-                  >
-                    <span className="text-xs font-black text-white/60 uppercase tracking-widest group-hover/card:text-white transition-colors">{s.label}</span>
-                    <span className={`text-3xl md:text-4xl font-black ${s.cls} tabular-nums drop-shadow-sm`}>{s.val}</span>
-                    <span className="text-xs text-white/50 font-bold">{s.sub}</span>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Live indicator */}
-              <div className="flex items-center justify-center gap-2.5 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500/15 via-teal-500/20 to-emerald-500/15 border border-emerald-500/40 shadow-md">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_12px_rgba(52,211,153,0.9)]" />
-                <span className="text-sm font-black text-emerald-300 tracking-wide uppercase font-mono">Health updates in real time</span>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
         </div>
+
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
+  { label: 'Home',                path: '/'          },
   { label: 'Features',            path: '/features'  },
   { label: 'Analytics',           path: '/analytics' },
   { label: 'Use Cases',           path: '/use-cases' },
@@ -64,6 +65,12 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
 
   const handleClick = (e, path) => {
     const id = path.replace(/^\//, '') || 'home';
+    if (id === 'home' && location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setMobileOpen(false);
+      return;
+    }
     const element = document.getElementById(id);
     if (element && location.pathname === '/') {
       e.preventDefault();

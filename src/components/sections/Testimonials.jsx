@@ -39,15 +39,7 @@ export default function Testimonials() {
         
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/15 via-purple-500/15 to-primary/15 border border-primary/30 text-primary text-xs font-black uppercase tracking-widest shadow-[0_0_20px_rgba(99,102,241,0.25)]"
-          >
-            <Sparkles size={14} className="animate-pulse text-amber-400" />
-            <span>Customer Stories</span>
-          </motion.div>
+
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

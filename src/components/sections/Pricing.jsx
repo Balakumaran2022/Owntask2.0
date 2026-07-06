@@ -5,69 +5,74 @@ import { Check, X, ChevronDown, HelpCircle, Sparkles } from 'lucide-react';
 const plans = [
   {
     name: 'STARTER',
-    subtitle: 'Free forever · no card needed',
-    price: { monthly: '$0', yearly: '$0' },
-    period: 'Free Forever',
-    color: '#64748B',
-    borderGlow: 'border-white/10',
-    buttonText: 'Get Started',
-    buttonStyle: 'bg-white/10 hover:bg-white/20 text-white',
+    subtitle: 'individuals and small teams',
+    price: { monthly: 'Free', yearly: 'Free' },
+    period: 'forever · no card needed',
+    color: '#3b82f6',
+    borderGlow: 'border border-primary/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]',
+    buttonText: 'Start Free →',
+    buttonStyle: 'bg-primary/20 hover:bg-primary/35 text-blue-200 border border-primary/40 font-extrabold shadow-md',
     features: [
-      { text: '3 Projects', active: true },
-      { text: '5 Team Members', active: true },
-      { text: 'Task Boards Included', active: true },
-      { text: 'Basic Recurring Tasks', active: true },
-      { text: 'Basic Analytics', active: true },
-      { text: '30 Days Audit Trail', active: true },
-      { text: 'Community Support', active: true },
-      { text: 'Ticket Boards & SLA Tracking', active: false },
-      { text: 'Approval Workflows', active: false },
-      { text: 'Bulk CSV Upload Engine', active: false },
+      { text: 'Up to 3 Projects', active: true },
+      { text: 'Up to 5 Team Members', active: true },
+      { text: 'Task Board (unlimited tasks)', active: true },
+      { text: 'Recurring Tasks (basic)', active: true },
+      { text: 'Priority & Due Dates', active: true },
+      { text: 'Checklists & Attachments', active: true },
+      { text: '30-day Audit Trail', active: true },
+      { text: 'SLA Tracking', active: false },
+      { text: 'Ticket Board', active: false },
+      { text: 'Approval Workflow', active: false },
+      { text: 'Custom Fields', active: false },
+      { text: 'Analytics Dashboard', active: false },
+      { text: 'Bulk Upload', active: false },
     ],
   },
   {
     name: 'GROWTH',
-    subtitle: 'recommended for teams',
+    subtitle: 'growing teams and businesses',
     badge: '⭐ MOST POPULAR',
-    price: { monthly: '$49', yearly: '$39' },
-    period: 'Per User / Month',
-    color: '#6366F1',
-    borderGlow: 'border-2 border-[#7c3aed] shadow-[0_0_35px_rgba(124,58,237,0.35)] lg:scale-[1.03]',
-    buttonText: 'Get Started',
-    buttonStyle: 'bg-gradient-to-r from-primary via-[#8B5CF6] to-[#EC4899] text-white shadow-[0_0_25px_rgba(99,102,241,0.5)] hover:brightness-110',
+    price: { monthly: 'Contact Us', yearly: 'Contact Us' },
+    period: 'recommended for teams',
+    color: '#3b82f6',
+    borderGlow: 'border-2 border-primary shadow-[0_0_35px_rgba(59,130,246,0.25)] lg:scale-[1.03]',
+    buttonText: 'Contact Us →',
+    buttonStyle: 'bg-gradient-to-r from-primary via-blue-500 to-sky-600 text-white shadow-[0_0_25px_rgba(59,130,246,0.5)] hover:brightness-110',
     features: [
       { text: 'Unlimited Projects', active: true },
       { text: 'Up to 50 Team Members', active: true },
-      { text: 'Task Boards + Ticket Boards', active: true },
-      { text: 'Full SLA Tracking (Deadline + Status)', active: true },
-      { text: 'Full Recurring Tasks Engine', active: true },
+      { text: 'Task Board + Ticket Board', active: true },
+      { text: 'Full SLA Tracking (Deadline + Status-based)', active: true },
       { text: 'Approval Workflow', active: true },
-      { text: 'Custom Fields & Task Library', active: true },
-      { text: 'Bulk CSV Upload Engine', active: true },
-      { text: 'Advanced Analytics & 1-Yr Audit', active: true },
-      { text: 'Email Support & Escalation Config', active: true },
+      { text: 'Custom Fields per Subject', active: true },
+      { text: 'Task Library & Templates', active: true },
+      { text: 'Round-Robin Assignment', active: true },
+      { text: 'Bulk CSV Upload', active: true },
+      { text: 'Advanced Analytics Dashboard', active: true },
+      { text: '1-Year Audit Trail', active: true },
+      { text: 'Escalation Configuration', active: true },
+      { text: 'Email Support', active: true },
     ],
   },
   {
     name: 'ENTERPRISE',
-    subtitle: 'for large organisations',
-    price: { monthly: 'Custom', yearly: 'Custom' },
-    period: 'Contact Us',
-    color: '#8B5CF6',
-    borderGlow: 'border-purple-500/30',
-    buttonText: 'Contact Us',
-    buttonStyle: 'bg-white/10 hover:bg-white/20 text-white border border-purple-500/40',
+    subtitle: 'large organisations with compliance needs',
+    price: { monthly: 'Contact Us', yearly: 'Contact Us' },
+    period: 'for large organisations',
+    color: '#3b82f6',
+    borderGlow: 'border border-primary/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]',
+    buttonText: 'Contact Sales →',
+    buttonStyle: 'bg-primary/20 hover:bg-primary/35 text-blue-200 border border-primary/40 font-extrabold shadow-md',
     features: [
-      { text: 'Unlimited Projects', active: true },
+      { text: 'Everything in Growth', active: true },
       { text: 'Unlimited Team Members', active: true },
-      { text: 'Everything in Growth Tier', active: true },
       { text: 'Unlimited Audit Trail Retention', active: true },
-      { text: 'Advanced Analytics + Export', active: true },
+      { text: 'Analytics Export (CSV/JSON)', active: true },
       { text: 'Custom Role Configuration', active: true },
       { text: 'Dedicated Onboarding', active: true },
       { text: 'SLA & Compliance Reporting', active: true },
       { text: 'Dedicated Account Manager', active: true },
-      { text: 'Custom MSA & Security Review', active: true },
+      { text: 'Priority Support (SLA-backed)', active: true },
     ],
   }
 ];
@@ -84,7 +89,7 @@ const compareTable = [
   { feature: 'Custom Fields', starter: '✗', pro: '✓', enterprise: '✓' },
   { feature: 'Task Library', starter: '✗', pro: '✓', enterprise: '✓' },
   { feature: 'Bulk Upload', starter: '✗', pro: '✓', enterprise: '✓' },
-  { feature: 'Analytics', starter: 'Basic', pro: 'Advanced', enterprise: 'Advanced' },
+  { feature: 'Analytics', starter: '✗', pro: 'Advanced', enterprise: 'Advanced' },
   { feature: 'Audit Trail', starter: '30 days', pro: '1 year', enterprise: 'Unlimited' },
   { feature: 'Escalation Config', starter: '✗', pro: '✓', enterprise: '✓' },
   { feature: 'Support', starter: 'Community', pro: 'Email', enterprise: 'Dedicated' },
@@ -116,6 +121,14 @@ const faqData = [
 export default function Pricing({ onOpenLogin, onOpenDemo }) {
   const [billing, setBilling] = useState('monthly');
   const [openFaq, setOpenFaq] = useState(0);
+  const [expandedPlans, setExpandedPlans] = useState({});
+
+  const togglePlanFeatures = (planName) => {
+    setExpandedPlans(prev => ({
+      ...prev,
+      [planName]: !prev[planName]
+    }));
+  };
 
   return (
     <section id="pricing" className="relative pt-16 pb-28 bg-transparent z-10">
@@ -199,8 +212,11 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
         </div>
 
         {/* 3 Pricing Cards (Increased Width via max-w-[1520px] & Slideshow Layout) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-16 overflow-x-auto pb-4 scrollbar-none" style={{ scrollbarWidth: 'none' }}>
-          {plans.map((plan, idx) => (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch mb-16 max-w-5xl mx-auto">
+          {plans.map((plan, idx) => {
+            const isExpanded = expandedPlans[plan.name];
+            const visibleFeatures = isExpanded ? plan.features : plan.features.slice(0, 5);
+            return (
             <motion.div
               key={plan.name}
               id={`plan-card-${idx}`}
@@ -208,64 +224,75 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
-              whileHover={{ y: -8, scale: idx === 1 ? 1.03 : 1.02 }}
-              className={`group relative rounded-3xl uiverse-card border ${plan.borderGlow} p-9 flex flex-col justify-between backdrop-blur-xl transition-all duration-500 w-full min-w-[320px] ${idx === 1 ? 'z-20 lg:-translate-y-4 uiverse-card-active shadow-[0_25px_80px_rgba(124,58,237,0.45)]' : 'z-10 shadow-[0_15px_50px_rgba(0,0,0,0.5)]'}`}
+              whileHover={{ y: -5, scale: idx === 1 ? 1.025 : 1.02 }}
+              className={`group relative rounded-2xl uiverse-card border ${plan.borderGlow} p-6 flex flex-col justify-between transition-all duration-500 w-full min-w-[280px] ${idx === 1 ? 'z-20 lg:-translate-y-2 uiverse-card-active shadow-[0_20px_60px_rgba(59,130,246,0.3)]' : 'z-10 shadow-[0_15px_45px_rgba(0,0,0,0.5)]'}`}
             >
               {/* Uiverse Animated Rotating Glow Border */}
               <div className="uiverse-card-border" />
 
               {/* Recommended Badge for Pro */}
               {plan.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-[#EC4899] text-white text-sm font-black uppercase tracking-widest px-6 py-2 rounded-full shadow-[0_0_20px_rgba(236,72,153,0.6)] z-20">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-emerald-600 text-white text-[11px] font-black uppercase tracking-widest px-5 py-1.5 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.5)] z-20">
                   {plan.badge}
                 </div>
               )}
 
               {/* Top info */}
               <div className="relative z-10">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight">{plan.name}</h3>
-                  <span className="w-4 h-4 rounded-full" style={{ background: plan.color, boxShadow: `0 0 14px ${plan.color}` }} />
+                <div className="flex items-center justify-between mb-2.5">
+                  <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight">{plan.name}</h3>
+                  <span className="w-3.5 h-3.5 rounded-full" style={{ background: plan.color, boxShadow: `0 0 12px ${plan.color}` }} />
                 </div>
-                <p className="text-muted-foreground/90 text-lg md:text-xl font-semibold not-italic mb-8 min-h-[52px] leading-snug">{plan.subtitle}</p>
+                <p className="text-muted-foreground/90 text-sm md:text-base font-semibold not-italic mb-5 min-h-[40px] leading-snug">{plan.subtitle}</p>
 
-                <div className="mb-9 pb-9 border-b border-white/[0.1]">
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-5xl md:text-6xl font-black text-white tracking-tight">
+                <div className="mb-6 pb-6 border-b border-white/[0.1]">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl md:text-5xl font-black text-white tracking-tight">
                       {billing === 'monthly' ? plan.price.monthly : plan.price.yearly}
                     </span>
-                    {plan.price.monthly !== '$0' && plan.price.monthly !== 'Custom' && (
-                      <span className="text-muted-foreground text-lg md:text-xl font-bold">/user/mo</span>
+                    {plan.price.monthly !== '$0' && plan.price.monthly !== 'Custom' && plan.price.monthly !== 'Free' && plan.price.monthly !== 'Contact Us' && plan.price.monthly.includes('$') && (
+                      <span className="text-muted-foreground text-sm md:text-base font-bold">/user/mo</span>
                     )}
                   </div>
-                  <span className="text-base md:text-lg font-bold text-primary/90 uppercase tracking-wider mt-2 block">
+                  <span className="text-xs md:text-sm font-bold text-primary/90 uppercase tracking-wider mt-1.5 block">
                     {plan.period}
                   </span>
                 </div>
 
                 {/* Feature checklist */}
-                <ul className="list-none p-0 m-0 flex flex-col gap-4 mb-10">
-                  {plan.features.map((f, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-4 text-base md:text-lg font-bold text-white/95">
+                <ul className="list-none p-0 m-0 flex flex-col gap-2.5 mb-8">
+                  {visibleFeatures.map((f, fIdx) => (
+                    <li key={fIdx} className="flex items-start gap-3 text-xs md:text-sm font-bold text-white/95">
                       {f.active ? (
-                        <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5 border border-primary/50 text-primary shadow-[0_0_12px_rgba(99,102,241,0.4)]">
-                          <Check size={16} strokeWidth={3} />
+                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5 border border-primary/50 text-primary shadow-[0_0_8px_rgba(59,130,246,0.3)]">
+                          <Check size={12} strokeWidth={3} />
                         </div>
                       ) : (
-                        <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center shrink-0 mt-0.5 text-white/20">
-                          <X size={16} strokeWidth={3} />
+                        <div className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center shrink-0 mt-0.5 text-white/20">
+                          <X size={12} strokeWidth={3} />
                         </div>
                       )}
                       <span className={f.active ? 'text-white leading-snug' : 'text-white/30 line-through leading-snug'}>{f.text}</span>
                     </li>
                   ))}
+                  
+                  {plan.features.length > 5 && (
+                    <button
+                      onClick={() => togglePlanFeatures(plan.name)}
+                      className={`self-start text-[11px] font-bold mt-1 cursor-pointer bg-transparent border-none p-0 hover:underline transition-colors ${
+                        plan.name === 'GROWTH' ? 'text-primary hover:text-blue-300' : plan.name === 'ENTERPRISE' ? 'text-emerald-400 hover:text-emerald-300' : 'text-white/60 hover:text-white'
+                      }`}
+                    >
+                      {isExpanded ? 'Show Less' : 'Show All'}
+                    </button>
+                  )}
                 </ul>
               </div>
 
               {/* Action Button */}
               <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => {
                   if (plan.name === 'ENTERPRISE') {
                     if (onOpenDemo || onOpenLogin) (onOpenDemo || onOpenLogin)();
@@ -273,24 +300,24 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
                     window.location.href = 'https://razorpay.com/?utm_source=bing&utm_medium=cpc&utm_campaign=&utm_adgroup=&utm_content=RPSME-Brand-050724&utm_term=razorpay&utm_gclid=&utm_campaignID=580151510&utm_adgroupID=1260041977203200&utm_adID=&utm_network=o&utm_device=c&msclkid=7b7948332aeb1d3cedd4227be092bd89';
                   }
                 }}
-                className={`relative z-10 w-full py-4.5 rounded-2xl font-black text-lg md:text-xl uppercase tracking-wider cursor-pointer transition-all border-none ${plan.name === 'GROWTH' ? 'uiverse-btn' : plan.buttonStyle}`}
+                className={`relative z-10 w-full py-3.5 rounded-xl font-black text-sm md:text-base uppercase tracking-wider cursor-pointer transition-all border-none ${plan.name === 'GROWTH' ? 'uiverse-btn' : plan.buttonStyle}`}
               >
                 {plan.buttonText}
               </motion.button>
             </motion.div>
-          ))}
+          )})}
         </div>
 
         {/* Feature Comparison Table (Reduced Height via Compact Padding py-2.5) */}
         <div className="mb-12">
           <div 
-            className="overflow-x-auto rounded-3xl backdrop-blur-xl bg-[#080814]/80 shadow-2xl"
+            className="overflow-x-auto rounded-3xl bg-[#080814]/80 shadow-2xl"
             style={{ 
               boxShadow: '0 0 50px rgba(99,102,241,0.1)', 
               border: '1px solid rgba(255,255,255,0.08)' 
             }}
           >
-            <table className="w-full text-left border-collapse min-w-[900px] font-sans antialiased">
+            <table className="w-full text-left border-collapse font-sans antialiased">
               <thead>
                 <tr className="border-b border-white/20">
                   <th className="py-3.5 px-5 text-base md:text-lg font-black text-white uppercase tracking-wider w-1/3 bg-[#0c0c16]">

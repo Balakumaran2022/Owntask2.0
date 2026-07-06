@@ -36,21 +36,13 @@ export default function FAQ() {
     <section className="relative z-10 py-24 lg:py-32 overflow-hidden bg-transparent font-sans">
       {/* Ambient glow blobs */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/[0.07] rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[600px] h-[400px] bg-purple-600/[0.06] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[600px] h-[400px] bg-emerald-600/[0.05] rounded-full blur-[140px] pointer-events-none" />
 
       <div className="container mx-auto px-5 md:px-8 max-w-[1240px] relative z-10">
         
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/15 via-purple-500/15 to-primary/15 border border-primary/25 text-primary text-xs font-black uppercase tracking-widest shadow-[0_0_20px_rgba(99,102,241,0.2)]"
-          >
-            <Sparkles size={14} className="animate-pulse text-amber-400" />
-            <span>Got Questions?</span>
-          </motion.div>
+
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +52,7 @@ export default function FAQ() {
             className="text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight font-extrabold mb-5 text-white"
           >
             Frequently Asked{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-300 to-purple-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-300 to-emerald-400">
               Questions
             </span>
           </motion.h2>
@@ -77,7 +69,7 @@ export default function FAQ() {
         </div>
 
         {/* Accordion Cards */}
-        <div className="max-w-3xl mx-auto flex flex-col gap-4.5">
+        <div className="max-w-3xl mx-auto flex flex-col gap-5">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -89,8 +81,8 @@ export default function FAQ() {
                 transition={{ duration: 0.4, delay: idx * 0.07 }}
                 className={`group rounded-3xl border transition-all duration-500 overflow-hidden ${
                   isOpen
-                    ? 'bg-gradient-to-br from-[#181636] via-[#13122b] to-[#1c1a3e] border-primary/60 shadow-[0_20px_60px_rgba(99,102,241,0.35)] scale-[1.01]'
-                    : 'bg-[#13122b]/90 backdrop-blur-xl border-white/20 hover:border-primary/50 hover:bg-[#1a1838] shadow-lg hover:shadow-2xl'
+                    ? 'bg-gradient-to-br from-[#10132b] via-[#0d0f24] to-[#121633] border-primary/60 shadow-[0_20px_60px_rgba(59,130,246,0.25)] scale-[1.01]'
+                    : 'bg-[#0d0f24]/90 border-white/20 hover:border-primary/50 hover:bg-[#111430] shadow-lg hover:shadow-2xl'
                 }`}
               >
                 {/* Header Question Trigger */}
@@ -102,7 +94,7 @@ export default function FAQ() {
                     {/* Number Badge */}
                     <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-mono font-black text-xs md:text-sm shrink-0 transition-all duration-300 ${
                       isOpen 
-                        ? 'bg-gradient-to-br from-primary to-purple-600 text-white shadow-[0_0_20px_rgba(99,102,241,0.5)] scale-105' 
+                        ? 'bg-gradient-to-br from-primary to-emerald-600 text-white shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-105' 
                         : 'bg-white/10 border border-white/15 text-white/80 group-hover:border-primary/50 group-hover:text-primary group-hover:bg-primary/10 shadow-sm'
                     }`}>
                       0{idx + 1}
@@ -119,7 +111,7 @@ export default function FAQ() {
                   {/* Expand/Collapse Icon */}
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-500 ${
                     isOpen 
-                      ? 'bg-primary/20 text-primary border border-primary/40 rotate-180 shadow-[0_0_15px_rgba(99,102,241,0.3)]' 
+                      ? 'bg-primary/20 text-primary border border-primary/40 rotate-180 shadow-[0_0_15px_rgba(59,130,246,0.25)]' 
                       : 'bg-white/[0.03] border border-white/[0.08] text-white/40 group-hover:bg-white/[0.08] group-hover:text-white'
                   }`}>
                     {isOpen ? <Minus size={18} strokeWidth={2.5} /> : <Plus size={18} strokeWidth={2.5} />}
@@ -136,7 +128,7 @@ export default function FAQ() {
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     >
                       <div className="px-6 md:px-8 pb-7 pt-1 flex gap-4 md:gap-5">
-                        <div className="w-1 rounded-full bg-gradient-to-b from-primary via-indigo-400 to-purple-500 shrink-0 opacity-80 ml-5" />
+                        <div className="w-1 rounded-full bg-gradient-to-b from-primary via-blue-400 to-emerald-500 shrink-0 opacity-80 ml-5" />
                         <p className="text-sm md:text-base text-white/70 leading-relaxed font-medium pr-4">
                           {faq.answer}
                         </p>
