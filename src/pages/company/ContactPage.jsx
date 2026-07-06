@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
 
-export default function ContactPage() {
+export default function ContactPage({ onOpenDemo }) {
   return (
     <div className="pt-[140px] pb-24 md:pt-[180px] md:pb-32 px-5 min-h-screen relative font-sans z-10">
       <div className="container mx-auto max-w-7xl">
@@ -58,7 +58,7 @@ export default function ContactPage() {
               <p className="text-primary/70 mb-8 leading-relaxed">
                 See OwnTasks in action. Schedule a 30-minute personalized walkthrough with an operations expert.
               </p>
-              <button className="w-full bg-[#e8f5ef] hover:bg-white text-black font-bold py-4 rounded-xl transition-colors">
+              <button onClick={onOpenDemo} className="w-full bg-[#e8f5ef] hover:bg-white text-black font-bold py-4 rounded-xl transition-colors">
                 Schedule Demo
               </button>
             </div>

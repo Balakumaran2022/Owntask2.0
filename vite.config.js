@@ -13,6 +13,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        about: path.resolve(__dirname, 'about.html'),
+        analytics: path.resolve(__dirname, 'analytics.html'),
+        features: path.resolve(__dirname, 'features.html'),
+        pricing: path.resolve(__dirname, 'pricing.html'),
+        'use-cases': path.resolve(__dirname, 'use-cases.html'),
+      }
+    }
+  },
   preview: {
     port: 5173,
     strictPort: true,

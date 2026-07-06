@@ -9,6 +9,17 @@ import CookieConsent from './components/ui/CookieConsent';
 
 import Home from './pages/core/Home';
 import BookDemoForm from './components/forms/BookDemoForm';
+
+import FeaturesPage from './pages/product/FeaturesPage';
+import AnalyticsPage from './pages/product/AnalyticsPage';
+import SolutionsPage from './pages/core/SolutionsPage';
+import PricingPage from './pages/core/PricingPage';
+import WorkflowPage from './pages/product/WorkflowPage';
+import ArchitecturePage from './pages/product/ArchitecturePage';
+import SecurityPage from './pages/product/SecurityPage';
+import ContactPage from './pages/company/ContactPage';
+import ResourcesPage from './pages/company/ResourcesPage';
+import LegalPage from './pages/legal/LegalPage';
 // Helper to dynamically enforce SEO tags on route changes
 function DynamicSEO() {
   const { pathname } = useLocation();
@@ -25,12 +36,12 @@ function DynamicSEO() {
         ogPage: "index.html"
       },
       '/features': {
-        title: "OwnTasks | Intelligent Command Center",
+        title: "ownTask Features — SLA, Recurring Tasks, Approvals, Audit Trail & More",
         desc: "Explore ownTask's complete feature set: 3-level hierarchy, dual board types, 2-level SLA, 21 audit events, recurring tasks, approvals, custom fields, bulk upload and more.",
         ogPage: "features.html"
       },
       '/features.html': {
-        title: "OwnTasks | Intelligent Command Center",
+        title: "ownTask Features — SLA, Recurring Tasks, Approvals, Audit Trail & More",
         desc: "Explore ownTask's complete feature set: 3-level hierarchy, dual board types, 2-level SLA, 21 audit events, recurring tasks, approvals, custom fields, bulk upload and more.",
         ogPage: "features.html"
       },
@@ -67,7 +78,7 @@ function DynamicSEO() {
     };
 
     const current = seoData[pathname] || seoData['/'];
-    document.title = "OwnTasks | Intelligent Command Center";
+    document.title = current.title;
 
     let descMeta = document.querySelector('meta[name="description"]');
     if (!descMeta) {
@@ -162,12 +173,14 @@ export default function App() {
 
   if (isLoggedIn) {
     return (
-      <div className="relative min-h-screen bg-background">
-        <Background />
-        <ParticleBackground />
-        <Dashboard onLogout={() => setIsLoggedIn(false)} />
-        <CookieConsent />
-      </div>
+      <BrowserRouter>
+        <div className="relative min-h-screen bg-background">
+          <Background />
+          <ParticleBackground />
+          <Dashboard onLogout={() => setIsLoggedIn(false)} />
+          <CookieConsent />
+        </div>
+      </BrowserRouter>
     );
   }
 
@@ -182,8 +195,28 @@ export default function App() {
         
         <main className="flex-1 relative z-10 pt-20 flex flex-col overflow-hidden gap-0">
           <Routes>
-            <Route path="/" element={<section id="home"><Home onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} /></section>} />
-            <Route path="*" element={<section id="home"><Home onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} /></section>} />
+            <Route path="/" element={<Home onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/index.html" element={<Home onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/features" element={<FeaturesPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/features.html" element={<FeaturesPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/analytics" element={<AnalyticsPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/analytics.html" element={<AnalyticsPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/use-cases" element={<SolutionsPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/use-cases.html" element={<SolutionsPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/pricing" element={<PricingPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/pricing.html" element={<PricingPage onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/workflow" element={<WorkflowPage />} />
+            <Route path="/workflow.html" element={<WorkflowPage />} />
+            <Route path="/architecture" element={<ArchitecturePage />} />
+            <Route path="/architecture.html" element={<ArchitecturePage />} />
+            <Route path="/security" element={<SecurityPage />} />
+            <Route path="/security.html" element={<SecurityPage />} />
+            <Route path="/contact" element={<ContactPage onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/contact.html" element={<ContactPage onOpenDemo={() => setIsDemoOpen(true)} />} />
+            <Route path="/resources" element={<ResourcesPage />} />
+            <Route path="/resources.html" element={<ResourcesPage />} />
+            <Route path="/legal/:docId" element={<LegalPage />} />
+            <Route path="*" element={<Home onOpenLogin={() => setIsLoggedIn(true)} onOpenDemo={() => setIsDemoOpen(true)} />} />
           </Routes>
         </main>
         <Footer isDark={isDark} onToggleTheme={() => setIsDark(p => !p)} />

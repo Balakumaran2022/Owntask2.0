@@ -1,10 +1,10 @@
 import React from 'react';
 import Pricing from '../../components/sections/Pricing';
 
-export default function PricingPage() {
+export default function PricingPage({ onOpenLogin, onOpenDemo }) {
   return (
     <div style={{ paddingTop: '80px' }}>
-      <Pricing />
+      <Pricing onOpenLogin={onOpenLogin} onOpenDemo={onOpenDemo} />
     </div>
   );
 }

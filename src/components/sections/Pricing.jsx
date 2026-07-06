@@ -365,7 +365,7 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
               </tbody>
             </table>
           </div>
-        </motion.div>
+        </div>
 
         {/* Pricing FAQ Accordion */}
         <motion.div

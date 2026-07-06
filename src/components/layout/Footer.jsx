@@ -95,20 +95,20 @@ export default function Footer() {
               © 2026 iEyal Solutions. All rights reserved.
             </div>
             <div className="flex items-center gap-2.5 flex-wrap justify-center">
-              <a href="https://ieyalsolutions.com" target="_blank" rel="noreferrer" className="text-white/50 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all" title="Website">
-                <FaGlobe size={16} />
+              <a href="https://ieyalsolutions.com" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/[0.08] hover:border-white/20 hover:scale-105 transition-all duration-300" title="Website">
+                <FaGlobe size={18} />
               </a>
-              <a href="https://facebook.com/ieyalsolutions" target="_blank" rel="noreferrer" className="text-white/50 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all" title="Facebook">
-                <FaFacebook size={16} />
+              <a href="https://facebook.com/ieyalsolutions" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/[0.08] hover:border-white/20 hover:scale-105 transition-all duration-300" title="Facebook">
+                <FaFacebook size={18} />
               </a>
-              <a href="https://instagram.com/ieyal_solutions?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer" className="text-white/50 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all" title="Instagram">
-                <FaInstagram size={16} />
+              <a href="https://instagram.com/ieyal_solutions?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/[0.08] hover:border-white/20 hover:scale-105 transition-all duration-300" title="Instagram">
+                <FaInstagram size={18} />
               </a>
-              <a href="https://www.youtube.com/@ieyalsolutions" target="_blank" rel="noreferrer" className="text-white/50 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all" title="YouTube">
-                <FaYoutube size={16} />
+              <a href="https://www.youtube.com/@ieyalsolutions" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/[0.08] hover:border-white/20 hover:scale-105 transition-all duration-300" title="YouTube">
+                <FaYoutube size={18} />
               </a>
-              <a href="https://linkedin.com/company/ieyalsolutions" target="_blank" rel="noreferrer" className="text-white/50 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all" title="LinkedIn">
-                <FaLinkedin size={16} />
+              <a href="https://linkedin.com/company/ieyalsolutions" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/[0.08] hover:border-white/20 hover:scale-105 transition-all duration-300" title="LinkedIn">
+                <FaLinkedin size={18} />
               </a>
             </div>
           </div>

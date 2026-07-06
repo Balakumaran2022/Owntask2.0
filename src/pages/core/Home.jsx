@@ -16,6 +16,7 @@ const BulkImport = React.lazy(() => import('../../components/sections/BulkImport
 const HowItWorks = React.lazy(() => import('../../components/sections/HowItWorks'));
 const Testimonials = React.lazy(() => import('../../components/sections/Testimonials'));
 const FAQ = React.lazy(() => import('../../components/sections/FAQ'));
+const CTA = React.lazy(() => import('../../components/sections/CTA'));
 
 const SectionLoader = () => (
   <div className="w-full py-24 flex items-center justify-center bg-transparent">
@@ -92,6 +93,12 @@ export default function Home({ onOpenLogin, onOpenDemo }) {
       <div id="pricing">
         <Suspense fallback={<SectionLoader />}>
           <Pricing onOpenLogin={onOpenLogin} onOpenDemo={onOpenDemo} />
+        </Suspense>
+      </div>
+
+      <div id="cta">
+        <Suspense fallback={<SectionLoader />}>
+          <CTA onOpenDemo={onOpenDemo} />
         </Suspense>
       </div>
 

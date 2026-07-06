@@ -56,8 +56,8 @@ export default function BookDemoForm() {
           >
             {/* Header */}
             <div className="mb-4 pb-3 border-b border-[#13281c] pr-8">
-              <h3 className="text-base md:text-lg font-black text-white m-0 tracking-tight">Book a Live Demo</h3>
-              <p className="text-xs text-[#628f78] m-0 mt-0.5">Get a personalized 15-min walkthrough with our product specialists.</p>
+              <h3 className="text-base md:text-lg font-black text-white m-0 tracking-tight">Get Started</h3>
+              <p className="text-xs text-[#628f78] m-0 mt-0.5">Enter your details to schedule a live demo or start setting up your workspace.</p>
             </div>
 
             {/* Row 1 — Full Name + Work Email */}

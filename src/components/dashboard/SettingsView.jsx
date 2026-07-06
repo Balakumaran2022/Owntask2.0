@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Bell, Palette, Globe, Shield, CreditCard, ChevronRight } from 'lucide-react';
+import { User, Bell, Palette, Globe, Shield, CreditCard, ChevronRight, Settings } from 'lucide-react';
 
 const SECTIONS = [
   { id: 'general', icon: User, label: 'General' },

@@ -63,10 +63,10 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
   }, []);
 
   const handleClick = (e, path) => {
-    e.preventDefault();
     const id = path.replace(/^\//, '') || 'home';
     const element = document.getElementById(id);
-    if (element) {
+    if (element && location.pathname === '/') {
+      e.preventDefault();
       const y = element.getBoundingClientRect().top + window.scrollY - 20;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -111,9 +111,9 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                 const linkId = link.path.replace(/^\//, '') || 'home';
                 const isActive = location.pathname === link.path || activeSection === linkId;
                 return (
-                  <a
+                  <Link
                     key={link.path}
-                    href={link.path}
+                    to={link.path}
                     onClick={(e) => handleClick(e, link.path)}
                     className={`relative px-4 py-2 text-[13.5px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap no-underline rounded-xl ${
                       isActive
@@ -130,7 +130,7 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                         transition={{ duration: 0.3, ease: 'easeOut' }}
                       />
                     )}
-                  </a>
+                  </Link>
                 );
               })}
             </nav>
@@ -210,9 +210,9 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                   const linkId = link.path.replace(/^\//, '') || 'home';
                   const isActive = location.pathname === link.path || activeSection === linkId;
                   return (
-                    <a
+                    <Link
                       key={link.path}
-                      href={link.path}
+                      to={link.path}
                       onClick={(e) => handleClick(e, link.path)}
                       className={`flex items-center justify-between py-4 text-2xl md:text-3xl font-black transition-all no-underline border-b border-white/10 ${
                         isActive
@@ -223,7 +223,7 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                     >
                       <span>{link.label}</span>
                       {isActive && <span className="text-primary text-sm font-mono uppercase tracking-widest">Active</span>}
-                    </a>
+                    </Link>
                   );
                 })}
               </div>

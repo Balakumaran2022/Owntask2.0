@@ -7,10 +7,14 @@
 .theme-dark {
   --font: 'Inter', system-ui, sans-serif;
   --bg-deep:         #07070F;
+  --bg:              #07070F;
   --bg-surface-1:    #0D0D1C;
+  --surface:         #0D0D1C;
   --bg-surface-2:    #121228;
   --bg-surface-glass: rgba(13, 13, 28, 0.78);
   --bg-card:         #121228;
+  --card:            #121228;
+  --card-hover:      #1A1A35;
 
   /* Requested Token Additions / Overrides */
   --primary:         #6366F1;
