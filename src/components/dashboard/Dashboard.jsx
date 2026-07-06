@@ -327,9 +327,7 @@ export default function Dashboard({ onLogout }) {
                 }}
               >
                 <option value="All Projects">All Projects</option>
-                <option value="AI Sync Engine">AI Sync Engine</option>
-                <option value="Stripe Integration">Stripe Integration</option>
-                <option value="CSV Upload Engine">CSV Upload Engine</option>
+                <option value="Development">Development</option>
               </select>
             </div>
 
@@ -348,8 +346,13 @@ export default function Dashboard({ onLogout }) {
                 }}
               >
                 <option value="Today">Today</option>
-                <option value="7d">Last 7 Days</option>
-                <option value="30d">Last 30 Days</option>
+                <option value="Yesterday">Yesterday</option>
+                <option value="Last 7 days">Last 7 days</option>
+                <option value="Current week">Current week</option>
+                <option value="Last week">Last week</option>
+                <option value="Current month">Current month</option>
+                <option value="Last month">Last month</option>
+                <option value="Current year">Current year</option>
               </select>
             </div>
 
@@ -368,9 +371,10 @@ export default function Dashboard({ onLogout }) {
                 }}
               >
                 <option value="All Subjects">All Subjects</option>
-                <option value="Engineering">Engineering</option>
-                <option value="QA Testing">QA Testing</option>
-                <option value="Operations">Operations</option>
+                <option value="Back End Tasks">Back End Tasks</option>
+                <option value="dev team">dev team</option>
+                <option value="TEST_AUTO_SEC_SUB_1">TEST_AUTO_SEC_SUB_1</option>
+                <option value="TEST_AUTO_SEC_SUB_2">TEST_AUTO_SEC_SUB_2</option>
               </select>
             </div>
 
