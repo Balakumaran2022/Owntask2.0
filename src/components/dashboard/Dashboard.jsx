@@ -468,50 +468,42 @@ export default function Dashboard({ onLogout }) {
                   {/* Cards Row 1 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {/* Card 1: Total Tasks */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
-                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">Total Tasks</p>
-                      <h2 className="text-4xl font-extrabold text-white mb-4">0</h2>
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[0.68rem] font-bold">
-                        ✓ All completed
-                      </div>
-                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#94A3B8]">
-                        <Clipboard size={16} />
+                    <div className="bg-[#0D0D1C]/60 border border-white/5 p-5 rounded-2xl">
+                      <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">Total Tasks</p>
+                      <h2 className="text-2xl font-bold text-white mb-2">0</h2>
+                      <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        All completed
                       </div>
                     </div>
 
                     {/* Card 2: SLA Targets */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
-                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">SLA Targets</p>
-                      <h2 className="text-4xl font-extrabold text-white mb-4">0</h2>
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[0.68rem] font-bold">
-                        ✓ No active targets
-                      </div>
-                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#94A3B8]">
-                        <Activity size={16} />
+                    <div className="bg-[#0D0D1C]/60 border border-white/5 p-5 rounded-2xl">
+                      <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">SLA Targets</p>
+                      <h2 className="text-2xl font-bold text-white mb-2">0</h2>
+                      <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        No active targets
                       </div>
                     </div>
 
                     {/* Card 3: SLA Breaches */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
-                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">SLA Breaches</p>
-                      <h2 className="text-4xl font-extrabold text-white mb-4">0</h2>
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[0.68rem] font-bold">
-                        ✓ No active breaches
-                      </div>
-                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#94A3B8]">
-                        <Clock size={16} />
+                    <div className="bg-[#0D0D1C]/60 border border-white/5 p-5 rounded-2xl">
+                      <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">SLA Breaches</p>
+                      <h2 className="text-2xl font-bold text-white mb-2">0</h2>
+                      <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        No active breaches
                       </div>
                     </div>
 
                     {/* Card 4: SLA Fails */}
-                    <div className="bg-[#0D0D1C]/60 border border-white/10 p-6 rounded-[1.75rem] relative overflow-hidden shadow-sm">
-                      <p className="text-[0.62rem] font-black text-primary/50 uppercase tracking-wider mb-2">SLA Fails</p>
-                      <h2 className="text-4xl font-extrabold text-red-500 mb-4">20</h2>
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/10 text-red-400 text-[0.68rem] font-bold">
+                    <div className="bg-[#0D0D1C]/60 border border-white/5 p-5 rounded-2xl">
+                      <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">SLA Fails</p>
+                      <h2 className="text-2xl font-bold text-red-500 mb-2">20</h2>
+                      <div className="flex items-center gap-1 text-[11px] text-red-400 font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
                         100% compliance target
-                      </div>
-                      <div className="absolute top-6 right-6 w-9 h-9 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400">
-                        <AlertTriangle size={16} />
                       </div>
                     </div>
                   </div>
@@ -529,50 +521,42 @@ export default function Dashboard({ onLogout }) {
                     {/* SLA Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                       {/* SLA Met */}
-                      <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
-                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">Total Met</p>
-                        <h3 className="text-3xl font-extrabold text-white mb-3">0</h3>
-                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full">
-                          ✓ No active targets
-                        </span>
-                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                          <Check size={14} strokeWidth={2.5} />
+                      <div className="bg-[#070710]/60 border border-white/5 p-5 rounded-2xl">
+                        <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">Total Met</p>
+                        <h3 className="text-2xl font-bold text-white mb-2">0</h3>
+                        <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          No active targets
                         </div>
                       </div>
 
                       {/* SLA Breached */}
-                      <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
-                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">Total Breached</p>
-                        <h3 className="text-3xl font-extrabold text-white mb-3">0</h3>
-                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full">
-                          ✓ No active breaches
-                        </span>
-                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                          <AlertTriangle size={14} />
+                      <div className="bg-[#070710]/60 border border-white/5 p-5 rounded-2xl">
+                        <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">Total Breached</p>
+                        <h3 className="text-2xl font-bold text-white mb-2">0</h3>
+                        <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          No active breaches
                         </div>
                       </div>
 
                       {/* Total Escalated */}
-                      <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
-                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">Total Escalated</p>
-                        <h3 className="text-3xl font-extrabold text-white mb-3">0</h3>
-                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full">
-                          ✓ No escalated tasks
-                        </span>
-                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                          <Check size={14} strokeWidth={2.5} />
+                      <div className="bg-[#070710]/60 border border-white/5 p-5 rounded-2xl">
+                        <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">Total Escalated</p>
+                        <h3 className="text-2xl font-bold text-white mb-2">0</h3>
+                        <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          No escalated tasks
                         </div>
                       </div>
 
                       {/* SLA Compliance */}
-                      <div className="bg-[#070710]/60 border border-white/10 p-5 rounded-2xl relative">
-                        <p className="text-[0.6rem] font-black text-primary/50 uppercase tracking-wider mb-1.5">SLA Compliance</p>
-                        <h3 className="text-3xl font-extrabold text-red-500 mb-3">0%</h3>
-                        <span className="text-[0.62rem] font-bold uppercase tracking-wider bg-red-500/10 text-red-400 px-2.5 py-1 rounded-full">
+                      <div className="bg-[#070710]/60 border border-white/5 p-5 rounded-2xl">
+                        <p className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1">SLA Compliance</p>
+                        <h3 className="text-2xl font-bold text-red-500 mb-2">0%</h3>
+                        <div className="flex items-center gap-1 text-[11px] text-red-400 font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
                           100% compliance target
-                        </span>
-                        <div className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400">
-                          <Trophy size={14} />
                         </div>
                       </div>
                     </div>
