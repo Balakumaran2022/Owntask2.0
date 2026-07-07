@@ -205,6 +205,7 @@ export default function Dashboard({ onLogout }) {
   
   // State for dropdown menus
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [showCreateDropdown, setShowCreateDropdown] = useState(false);
   
   // State for collapsed columns
   const [collapsedColumns, setCollapsedColumns] = useState({
@@ -897,14 +898,66 @@ export default function Dashboard({ onLogout }) {
                           </div>
                         </div>
 
-                        {/* Create Task Green Button */}
-                        <button 
-                          onClick={() => showCreateForm ? handleCancelEdit() : setShowCreateForm(true)}
-                          className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#00C853] hover:bg-[#00E676] text-white font-extrabold text-xs transition-all duration-300 cursor-pointer border-none shadow-lg shadow-emerald-950/20"
-                        >
-                          <span>{showCreateForm ? 'Cancel' : 'Create Task'}</span>
-                          <ChevronDown size={14} className={`transition-transform duration-300 ${showCreateForm ? 'rotate-180' : ''}`} />
-                        </button>
+                        {/* Create Task Green Button with Dropdown */}
+                        <div className="relative">
+                          <button 
+                            onClick={() => {
+                              if (showCreateForm) {
+                                handleCancelEdit();
+                              } else {
+                                setShowCreateDropdown(!showCreateDropdown);
+                              }
+                            }}
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#00C853] hover:bg-[#00E676] text-white font-extrabold text-xs transition-all duration-300 cursor-pointer border-none shadow-lg shadow-emerald-950/20"
+                          >
+                            <span>{showCreateForm ? 'Cancel' : 'Create Task'}</span>
+                            <ChevronDown size={14} className={`transition-transform duration-300 ${showCreateDropdown || showCreateForm ? 'rotate-180' : ''}`} />
+                          </button>
+
+                          {/* Dropdown Menu */}
+                          <AnimatePresence>
+                            {showCreateDropdown && !showCreateForm && (
+                              <>
+                                <div 
+                                  className="fixed inset-0 z-40" 
+                                  onClick={() => setShowCreateDropdown(false)}
+                                />
+                                <motion.div
+                                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                                  transition={{ duration: 0.15 }}
+                                  className="absolute right-0 top-full mt-2 w-44 bg-white rounded-2xl shadow-xl shadow-black/10 border border-gray-100 overflow-hidden py-1.5 z-50"
+                                >
+                                  <button 
+                                    onClick={() => {
+                                      setShowCreateDropdown(false);
+                                      setShowCreateForm(true);
+                                    }}
+                                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left text-sm font-bold text-gray-800 transition-colors border-none bg-transparent cursor-pointer"
+                                  >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                                    New Task
+                                  </button>
+                                  <button 
+                                    onClick={() => setShowCreateDropdown(false)}
+                                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left text-sm font-bold text-gray-800 transition-colors border-none bg-transparent cursor-pointer"
+                                  >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                                    Quick Task
+                                  </button>
+                                  <button 
+                                    onClick={() => setShowCreateDropdown(false)}
+                                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left text-sm font-bold text-gray-800 transition-colors border-none bg-transparent cursor-pointer"
+                                  >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                    Bulk Upload
+                                  </button>
+                                </motion.div>
+                              </>
+                            )}
+                          </AnimatePresence>
+                        </div>
                       </div>
                     </div>
 
