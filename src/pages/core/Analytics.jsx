@@ -132,8 +132,8 @@ export default function Analytics() {
       <div className="container mx-auto px-5 md:px-8 max-w-[1240px] relative z-10">
         
         {/* Page Header */}
-        <div id="analytics-header-section" className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-10">
-          <div>
+        <div id="analytics-header-section" className="flex flex-col items-center justify-center text-center gap-6 mb-10">
+          <div className="flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -162,18 +162,7 @@ export default function Analytics() {
             </motion.p>
           </div>
 
-          <motion.button
-            id="analytics-refresh-button"
-            whileHover={{ scale: 1.06, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleRefresh}
-            disabled={isRefreshing}
-            className="self-start md:self-start mt-1 flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/15 hover:border-indigo-500/40 bg-white/[0.04] hover:bg-indigo-500/10 text-white/70 hover:text-white text-xs font-extrabold transition-all duration-300 cursor-pointer disabled:opacity-40 backdrop-blur-xl shadow-sm"
-            style={{ boxShadow: isRefreshing ? '0 0 15px rgba(99,102,241,0.3)' : undefined }}
-          >
-            <RefreshCw size={13} className={isRefreshing ? "animate-spin text-indigo-400" : "text-white/60"} />
-            <span>Refresh Data</span>
-          </motion.button>
+
         </div>
 
         {/* ─── FILTERS PANEL ─── */}
@@ -182,9 +171,10 @@ export default function Analytics() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-8 p-4 rounded-2xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-xl flex flex-col gap-3"
+          className="mb-8 p-4 rounded-2xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-xl flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
-          {/* Row 1: Time Period Pills */}
+          <div className="flex flex-col gap-3 flex-1">
+            {/* Row 1: Time Period Pills */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-white/30 mr-1 flex items-center gap-1">
               <Calendar size={10} /> Period
@@ -234,6 +224,20 @@ export default function Analytics() {
               </div>
             ))}
           </div>
+          </div>
+          
+          <motion.button
+            id="analytics-refresh-button"
+            whileHover={{ scale: 1.06, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="self-start md:self-auto flex items-center gap-2 px-5 py-3 md:px-4 md:py-2.5 rounded-xl border border-white/15 hover:border-indigo-500/40 bg-white/[0.04] hover:bg-indigo-500/10 text-white/70 hover:text-white text-xs md:text-sm font-extrabold transition-all duration-300 cursor-pointer disabled:opacity-40 backdrop-blur-xl shadow-sm"
+            style={{ boxShadow: isRefreshing ? '0 0 15px rgba(99,102,241,0.3)' : undefined }}
+          >
+            <RefreshCw size={14} className={isRefreshing ? "animate-spin text-indigo-400" : "text-white/60"} />
+            <span>Refresh Data</span>
+          </motion.button>
         </motion.div>
 
         {/* ─── METRICS CARDS GRID ─── */}

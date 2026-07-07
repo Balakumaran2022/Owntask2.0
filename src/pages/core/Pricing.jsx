@@ -77,18 +77,11 @@ const COMPARISON = [
   { category: 'All Features', features: [
     { name: 'Projects',             free: '3',         pro: 'Unlimited', ent: 'Unlimited' },
     { name: 'Team Members',         free: '5',         pro: '50',        ent: 'Unlimited' },
-    { name: 'Task Boards',          free: true,        pro: true,        ent: true },
-    { name: 'Ticket Boards',        free: false,       pro: true,        ent: true },
     { name: 'SLA Tracking',         free: false,       pro: true,        ent: true },
-    { name: 'Status-Based SLA',     free: false,       pro: true,        ent: true },
     { name: 'Recurring Tasks',      free: 'Basic',     pro: 'Full',      ent: 'Full' },
-    { name: 'Approval Workflow',    free: false,       pro: true,        ent: true },
     { name: 'Custom Fields',        free: false,       pro: true,        ent: true },
-    { name: 'Task Library',         free: false,       pro: true,        ent: true },
-    { name: 'Bulk Upload',          free: false,       pro: true,        ent: true },
     { name: 'Analytics',            free: false,       pro: 'Advanced',  ent: 'Advanced' },
     { name: 'Audit Trail',          free: '30 days',   pro: '1 year',    ent: 'Unlimited' },
-    { name: 'Escalation Config',    free: false,       pro: true,        ent: true },
     { name: 'Support',              free: 'Community', pro: 'Email',     ent: 'Dedicated' },
   ]},
 ];
@@ -311,60 +304,60 @@ export default function Pricing({ onOpenLogin, onOpenDemo }) {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <div className="overflow-x-auto rounded-[32px] shadow-[0_25px_70px_rgba(0,0,0,0.6)] border border-white/10 bg-gradient-to-b from-[#110e24]/90 via-[#0a0816]/95 to-[#07060f]/95">
-            <div className="w-full">
+          <div className="overflow-x-auto">
+            <div className="w-full min-w-[800px] border border-white/[0.05] rounded-3xl bg-white/[0.02] backdrop-blur-xl">
               {/* Table header */}
-              <div className="grid grid-cols-4 border-b border-white/15 px-8 py-6 bg-[#0c0a1a]/80 items-center">
-                <div className="text-xl font-black text-white uppercase tracking-wider flex items-center gap-2.5">
-                  <span className="w-8 h-8 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center text-primary text-base shadow-[0_0_15px_rgba(99,102,241,0.4)]">⚡</span>
-                  <span>Compare Plans</span>
+              <div className="grid grid-cols-4 px-10 py-8 border-b border-white/[0.05] items-center">
+                <div className="text-sm font-black text-white/50 uppercase tracking-widest flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-white/[0.05] flex items-center justify-center text-white/70">⚡</span>
+                  Compare Features
                 </div>
                 {['Starter', 'Growth ⭐', 'Enterprise'].map((h, i) => (
-                  <div key={i} className={`text-lg font-extrabold text-center ${i === 1 ? 'text-primary bg-primary/10 py-2 rounded-2xl border border-primary/30 shadow-sm' : i === 2 ? 'text-purple-300' : 'text-white/80'}`}>{h}</div>
+                  <div key={i} className={`text-xl font-black text-center ${i === 1 ? 'text-primary' : 'text-white'}`}>{h}</div>
                 ))}
               </div>
 
               {COMPARISON.map((group, gi) => (
-                <div key={gi}>
+                <div key={gi} className="divide-y divide-white/[0.03]">
                   {group.features.map((feat, fi) => (
                     <div
                       key={fi}
-                      className={`grid grid-cols-4 items-center px-8 py-5 border-b border-white/[0.06] hover:bg-white/[0.04] transition-all duration-300`}
+                      className={`grid grid-cols-4 items-center px-10 py-6 hover:bg-white/[0.02] transition-colors duration-300`}
                     >
-                      <span className="text-[#e2e8f0] font-semibold text-base">{feat.name}</span>
-                      <div className="text-center"><Cell val={feat.free} /></div>
-                      <div className="text-center"><Cell val={feat.pro} /></div>
-                      <div className="text-center"><Cell val={feat.ent} /></div>
+                      <span className="text-white/80 font-medium text-sm">{feat.name}</span>
+                      <div className="text-center text-sm"><Cell val={feat.free} /></div>
+                      <div className="text-center text-sm"><Cell val={feat.pro} /></div>
+                      <div className="text-center text-sm"><Cell val={feat.ent} /></div>
                     </div>
                   ))}
                 </div>
               ))}
               
               {/* CTA Button Row */}
-              <div className="grid grid-cols-4 items-center px-8 py-7 bg-white/[0.02] border-t border-white/10">
-                <span className="text-lg font-bold text-white">Ready to get started?</span>
+              <div className="grid grid-cols-4 items-center px-10 py-8 border-t border-white/[0.05]">
+                <span className="text-sm font-bold text-white/50 tracking-widest uppercase">Ready?</span>
                 <div className="text-center">
                   <button
                     onClick={() => window.location.href = 'https://razorpay.com/?utm_source=bing&utm_medium=cpc&utm_campaign=&utm_adgroup=&utm_content=RPSME-Brand-050724&utm_term=razorpay&utm_gclid=&utm_campaignID=580151510&utm_adgroupID=1260041977203200&utm_adID=&utm_network=o&utm_device=c&msclkid=7b7948332aeb1d3cedd4227be092bd89'}
-                    className="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all duration-300 cursor-pointer border border-white/10 shadow-sm"
+                    className="px-6 py-2.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] text-white/80 font-bold text-xs transition-colors"
                   >
                     Get Started
                   </button>
                 </div>
-                <div className="text-center bg-primary/[0.05] py-2.5 rounded-2xl border border-primary/20">
+                <div className="text-center">
                   <button
                     onClick={() => window.location.href = 'https://razorpay.com/?utm_source=bing&utm_medium=cpc&utm_campaign=&utm_adgroup=&utm_content=RPSME-Brand-050724&utm_term=razorpay&utm_gclid=&utm_campaignID=580151510&utm_adgroupID=1260041977203200&utm_adID=&utm_network=o&utm_device=c&msclkid=7b7948332aeb1d3cedd4227be092bd89'}
-                    className="px-7 py-3 rounded-2xl bg-gradient-to-r from-primary via-indigo-500 to-purple-600 text-white font-black text-sm shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:brightness-110 transition-all duration-300 cursor-pointer border-none"
+                    className="px-6 py-2.5 rounded-full bg-primary text-white font-black text-xs hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
                   >
-                    Get Started
+                    Start Free Trial
                   </button>
                 </div>
                 <div className="text-center">
                   <button
                     onClick={onOpenDemo || onOpenLogin}
-                    className="px-6 py-3 rounded-2xl bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 font-bold text-sm border border-purple-500/40 transition-all duration-300 cursor-pointer shadow-sm"
+                    className="px-6 py-2.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] text-white/80 font-bold text-xs transition-colors"
                   >
-                    Contact Us
+                    Contact Sales
                   </button>
                 </div>
               </div>

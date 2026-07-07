@@ -224,7 +224,6 @@ export default function SubtasksDeepDive() {
 
                 {/* Parent Task Header Card (Compact Glassmorphic Gradient) */}
                 <div className="p-4 md:p-5 rounded-2xl bg-gradient-to-br from-[#1c1a3e]/90 via-[#161432]/90 to-[#121028]/90 border border-primary/40 flex flex-col gap-3.5 shadow-[0_15px_40px_rgba(99,102,241,0.25)] backdrop-blur-xl relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-emerald-400 to-purple-500 shadow-[0_0_15px_rgba(52,211,153,0.8)]" />
                   
                   <div className="flex justify-between items-start gap-3 pt-0.5">
                     <div>

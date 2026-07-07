@@ -5,7 +5,7 @@ import {
   LayoutGrid, CheckSquare, Activity, Calendar, Folder, Filter, RefreshCw, 
   Clipboard, Clock, AlertTriangle, Check, Trophy, LogOut, ChevronLeft, 
   ChevronRight, Plus, X, Trash2, User, Users, ShieldAlert, Settings, ArrowRight, ArrowLeft,
-  Search, Sliders, ChevronDown, List, MoreVertical, Pencil, Copy
+  Search, Sliders, ChevronDown, List, MoreVertical, Pencil, Copy, Zap, FileUp
 } from 'lucide-react';
 import "../../styles/dashboard.css";
 
@@ -103,6 +103,17 @@ const SUBJECT_OPTIONS = [
   { value: 'dev team', label: 'dev team' },
   { value: 'TEST_AUTO_SEC_SUB_1', label: 'TEST_AUTO_SEC_SUB_1' },
   { value: 'TEST_AUTO_SEC_SUB_2', label: 'TEST_AUTO_SEC_SUB_2' }
+];
+
+const STATUS_OPTIONS = ['All Statuses', 'Not Started', 'In Progress', 'Done'];
+
+// Dynamic team members for the avatar stack
+const TEAM_MEMBERS = [
+  { id: 1, name: 'sathish c', initials: 'S', bg: '#fce4ec', color: '#e91e63' },
+  { id: 2, name: 'sethumeena ieyal', initials: 'S', bg: '#f3e5f5', color: '#9c27b0' },
+  { id: 3, name: 'ownTask Bot', img: '/official-logo.png', bg: '#000' },
+  { id: 4, name: 'Haje Abudhahir S', initials: 'H', bg: '#e8f5e9', color: '#2e7d32' },
+  { id: 5, name: 'BalajG K', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80', bg: '#efebe9' }
 ];
 
 function CustomSelect({ value, onChange, options, icon: Icon, placeholder }) {
@@ -936,21 +947,21 @@ export default function Dashboard({ onLogout }) {
                                     }}
                                     className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left text-sm font-bold text-gray-800 transition-colors border-none bg-transparent cursor-pointer"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                                    <Plus size={16} className="text-blue-500" strokeWidth={2.5} />
                                     New Task
                                   </button>
                                   <button 
                                     onClick={() => setShowCreateDropdown(false)}
                                     className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left text-sm font-bold text-gray-800 transition-colors border-none bg-transparent cursor-pointer"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                                    <Zap size={16} className="text-orange-500" strokeWidth={2.5} />
                                     Quick Task
                                   </button>
                                   <button 
                                     onClick={() => setShowCreateDropdown(false)}
                                     className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left text-sm font-bold text-gray-800 transition-colors border-none bg-transparent cursor-pointer"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                    <FileUp size={16} className="text-emerald-500" strokeWidth={2.5} />
                                     Bulk Upload
                                   </button>
                                 </motion.div>

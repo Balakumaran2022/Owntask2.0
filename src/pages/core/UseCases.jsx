@@ -196,9 +196,6 @@ export default function UseCases() {
                     transition={{ duration: 0.25, delay: i * 0.06 }}
                     className={`p-6 rounded-3xl border transition-all duration-300 flex items-start gap-4 shadow-xl group relative overflow-hidden ${bulletStyle}`}
                   >
-                    {/* Hover top glow bar */}
-                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${active.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
                     {/* Glowing Icon Badge */}
                     <div className={`p-3.5 rounded-2xl bg-gradient-to-br ${active.color} shadow-lg shrink-0 text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center`}>
                       <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
@@ -223,7 +220,6 @@ export default function UseCases() {
               >
                 {/* Ambient background glow */}
                 <div className={`absolute -inset-10 bg-gradient-to-br ${active.color} blur-3xl opacity-25 group-hover:opacity-45 transition-opacity duration-500 pointer-events-none`} />
-                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${active.color}`} />
 
                 <span className={`text-5xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br ${active.color} mb-3 drop-shadow-sm group-hover:scale-105 transition-transform duration-300`}>
                   {active.stat.val}
@@ -267,8 +263,8 @@ export default function UseCases() {
           {USE_CASES.map((uc, idx) => {
             const isActive = activeTab === uc.id;
             const cardBgStyle = isActive
-              ? 'bg-gradient-to-br from-sky-500/[0.22] via-blue-600/[0.12] to-transparent border-sky-400/60 shadow-[0_20px_50px_rgba(14,165,233,0.3)] ring-2 ring-sky-400/70 -translate-y-2'
-              : 'bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.01] border-white/15 hover:border-sky-400/50 hover:from-sky-500/[0.15] hover:to-transparent shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_40px_rgba(14,165,233,0.25)] hover:-translate-y-1.5';
+              ? 'bg-gradient-to-br from-sky-500/[0.22] via-blue-600/[0.12] to-transparent shadow-[0_20px_50px_rgba(14,165,233,0.3)] -translate-y-2'
+              : 'bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.01] hover:from-sky-500/[0.15] hover:to-transparent shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_40px_rgba(14,165,233,0.25)] hover:-translate-y-1.5';
 
             return (
               <motion.button
@@ -278,10 +274,8 @@ export default function UseCases() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className={`group text-center p-8 sm:p-10 rounded-3xl border transition-all duration-300 relative overflow-hidden flex flex-col items-center justify-between ${cardBgStyle}`}
+                className={`group text-center p-8 sm:p-10 rounded-3xl transition-all duration-300 relative overflow-hidden flex flex-col items-center justify-between ${cardBgStyle}`}
               >
-                {/* Glowing Top Border Bar */}
-                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${uc.color} ${isActive ? 'opacity-100 shadow-[0_0_20px_currentColor]' : 'opacity-40 group-hover:opacity-100'} transition-all duration-500`} />
 
                 {/* Ambient Background Glow Orb */}
                 <div className={`absolute -top-24 -right-24 w-56 h-56 rounded-full bg-gradient-to-br ${uc.color} blur-3xl ${isActive ? 'opacity-35' : 'opacity-15 group-hover:opacity-30'} transition-opacity duration-500 pointer-events-none`} />

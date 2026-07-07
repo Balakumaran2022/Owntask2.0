@@ -14,18 +14,10 @@ function ExecutionFlowBox() {
     <motion.aside
       initial={{ opacity: 0, y: 50, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      whileHover={{ 
-        y: -4, 
-        scale: 1.02,
-        boxShadow: '0 25px 60px rgba(0,0,0,0.7), 0 0 45px rgba(99,102,241,0.3)',
-        borderColor: 'rgba(99, 102, 241, 0.5)'
-      }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-[24px] p-5 sm:p-6 bg-[#090B16]/95 backdrop-blur-2xl border border-white/20 shadow-2xl transition-all duration-500 w-full max-w-[500px] mx-auto cursor-pointer flex flex-col gap-4 font-sans ring-1 ring-white/10"
+      className="relative overflow-hidden rounded-[24px] p-5 sm:p-6 bg-[#090B16]/95 backdrop-blur-2xl border border-indigo-500/40 shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_30px_rgba(99,102,241,0.2)] transition-all duration-500 w-full max-w-[500px] mx-auto cursor-default flex flex-col gap-4 font-sans ring-1 ring-white/10"
       aria-label="Execution flow preview"
     >
-      {/* Top glowing accent strip */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-400 via-indigo-500 to-pink-500 shadow-[0_0_20px_rgba(99,102,241,0.8)]" />
 
       {/* Ambient background glow orbs */}
       <div className="absolute top-0 right-0 w-56 h-56 bg-indigo-500/15 rounded-full blur-[70px] pointer-events-none" />
