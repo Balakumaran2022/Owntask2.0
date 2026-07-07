@@ -64,13 +64,7 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
     };
   }, []);
 
-  const handleClick = (e, path, label) => {
-    if (label === 'Features' && !isMobile) {
-      e.preventDefault();
-      setFeaturesOpen(!featuresOpen);
-      return;
-    }
-
+  const handleClick = (e, path) => {
     const id = path.replace(/^\//, '') || 'home';
     if (id === 'home' && location.pathname === '/') {
       e.preventDefault();
@@ -78,7 +72,12 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
       setMobileOpen(false);
       return;
     }
-
+    const element = document.getElementById(id);
+    if (element && location.pathname === '/') {
+      e.preventDefault();
+      const y = element.getBoundingClientRect().top + window.scrollY - 20;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
     setMobileOpen(false);
   };
 
@@ -125,7 +124,7 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                   <Link
                     key={link.path}
                     to={link.path}
-                    onClick={(e) => handleClick(e, link.path, link.label)}
+                    onClick={(e) => handleClick(e, link.path)}
                     className={`relative px-4 py-2 text-[13.5px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap no-underline rounded-xl flex items-center gap-1 ${
                       isActive || (link.label === 'Features' && featuresOpen)
                         ? 'active text-white bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]'
@@ -286,7 +285,7 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                     <Link
                       key={link.path}
                       to={link.path}
-                      onClick={(e) => handleClick(e, link.path, link.label)}
+                      onClick={(e) => handleClick(e, link.path)}
                       className={`flex items-center justify-between py-4 text-2xl md:text-3xl font-black transition-all no-underline border-b border-white/10 ${
                         isActive
                           ? 'active text-white pl-4 border-l-4 border-l-primary bg-primary/10 rounded-r-2xl'
