@@ -1,5 +1,5 @@
 const fs = require('fs');
-const buf = fs.readFileSync('public/official-logo.svg');
+const buf = fs.readFileSync('public/official-logo.png');
 const b64 = buf.toString('base64');
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
@@ -11,4 +11,5 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 </svg>`;
 fs.writeFileSync('public/favicon.svg', svg);
 console.log('Saved favicon.svg');
+
 
