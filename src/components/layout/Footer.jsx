@@ -28,7 +28,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 pb-8 border-b border-white/10 text-center md:text-left">
             <div className="flex flex-col items-center md:items-start max-w-md">
               <a href="/" onClick={(e) => handleClick(e, '/')} className="flex items-center gap-2.5 no-underline mb-2.5">
-                <img src="/official-logo.png" alt="ownTask" className="w-8 h-8 rounded-full object-cover" />
+                <img src="/official-logo.png" alt="ownTask" className="w-10 h-10 rounded-full object-cover shadow-md shadow-primary/20" />
                 <span className="text-2xl md:text-3xl font-black italic tracking-tight">
                   <span className="text-white">own</span><span className="text-primary">Task</span>
                 </span>
