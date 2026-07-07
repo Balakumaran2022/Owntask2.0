@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { 
   LayoutGrid, CheckSquare, Activity, Calendar, Folder, Filter, RefreshCw, 
   Clipboard, Clock, AlertTriangle, Check, Trophy, LogOut, ChevronLeft, 
-  ChevronRight, Plus, X, Trash2, User, Users, ShieldAlert, Settings, ArrowRight, ArrowLeft 
+  ChevronRight, Plus, X, Trash2, User, Users, ShieldAlert, Settings, ArrowRight, ArrowLeft,
+  Search, Sliders, ChevronDown, List 
 } from 'lucide-react';
 import "../../styles/dashboard.css";
 
@@ -757,16 +758,93 @@ export default function Dashboard({ onLogout }) {
               {/* ── Tab: Tasks ── */}
               {activeTab === 'Tasks' && (
                 <div className="space-y-6">
-                  {/* Action Bar */}
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-base font-bold text-white">Task Board</h3>
-                    <button 
-                      onClick={() => setShowCreateForm(!showCreateForm)}
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary hover:brightness-110 text-white font-bold text-xs transition-all cursor-pointer border-none"
-                    >
-                      {showCreateForm ? <X size={14} /> : <Plus size={14} />}
-                      <span>{showCreateForm ? 'Cancel' : 'Create Task'}</span>
-                    </button>
+                  {/* High-Fidelity Tasks Header (matching user screenshot) */}
+                  <div className="space-y-5 pb-2">
+                    {/* Row 1: Title, Subtitle, Avatar Stack, and Create Button */}
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <div>
+                        <h2 className="text-3xl font-black text-white tracking-tight">Tasks</h2>
+                        <p className="text-white/40 text-sm mt-0.5">Manage your work</p>
+                      </div>
+                      
+                      <div className="flex items-center gap-4 self-end sm:self-auto">
+                        {/* Avatar Group Stack */}
+                        <div className="flex items-center -space-x-2">
+                          <div className="w-8 h-8 rounded-full bg-[#fce4ec] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#e91e63] shadow-sm">S</div>
+                          <div className="w-8 h-8 rounded-full bg-[#f3e5f5] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#9c27b0] shadow-sm">S</div>
+                          <div className="w-8 h-8 rounded-full bg-[#000] border border-white/10 flex items-center justify-center p-1 shadow-sm overflow-hidden">
+                            <img src="/official-logo.png" alt="ownTask Logo" className="w-full h-full object-contain" />
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-[#e8f5e9] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#2e7d32] shadow-sm">H</div>
+                          <div className="w-8 h-8 rounded-full bg-[#efebe9] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#5d4037] shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar" className="w-full h-full rounded-full object-cover" />
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white/70 shadow-sm">+1</div>
+                        </div>
+
+                        {/* Create Task Green Button */}
+                        <button 
+                          onClick={() => setShowCreateForm(!showCreateForm)}
+                          className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#00C853] hover:bg-[#00E676] text-white font-extrabold text-xs transition-all duration-300 cursor-pointer border-none shadow-lg shadow-emerald-950/20"
+                        >
+                          <span>{showCreateForm ? 'Cancel' : 'Create Task'}</span>
+                          <ChevronDown size={14} className={`transition-transform duration-300 ${showCreateForm ? 'rotate-180' : ''}`} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Row 2: View Switcher and Filter controls */}
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-1">
+                      {/* Left: View Switcher Segmented Control */}
+                      <div className="inline-flex items-center p-1 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-md">
+                        <button className="p-2.5 rounded-xl bg-white/5 text-[#00C853] border-none cursor-pointer flex items-center justify-center shadow-inner">
+                          <LayoutGrid size={16} strokeWidth={2.5} />
+                        </button>
+                        <button className="p-2.5 rounded-xl bg-transparent text-white/40 hover:text-white border-none cursor-pointer flex items-center justify-center transition-colors">
+                          <List size={16} strokeWidth={2.5} />
+                        </button>
+                        <button className="p-2.5 rounded-xl bg-transparent text-white/40 hover:text-white border-none cursor-pointer flex items-center justify-center transition-colors">
+                          <Calendar size={16} strokeWidth={2.5} />
+                        </button>
+                        <button className="p-2.5 rounded-xl bg-transparent text-white/40 hover:text-white border-none cursor-pointer flex items-center justify-center transition-colors">
+                          <RefreshCw size={16} strokeWidth={2.5} />
+                        </button>
+                      </div>
+
+                      {/* Right: Search and Action Buttons */}
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        {/* Search Input */}
+                        <div className="relative flex-1 min-w-[200px] md:w-60">
+                          <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
+                          <input 
+                            type="text" 
+                            placeholder="Search..." 
+                            className="w-full bg-white/[0.02] hover:bg-white/[0.04] focus:bg-[#070710] border border-white/5 focus:border-white/10 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-white/30 outline-none transition-all duration-300"
+                          />
+                        </div>
+
+                        {/* Filter Button */}
+                        <button className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 text-white/70 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer">
+                          <Filter size={14} />
+                          <span>Filter</span>
+                        </button>
+
+                        {/* Sliders/Settings Button */}
+                        <button className="p-2.5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center">
+                          <Sliders size={14} />
+                        </button>
+
+                        {/* Refresh Button */}
+                        <button className="p-2.5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center">
+                          <RefreshCw size={14} />
+                        </button>
+
+                        {/* History Button */}
+                        <button className="p-2.5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/10 text-white/70 hover:text-white transition-all duration-300 cursor-pointer flex items-center justify-center">
+                          <Clock size={14} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Inline Creation Form */}
