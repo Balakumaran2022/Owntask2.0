@@ -121,30 +121,34 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                   ? (link.path === '/' ? activeSection === 'home' : activeSection === linkId)
                   : location.pathname === link.path;
                 return (
-                  <Link
+                  <div
                     key={link.path}
-                    to={link.path}
-                    onClick={(e) => handleClick(e, link.path)}
-                    className={`relative px-4 py-2 text-[13.5px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap no-underline rounded-xl flex items-center gap-1 ${
-                      isActive || (link.label === 'Features' && featuresOpen)
-                        ? 'active text-white bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]'
-                        : 'text-white/55 hover:text-white hover:bg-white/[0.05]'
-                    }`}
-                    style={isActive ? { color: '#FFFFFF' } : {}}
+                    className="relative flex items-center"
                     onMouseEnter={() => link.label === 'Features' && setFeaturesOpen(true)}
                     onMouseLeave={() => link.label === 'Features' && setFeaturesOpen(false)}
                   >
-                    {link.label}
-                    {link.label === 'Features' && (
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${featuresOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    )}
-                    {isActive && (
-                      <motion.span
-                        layoutId="navbar-underline"
-                        className="absolute bottom-1 left-4 right-4 h-[2px] bg-gradient-to-r from-indigo-400 to-violet-400 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.8)]"
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                      />
-                    )}
+                    <Link
+                      to={link.path}
+                      onClick={(e) => handleClick(e, link.path)}
+                      className={`px-4 py-2 text-[13.5px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap no-underline rounded-xl flex items-center gap-1 ${
+                        isActive || (link.label === 'Features' && featuresOpen)
+                          ? 'active text-white bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]'
+                          : 'text-white/55 hover:text-white hover:bg-white/[0.05]'
+                      }`}
+                      style={isActive ? { color: '#FFFFFF' } : {}}
+                    >
+                      {link.label}
+                      {link.label === 'Features' && (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${featuresOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      )}
+                      {isActive && (
+                        <motion.span
+                          layoutId="navbar-underline"
+                          className="absolute bottom-1 left-4 right-4 h-[2px] bg-gradient-to-r from-indigo-400 to-violet-400 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.8)]"
+                          transition={{ duration: 0.3, ease: 'easeOut' }}
+                        />
+                      )}
+                    </Link>
                     
                     {/* Dropdown Menu for Features */}
                     {link.label === 'Features' && (
@@ -155,53 +159,42 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[540px] bg-[#080B1A]/95 backdrop-blur-2xl border border-white/[0.08] rounded-[24px] shadow-[0_30px_80px_rgba(0,0,0,0.8)] overflow-hidden cursor-default"
+                            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[480px] bg-[#080B1A]/95 backdrop-blur-2xl border border-white/[0.08] rounded-[24px] shadow-[0_30px_80px_rgba(0,0,0,0.8)] overflow-hidden cursor-default"
                           >
                             <div className="grid grid-cols-2 gap-2 p-4">
                               <Link 
                                 to="/features"
                                 onClick={(e) => { setFeaturesOpen(false); handleClick(e, '/features'); }}
-                                className="flex items-start gap-4 p-4 rounded-2xl hover:bg-white/[0.04] transition-all duration-300 group no-underline"
+                                className="flex flex-col items-center text-center gap-3 p-5 rounded-2xl hover:bg-white/[0.04] transition-all duration-300 group no-underline"
                               >
-                                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
-                                  <Layers size={20} className="text-blue-400 group-hover:text-blue-300 transition-colors" />
+                                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
+                                  <Layers size={24} className="text-blue-400 group-hover:text-blue-300 transition-colors" />
                                 </div>
-                                <div className="flex flex-col gap-1">
-                                  <span className="text-white font-bold text-[15px] group-hover:text-blue-400 transition-colors tracking-wide">12 Core Features</span>
-                                  <span className="text-white/40 font-medium text-[12px] leading-snug">Every feature your team needs. Nothing they don't.</span>
+                                <div className="flex flex-col gap-1.5">
+                                  <span className="text-white font-bold text-[16px] group-hover:text-blue-400 transition-colors tracking-wide">12 Core Features</span>
+                                  <span className="text-white/40 font-medium text-[13px] leading-snug">Every feature your team needs. Nothing they don't.</span>
                                 </div>
                               </Link>
 
                               <Link 
                                 to="/architecture"
                                 onClick={(e) => { setFeaturesOpen(false); handleClick(e, '/architecture'); }}
-                                className="flex items-start gap-4 p-4 rounded-2xl hover:bg-white/[0.04] transition-all duration-300 group no-underline"
+                                className="flex flex-col items-center text-center gap-3 p-5 rounded-2xl hover:bg-white/[0.04] transition-all duration-300 group no-underline"
                               >
-                                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
-                                  <Shield size={20} className="text-indigo-400 group-hover:text-indigo-300 transition-colors" />
+                                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
+                                  <Shield size={24} className="text-indigo-400 group-hover:text-indigo-300 transition-colors" />
                                 </div>
-                                <div className="flex flex-col gap-1">
-                                  <span className="text-white font-bold text-[15px] group-hover:text-indigo-400 transition-colors tracking-wide">Why ownTask</span>
-                                  <span className="text-white/40 font-medium text-[12px] leading-snug">Enterprise Capabilities.</span>
+                                <div className="flex flex-col gap-1.5">
+                                  <span className="text-white font-bold text-[16px] group-hover:text-indigo-400 transition-colors tracking-wide">Why ownTask</span>
+                                  <span className="text-white/40 font-medium text-[13px] leading-snug">Enterprise Capabilities.</span>
                                 </div>
-                              </Link>
-                            </div>
-
-                            {/* Footer link */}
-                            <div className="bg-white/[0.02] border-t border-white/[0.05] p-4 flex justify-end">
-                              <Link 
-                                to="/features"
-                                onClick={(e) => { setFeaturesOpen(false); handleClick(e, '/features'); }}
-                                className="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 text-xs font-bold transition-colors no-underline group"
-                              >
-                                View all features <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                               </Link>
                             </div>
                           </motion.div>
                         )}
                       </AnimatePresence>
                     )}
-                  </Link>
+                  </div>
                 );
               })}
             </nav>
