@@ -5,7 +5,7 @@ import {
   LayoutGrid, CheckSquare, Activity, Calendar, Folder, Filter, RefreshCw, 
   Clipboard, Clock, AlertTriangle, Check, Trophy, LogOut, ChevronLeft, 
   ChevronRight, Plus, X, Trash2, User, Users, ShieldAlert, Settings, ArrowRight, ArrowLeft,
-  Search, Sliders, ChevronDown, List 
+  Search, Sliders, ChevronDown, List, MoreVertical, Pencil, Copy
 } from 'lucide-react';
 import "../../styles/dashboard.css";
 
@@ -202,6 +202,9 @@ export default function Dashboard({ onLogout }) {
   // State for drag and drop and editing
   const [draggedTaskId, setDraggedTaskId] = useState(null);
   const [editingTaskId, setEditingTaskId] = useState(null);
+  
+  // State for dropdown menus
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -332,6 +335,18 @@ export default function Dashboard({ onLogout }) {
 
   const handleDeleteTask = (taskId) => {
     setTasks(prev => prev.filter(t => t.id !== taskId));
+    setActiveDropdown(null);
+  };
+
+  const handleDuplicateTask = (task) => {
+    const randomId = `TSK-${Math.floor(100000 + Math.random() * 900000)}`;
+    const duplicatedTask = {
+      ...task,
+      id: randomId,
+      title: `${task.title} (Copy)`
+    };
+    setTasks(prev => [duplicatedTask, ...prev]);
+    setActiveDropdown(null);
   };
 
   const moveTaskStatus = (taskId, direction) => {
@@ -1051,21 +1066,70 @@ export default function Dashboard({ onLogout }) {
                                 className={`bg-white/[0.06] hover:bg-white/[0.09] border border-white/[0.07] hover:border-white/[0.15] rounded-2xl p-4 transition-all duration-200 shadow-sm group cursor-pointer ${draggedTaskId === task.id ? 'opacity-50' : 'opacity-100'}`}
                               >
                                 {/* Card top: title + action icons */}
-                                <div className="flex items-start justify-between mb-2.5">
+                                <div className="flex items-start justify-between mb-2.5 relative">
                                   <h4 className="text-sm font-bold text-white leading-snug flex-1 pr-2">{task.title}</h4>
-                                  <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                                  
+                                  <div className="relative shrink-0">
                                     <button 
-                                      onClick={() => handleEditTask(task)}
-                                      className="text-white/40 hover:text-white cursor-pointer bg-transparent border-none p-0.5"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setActiveDropdown(activeDropdown === task.id ? null : task.id);
+                                      }}
+                                      className="text-white/40 hover:text-white cursor-pointer bg-transparent border-none p-1 rounded-md hover:bg-white/[0.05] transition-colors"
                                     >
-                                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                      <MoreVertical size={16} />
                                     </button>
-                                    <button
-                                      onClick={() => handleDeleteTask(task.id)}
-                                      className="text-white/40 hover:text-white cursor-pointer bg-transparent border-none p-0.5"
-                                    >
-                                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-                                    </button>
+
+                                    {/* Dropdown Menu */}
+                                    <AnimatePresence>
+                                      {activeDropdown === task.id && (
+                                        <>
+                                          <div 
+                                            className="fixed inset-0 z-40" 
+                                            onClick={(e) => { e.stopPropagation(); setActiveDropdown(null); }}
+                                          />
+                                          <motion.div
+                                            initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                                            exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                                            transition={{ duration: 0.15 }}
+                                            className="absolute right-0 top-full mt-1 z-50 w-36 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden py-1"
+                                          >
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleEditTask(task);
+                                                setActiveDropdown(null);
+                                              }}
+                                              className="w-full text-left px-3.5 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 flex items-center gap-2.5 transition-colors cursor-pointer border-none bg-transparent"
+                                            >
+                                              <Pencil size={13} className="text-gray-500" />
+                                              Update Task
+                                            </button>
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDuplicateTask(task);
+                                              }}
+                                              className="w-full text-left px-3.5 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 flex items-center gap-2.5 transition-colors cursor-pointer border-none bg-transparent"
+                                            >
+                                              <Copy size={13} className="text-gray-500" />
+                                              Duplicate
+                                            </button>
+                                            <button 
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDeleteTask(task.id);
+                                              }}
+                                              className="w-full text-left px-3.5 py-2.5 text-xs font-semibold text-red-500 hover:bg-red-50 flex items-center gap-2.5 transition-colors cursor-pointer border-none bg-transparent mt-0.5"
+                                            >
+                                              <Trash2 size={13} className="text-red-500" />
+                                              Delete
+                                            </button>
+                                          </motion.div>
+                                        </>
+                                      )}
+                                    </AnimatePresence>
                                   </div>
                                 </div>
 
