@@ -385,72 +385,73 @@ export default function Dashboard({ onLogout }) {
       {/* ── Main Panel ── */}
       <div className={`flex-1 min-h-screen flex flex-col transition-all duration-300 ${collapsed ? 'pl-[76px]' : 'pl-[260px]'} ${isMobile ? 'pl-0' : ''}`}>
         
-        {/* Topbar Header */}
-        <header className="h-[72px] border-b border-white/5 bg-[#070710]/40 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-30">
-          <div className="flex items-center gap-3">
-            {isMobile && (
+        {/* Topbar Header — hidden on Tasks tab (content header replaces it) */}
+        {activeTab !== 'Tasks' && (
+          <header className="h-[72px] border-b border-white/5 bg-[#070710]/40 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-30">
+            <div className="flex items-center gap-3">
+              {isMobile && (
+                <button 
+                  onClick={() => setMobileMenuOpen(true)}
+                  className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#94A3B8] hover:text-white"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              )}
+              <div>
+                <h1 className="text-lg md:text-xl font-black text-white m-0 tracking-tight">{activeTab}</h1>
+                <p className="text-[0.68rem] md:text-xs text-primary/50 font-bold m-0 mt-0.5 uppercase tracking-wide">
+                  {activeTab === 'Overview' && 'Overall performance overview'}
+                  {activeTab === 'Analytics' && 'Operational SLA & compliance reports'}
+                </p>
+              </div>
+            </div>
+
+            {/* Filters Bar */}
+            <div className="flex items-center gap-2 md:gap-3">
+              
+              {/* Project Filter */}
+              <div className="hidden md:block">
+                <CustomSelect 
+                  value={selectedProject} 
+                  onChange={setSelectedProject} 
+                  options={PROJECT_OPTIONS} 
+                  icon={Folder} 
+                  placeholder="All Projects" 
+                />
+              </div>
+
+              {/* Period Filter */}
+              <div>
+                <CustomSelect 
+                  value={selectedPeriod} 
+                  onChange={setSelectedPeriod} 
+                  options={PERIOD_OPTIONS} 
+                  icon={Calendar} 
+                  placeholder="Today" 
+                />
+              </div>
+
+              {/* Subject Filter */}
+              <div className="hidden lg:block">
+                <CustomSelect 
+                  value={selectedSubject} 
+                  onChange={setSelectedSubject} 
+                  options={SUBJECT_OPTIONS} 
+                  icon={Filter} 
+                  placeholder="All Subjects" 
+                />
+              </div>
+
+              {/* Refresh Button */}
               <button 
-                onClick={() => setMobileMenuOpen(true)}
-                className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#94A3B8] hover:text-white"
+                onClick={handleRefresh}
+                className={`w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#94A3B8] hover:text-white transition-all cursor-pointer ${isRefreshing ? 'rotate-spin' : ''}`}
               >
-                <ChevronRight size={18} />
+                <RefreshCw size={14} className={isRefreshing ? 'animate-spin text-primary' : ''} />
               </button>
-            )}
-            <div>
-              <h1 className="text-lg md:text-xl font-black text-white m-0 tracking-tight">{activeTab}</h1>
-              <p className="text-[0.68rem] md:text-xs text-primary/50 font-bold m-0 mt-0.5 uppercase tracking-wide">
-                {activeTab === 'Overview' && 'Overall performance overview'}
-                {activeTab === 'Tasks' && 'Sprint boards & pipeline tracking'}
-                {activeTab === 'Analytics' && 'Operational SLA & compliance reports'}
-              </p>
             </div>
-          </div>
-
-          {/* Filters Bar */}
-          <div className="flex items-center gap-2 md:gap-3">
-            
-            {/* Project Filter */}
-            <div className="hidden md:block">
-              <CustomSelect 
-                value={selectedProject} 
-                onChange={setSelectedProject} 
-                options={PROJECT_OPTIONS} 
-                icon={Folder} 
-                placeholder="All Projects" 
-              />
-            </div>
-
-            {/* Period Filter */}
-            <div>
-              <CustomSelect 
-                value={selectedPeriod} 
-                onChange={setSelectedPeriod} 
-                options={PERIOD_OPTIONS} 
-                icon={Calendar} 
-                placeholder="Today" 
-              />
-            </div>
-
-            {/* Subject Filter */}
-            <div className="hidden lg:block">
-              <CustomSelect 
-                value={selectedSubject} 
-                onChange={setSelectedSubject} 
-                options={SUBJECT_OPTIONS} 
-                icon={Filter} 
-                placeholder="All Subjects" 
-              />
-            </div>
-
-            {/* Refresh Button */}
-            <button 
-              onClick={handleRefresh}
-              className={`w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#94A3B8] hover:text-white transition-all cursor-pointer ${isRefreshing ? 'rotate-spin' : ''}`}
-            >
-              <RefreshCw size={14} className={isRefreshing ? 'animate-spin text-primary' : ''} />
-            </button>
-          </div>
-        </header>
+          </header>
+        )}
 
         {/* main scrolling content */}
         <main className="flex-1 overflow-y-auto p-6 relative z-10">
@@ -898,7 +899,6 @@ export default function Dashboard({ onLogout }) {
                             >
                               <option>Not Started</option>
                               <option>In Progress</option>
-                              <option>Waiting</option>
                               <option>Done</option>
                             </select>
                           </div>
@@ -936,98 +936,114 @@ export default function Dashboard({ onLogout }) {
                     )}
                   </AnimatePresence>
 
-                  {/* Kanban Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
-                    {['Not Started', 'In Progress', 'Waiting', 'Done'].map((colStatus) => {
+                  {/* Kanban Board — 3 columns matching screenshot style */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start mt-2">
+                    {[
+                      { key: 'Not Started', label: 'TO DO', dotColor: '#9B9BFF', statusIcon: <div className="w-5 h-5 rounded-full border-2 border-[#9B9BFF] flex items-center justify-center" /> },
+                      { key: 'In Progress', label: 'IN PROGRESS', dotColor: '#F5A623', statusIcon: <div className="w-5 h-5 rounded-full border-2 border-[#F5A623] bg-[#F5A623]/20 flex items-center justify-center"><div className="w-2 h-2 rounded-full bg-[#F5A623]" /></div> },
+                      { key: 'Done', label: 'COMPLETED', dotColor: '#00C853', statusIcon: <div className="w-5 h-5 rounded-full bg-[#00C853]/20 border-2 border-[#00C853] flex items-center justify-center"><Check size={10} className="text-[#00C853]" /></div> },
+                    ].map(({ key: colStatus, label, dotColor, statusIcon }) => {
                       const colTasks = tasks.filter(t => t.status === colStatus);
                       return (
-                        <div 
-                          key={colStatus}
-                          className="bg-[#0D0D1C]/45 border border-white/5 rounded-2xl p-4 flex flex-col min-h-[400px] backdrop-blur-md"
-                        >
-                          <div className="flex items-center justify-between mb-4 pb-2 border-b border-white/5">
-                            <span className="text-xs font-black uppercase text-primary/75 tracking-wider">{colStatus}</span>
-                            <span className="text-[0.62rem] font-bold px-2 py-0.5 rounded-md bg-white/[0.04] text-white/55 border border-white/5">
-                              {colTasks.length}
-                            </span>
+                        <div key={colStatus} className="bg-[#F8F9FB]/[0.03] rounded-2xl flex flex-col min-h-[500px]">
+                          {/* Column Header */}
+                          <div className="flex items-center justify-between px-4 py-3.5">
+                            <div className="flex items-center gap-2.5">
+                              {statusIcon}
+                              <div>
+                                <span className="text-[11px] font-black uppercase tracking-widest text-white/70">{label}</span>
+                                <p className="text-[10px] text-white/30 font-bold">{colTasks.length} {colTasks.length === 1 ? 'TASK' : 'TASKS'}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                onClick={() => setShowCreateForm(true)}
+                                className="w-6 h-6 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-white transition-all cursor-pointer border-solid"
+                              >
+                                <Plus size={12} />
+                              </button>
+                              <button className="w-6 h-6 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-white transition-all cursor-pointer">
+                                <ArrowRight size={12} />
+                              </button>
+                            </div>
                           </div>
 
-                          <div className="space-y-3 flex-1 overflow-y-auto">
+                          {/* Cards */}
+                          <div className="flex-1 space-y-3 px-3 pb-4 overflow-y-auto">
                             {colTasks.map((task) => (
-                              <div 
+                              <div
                                 key={task.id}
-                                className="bg-[#121228]/85 border border-white/5 hover:border-primary/30 p-4 rounded-xl hover:-translate-y-1 transition-all duration-300 shadow-sm relative group"
+                                className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/[0.07] hover:border-white/[0.15] rounded-2xl p-4 transition-all duration-200 shadow-sm group cursor-pointer"
                               >
-                                {/* Header Info */}
-                                <div className="flex items-center justify-between mb-2">
-                                  <span className="font-mono text-[0.68rem] font-bold text-primary/80 bg-primary/10 px-2 py-0.5 rounded-md">
-                                    {task.id}
-                                  </span>
-                                  
-                                  {/* Delete button (visible on hover) */}
-                                  <button 
-                                    onClick={() => handleDeleteTask(task.id)}
-                                    className="text-white/30 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer border-none bg-transparent"
-                                  >
-                                    <Trash2 size={13} />
-                                  </button>
+                                {/* Card top: title + action icons */}
+                                <div className="flex items-start justify-between mb-2.5">
+                                  <h4 className="text-sm font-bold text-white leading-snug flex-1 pr-2">{task.title}</h4>
+                                  <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                                    <button className="text-white/40 hover:text-white cursor-pointer bg-transparent border-none p-0.5">
+                                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                    </button>
+                                    <button
+                                      onClick={() => handleDeleteTask(task.id)}
+                                      className="text-white/40 hover:text-white cursor-pointer bg-transparent border-none p-0.5"
+                                    >
+                                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                                    </button>
+                                  </div>
                                 </div>
 
-                                <h4 className="text-xs font-bold text-white mb-1.5 leading-snug">{task.title}</h4>
-                                <p className="text-[0.68rem] text-[#94A3B8] line-clamp-2 mb-3 leading-normal">{task.desc}</p>
+                                {/* Subject dot label */}
+                                <div className="flex items-center gap-1.5 mb-2.5">
+                                  <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: dotColor }} />
+                                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-white/40">BACK END TASKS</span>
+                                </div>
 
-                                {/* Badges */}
-                                <div className="flex items-center gap-1.5 flex-wrap mb-3.5">
-                                  <span className={`text-[0.58rem] font-black uppercase px-2 py-0.5 rounded-md border
-                                    ${task.priority === 'Highest' && 'bg-rose-500/10 text-rose-400 border-rose-500/20'}
-                                    ${task.priority === 'High' && 'bg-amber-500/10 text-amber-400 border-amber-500/20'}
-                                    ${task.priority === 'Normal' && 'bg-primary/10 text-primary-light border-primary/20'}
-                                    ${task.priority === 'Low' && 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'}
-                                    ${task.priority === 'Lowest' && 'bg-slate-500/10 text-slate-400 border-slate-500/20'}
-                                  `}>
-                                    {task.priority}
-                                  </span>
-                                  {task.slaDeadline && (
-                                    <span className={`text-[0.58rem] font-black uppercase px-2 py-0.5 rounded-md border flex items-center gap-1
-                                      ${task.slaBreached ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' : 'bg-primary/10 text-primary-light border-primary/20'}
-                                    `}>
-                                      <Clock size={10} />
-                                      {task.slaBreached ? 'Breached' : 'SLA Active'}
+                                {/* Description */}
+                                <p className="text-[11px] text-white/35 font-medium mb-3.5 leading-relaxed">
+                                  {task.desc || 'No Description'}
+                                </p>
+
+                                {/* Footer: avatar + SLA badge + date */}
+                                <div className="flex items-center justify-between pt-3 border-t border-white/[0.05]">
+                                  <div className="flex items-center gap-2">
+                                    {/* Warning triangle */}
+                                    <AlertTriangle size={13} className="text-amber-400/70" />
+                                    {/* Avatar */}
+                                    <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-[9px] font-black text-white shadow-sm">
+                                      {task.assignedTo?.split(' ').map(n => n[0]).join('').slice(0,2)}
+                                    </div>
+                                    <span className="text-[10px] text-white/40 font-semibold">{task.assignedTo?.split(' ')[0]} {task.assignedTo?.split(' ')[1]?.slice(0,2)}...</span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    {task.slaBreached && (
+                                      <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-md bg-red-500/20 text-red-400 border border-red-500/30 tracking-wider">
+                                        SLA BREACH
+                                      </span>
+                                    )}
+                                    <span className="text-[10px] text-white/30 font-mono font-semibold">
+                                      {task.dueDate || '—'}
                                     </span>
-                                  )}
-                                </div>
-
-                                {/* Footer Assignment / Progress */}
-                                <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                                  <div className="flex items-center gap-1 text-[0.65rem] text-[#94A3B8] font-bold">
-                                    <User size={11} className="text-primary/50" />
-                                    <span>{task.assignedTo.split(' ')[0]}</span>
-                                  </div>
-
-                                  {/* Quick Status Adjustments */}
-                                  <div className="flex items-center gap-1">
-                                    <button 
-                                      onClick={() => moveTaskStatus(task.id, -1)}
-                                      disabled={colStatus === 'Not Started'}
-                                      className="w-5 h-5 rounded bg-white/[0.04] hover:bg-white/[0.08] flex items-center justify-center text-[#94A3B8] hover:text-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer border-none"
-                                    >
-                                      <ArrowLeft size={11} />
-                                    </button>
-                                    <button 
-                                      onClick={() => moveTaskStatus(task.id, 1)}
-                                      disabled={colStatus === 'Done'}
-                                      className="w-5 h-5 rounded bg-white/[0.04] hover:bg-white/[0.08] flex items-center justify-center text-[#94A3B8] hover:text-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer border-none"
-                                    >
-                                      <ArrowRight size={11} />
-                                    </button>
                                   </div>
                                 </div>
-
                               </div>
                             ))}
+
+                            {/* Empty State */}
                             {colTasks.length === 0 && (
-                              <div className="h-28 rounded-xl border border-dashed border-white/5 flex items-center justify-center text-[0.68rem] text-primary/30 font-bold select-none">
-                                No tasks
+                              <div className="flex flex-col items-center justify-center py-16 text-center gap-3">
+                                <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center">
+                                  <Clipboard size={22} className="text-white/20" />
+                                </div>
+                                <div>
+                                  <p className="text-sm font-bold text-white/30">No tasks found</p>
+                                  <p className="text-[11px] text-white/20 mt-0.5">Adjust filters or create a new entry</p>
+                                </div>
+                                <button
+                                  onClick={() => setShowCreateForm(true)}
+                                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#00C853] hover:bg-[#00E676] text-white font-extrabold text-xs transition-all duration-300 cursor-pointer border-none shadow-md mt-1"
+                                >
+                                  <Plus size={12} />
+                                  New Task
+                                </button>
                               </div>
                             )}
                           </div>
