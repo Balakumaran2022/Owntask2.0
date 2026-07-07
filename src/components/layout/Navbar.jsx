@@ -105,7 +105,7 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
         >
           {/* ── Logo ── */}
           <Link to="/" onClick={(e) => handleClick(e, '/')} className="flex items-center shrink-0 no-underline gap-2">
-            <img src="/official-logo.png" alt="ownTask" className="w-8 h-8 object-contain" />
+            <img src="/official-logo.svg" alt="ownTask" className="w-8 h-8 object-contain" />
             <span className="text-xl md:text-2xl font-black italic tracking-tight">
               <span className="text-white">own</span><span className="text-primary">Task</span>
             </span>
@@ -261,3 +261,4 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
     </>
   );
 }
+
