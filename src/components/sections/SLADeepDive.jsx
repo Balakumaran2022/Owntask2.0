@@ -183,7 +183,7 @@ export default function SLADeepDive() {
                   
                   {/* Gauge */}
                   <div className="flex flex-col items-center justify-center text-center p-4 bg-white/[0.02] border border-white/[0.05] rounded-2xl relative overflow-hidden">
-                    <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+                    <svg className="w-36 h-36 transform -rotate-90" viewBox="0 0 100 100">
                       {/* Background circle */}
                       <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.03)" strokeWidth="8" fill="none" />
                       {/* Active path */}
@@ -202,9 +202,9 @@ export default function SLADeepDive() {
                         strokeLinecap="round"
                       />
                     </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center mt-3">
-                      <span className="text-3xl font-black text-white leading-none">94.2%</span>
-                      <span className="text-[9px] font-extrabold text-white/50 uppercase tracking-widest mt-1">SLA MET</span>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-2xl font-black text-white leading-none">94.2%</span>
+                      <span className="text-[9px] font-extrabold text-white/50 uppercase tracking-widest mt-1.5">SLA MET</span>
                     </div>
                   </div>
 
