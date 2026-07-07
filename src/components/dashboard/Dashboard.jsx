@@ -198,6 +198,10 @@ export default function Dashboard({ onLogout }) {
   const [newStatus, setNewStatus] = useState('Not Started');
   const [newAssignee, setNewAssignee] = useState('Sarah Jenkins');
   const [newSlaEnabled, setNewSlaEnabled] = useState(true);
+  
+  // State for drag and drop and editing
+  const [draggedTaskId, setDraggedTaskId] = useState(null);
+  const [editingTaskId, setEditingTaskId] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -239,27 +243,91 @@ export default function Dashboard({ onLogout }) {
     e.preventDefault();
     if (!newTitle.trim()) return;
 
-    const randomId = `TSK-${Math.floor(100000 + Math.random() * 900000)}`;
-    const createdTask = {
-      id: randomId,
-      title: newTitle,
-      desc: newDesc || 'No description provided.',
-      priority: newPriority,
-      status: newStatus,
-      assignedTo: newAssignee,
-      dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 5 days from now
-      progress: newStatus === 'Done' ? 100 : newStatus === 'In Progress' ? 50 : 0,
-      slaDeadline: newSlaEnabled ? new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString().replace('T', ' ').substring(0, 16) : null,
-      slaBreached: false,
-      taskType: 'internal'
-    };
-
-    setTasks(prev => [createdTask, ...prev]);
+    if (editingTaskId) {
+      setTasks(prev => prev.map(t => {
+        if (t.id !== editingTaskId) return t;
+        return {
+          ...t,
+          title: newTitle,
+          desc: newDesc || 'No description provided.',
+          priority: newPriority,
+          status: newStatus,
+          assignedTo: newAssignee,
+          slaDeadline: newSlaEnabled ? t.slaDeadline || new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString().replace('T', ' ').substring(0, 16) : null,
+          progress: newStatus === 'Done' ? 100 : newStatus === 'In Progress' ? 50 : 0,
+        };
+      }));
+    } else {
+      const randomId = `TSK-${Math.floor(100000 + Math.random() * 900000)}`;
+      const createdTask = {
+        id: randomId,
+        title: newTitle,
+        desc: newDesc || 'No description provided.',
+        priority: newPriority,
+        status: newStatus,
+        assignedTo: newAssignee,
+        dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        progress: newStatus === 'Done' ? 100 : newStatus === 'In Progress' ? 50 : 0,
+        slaDeadline: newSlaEnabled ? new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString().replace('T', ' ').substring(0, 16) : null,
+        slaBreached: false,
+        taskType: 'internal'
+      };
+      setTasks(prev => [createdTask, ...prev]);
+    }
+    
     setNewTitle('');
     setNewDesc('');
     setNewPriority('Normal');
     setNewStatus('Not Started');
+    setEditingTaskId(null);
     setShowCreateForm(false);
+  };
+
+  const handleEditTask = (task) => {
+    setEditingTaskId(task.id);
+    setNewTitle(task.title);
+    setNewDesc(task.desc);
+    setNewPriority(task.priority || 'Normal');
+    setNewStatus(task.status);
+    setNewAssignee(task.assignedTo);
+    setNewSlaEnabled(!!task.slaDeadline);
+    setShowCreateForm(true);
+  };
+
+  const handleCancelEdit = () => {
+    setNewTitle('');
+    setNewDesc('');
+    setNewPriority('Normal');
+    setNewStatus('Not Started');
+    setEditingTaskId(null);
+    setShowCreateForm(false);
+  };
+
+  const handleDragStart = (e, id) => {
+    setDraggedTaskId(id);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault(); // Necessary to allow dropping
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (e, newStatus) => {
+    e.preventDefault();
+    if (draggedTaskId) {
+      setTasks(prev => prev.map(t => {
+        if (t.id === draggedTaskId) {
+          return {
+            ...t,
+            status: newStatus,
+            progress: newStatus === 'Done' ? 100 : newStatus === 'In Progress' ? 50 : 0
+          };
+        }
+        return t;
+      }));
+      setDraggedTaskId(null);
+    }
   };
 
   const handleDeleteTask = (taskId) => {
@@ -267,7 +335,7 @@ export default function Dashboard({ onLogout }) {
   };
 
   const moveTaskStatus = (taskId, direction) => {
-    const statuses = ['Not Started', 'In Progress', 'Waiting', 'Done'];
+    const statuses = ['Not Started', 'In Progress', 'Done'];
     setTasks(prev => prev.map(t => {
       if (t.id !== taskId) return t;
       const currentIndex = statuses.indexOf(t.status);
@@ -785,7 +853,7 @@ export default function Dashboard({ onLogout }) {
 
                         {/* Create Task Green Button */}
                         <button 
-                          onClick={() => setShowCreateForm(!showCreateForm)}
+                          onClick={() => showCreateForm ? handleCancelEdit() : setShowCreateForm(true)}
                           className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#00C853] hover:bg-[#00E676] text-white font-extrabold text-xs transition-all duration-300 cursor-pointer border-none shadow-lg shadow-emerald-950/20"
                         >
                           <span>{showCreateForm ? 'Cancel' : 'Create Task'}</span>
@@ -929,7 +997,7 @@ export default function Dashboard({ onLogout }) {
                             type="submit"
                             className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary to-[#8B5CF6] hover:brightness-110 font-bold text-xs text-white cursor-pointer border-none"
                           >
-                            Save Task
+                            {editingTaskId ? 'Update Task' : 'Save Task'}
                           </button>
                         </div>
                       </motion.form>
@@ -945,7 +1013,12 @@ export default function Dashboard({ onLogout }) {
                     ].map(({ key: colStatus, label, dotColor, statusIcon }) => {
                       const colTasks = tasks.filter(t => t.status === colStatus);
                       return (
-                        <div key={colStatus} className="bg-[#F8F9FB]/[0.03] rounded-2xl flex flex-col min-h-[500px]">
+                        <div 
+                          key={colStatus} 
+                          className="bg-[#F8F9FB]/[0.03] rounded-2xl flex flex-col min-h-[500px]"
+                          onDragOver={handleDragOver}
+                          onDrop={(e) => handleDrop(e, colStatus)}
+                        >
                           {/* Column Header */}
                           <div className="flex items-center justify-between px-4 py-3.5">
                             <div className="flex items-center gap-2.5">
@@ -973,13 +1046,18 @@ export default function Dashboard({ onLogout }) {
                             {colTasks.map((task) => (
                               <div
                                 key={task.id}
-                                className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/[0.07] hover:border-white/[0.15] rounded-2xl p-4 transition-all duration-200 shadow-sm group cursor-pointer"
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, task.id)}
+                                className={`bg-white/[0.06] hover:bg-white/[0.09] border border-white/[0.07] hover:border-white/[0.15] rounded-2xl p-4 transition-all duration-200 shadow-sm group cursor-pointer ${draggedTaskId === task.id ? 'opacity-50' : 'opacity-100'}`}
                               >
                                 {/* Card top: title + action icons */}
                                 <div className="flex items-start justify-between mb-2.5">
                                   <h4 className="text-sm font-bold text-white leading-snug flex-1 pr-2">{task.title}</h4>
                                   <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                                    <button className="text-white/40 hover:text-white cursor-pointer bg-transparent border-none p-0.5">
+                                    <button 
+                                      onClick={() => handleEditTask(task)}
+                                      className="text-white/40 hover:text-white cursor-pointer bg-transparent border-none p-0.5"
+                                    >
                                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                                     </button>
                                     <button
