@@ -205,6 +205,20 @@ export default function Dashboard({ onLogout }) {
   
   // State for dropdown menus
   const [activeDropdown, setActiveDropdown] = useState(null);
+  
+  // State for collapsed columns
+  const [collapsedColumns, setCollapsedColumns] = useState({
+    'Not Started': false,
+    'In Progress': false,
+    'Done': false
+  });
+
+  const toggleColumnCollapse = (colStatus) => {
+    setCollapsedColumns(prev => ({
+      ...prev,
+      [colStatus]: !prev[colStatus]
+    }));
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -1020,17 +1034,47 @@ export default function Dashboard({ onLogout }) {
                   </AnimatePresence>
 
                   {/* Kanban Board — 3 columns matching screenshot style */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start mt-2">
+                  <div className="flex flex-col md:flex-row gap-5 items-stretch mt-2">
                     {[
                       { key: 'Not Started', label: 'TO DO', dotColor: '#9B9BFF', statusIcon: <div className="w-5 h-5 rounded-full border-2 border-[#9B9BFF] flex items-center justify-center" /> },
                       { key: 'In Progress', label: 'IN PROGRESS', dotColor: '#F5A623', statusIcon: <div className="w-5 h-5 rounded-full border-2 border-[#F5A623] bg-[#F5A623]/20 flex items-center justify-center"><div className="w-2 h-2 rounded-full bg-[#F5A623]" /></div> },
                       { key: 'Done', label: 'COMPLETED', dotColor: '#00C853', statusIcon: <div className="w-5 h-5 rounded-full bg-[#00C853]/20 border-2 border-[#00C853] flex items-center justify-center"><Check size={10} className="text-[#00C853]" /></div> },
                     ].map(({ key: colStatus, label, dotColor, statusIcon }) => {
                       const colTasks = tasks.filter(t => t.status === colStatus);
+                      
+                      if (collapsedColumns[colStatus]) {
+                        return (
+                          <div 
+                            key={colStatus} 
+                            className="bg-[#F8F9FB]/[0.03] rounded-2xl flex flex-col items-center py-5 w-[60px] min-h-[500px] shrink-0 border border-white/[0.02]"
+                            onDragOver={handleDragOver}
+                            onDrop={(e) => handleDrop(e, colStatus)}
+                          >
+                            <button 
+                              onClick={() => toggleColumnCollapse(colStatus)}
+                              className="w-6 h-6 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-white transition-all cursor-pointer mb-6"
+                            >
+                              <ChevronLeft size={14} />
+                            </button>
+                            
+                            <span className="w-2.5 h-2.5 rounded-full mb-8 shadow-sm" style={{ backgroundColor: dotColor }} />
+                            
+                            <div className="flex-1 flex flex-col justify-start items-center">
+                              <span 
+                                className="text-[12px] font-black uppercase tracking-[0.2em] text-white/60 whitespace-nowrap"
+                                style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                              >
+                                {label} ({colTasks.length})
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      }
+
                       return (
                         <div 
                           key={colStatus} 
-                          className="bg-[#F8F9FB]/[0.03] rounded-2xl flex flex-col min-h-[500px]"
+                          className="bg-[#F8F9FB]/[0.03] rounded-2xl flex flex-col min-h-[500px] flex-1 min-w-[280px]"
                           onDragOver={handleDragOver}
                           onDrop={(e) => handleDrop(e, colStatus)}
                         >
@@ -1050,7 +1094,10 @@ export default function Dashboard({ onLogout }) {
                               >
                                 <Plus size={12} />
                               </button>
-                              <button className="w-6 h-6 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-white transition-all cursor-pointer">
+                              <button 
+                                onClick={() => toggleColumnCollapse(colStatus)}
+                                className="w-6 h-6 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-white transition-all cursor-pointer"
+                              >
                                 <ArrowRight size={12} />
                               </button>
                             </div>
