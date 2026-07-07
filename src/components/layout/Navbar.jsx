@@ -16,6 +16,7 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
   const [isMobile,     setIsMobile]     = useState(false);
   const [mobileOpen,   setMobileOpen]   = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [featuresOpen, setFeaturesOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -124,20 +125,57 @@ export default function Navbar({ onOpenLogin, onOpenDemo }) {
                     key={link.path}
                     to={link.path}
                     onClick={(e) => handleClick(e, link.path)}
-                    className={`relative px-4 py-2 text-[13.5px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap no-underline rounded-xl ${
-                      isActive
+                    className={`relative px-4 py-2 text-[13.5px] font-bold tracking-wide transition-all duration-200 whitespace-nowrap no-underline rounded-xl flex items-center gap-1 ${
+                      isActive || (link.label === 'Features' && featuresOpen)
                         ? 'active text-white bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]'
                         : 'text-white/55 hover:text-white hover:bg-white/[0.05]'
                     }`}
                     style={isActive ? { color: '#FFFFFF' } : {}}
+                    onMouseEnter={() => link.label === 'Features' && setFeaturesOpen(true)}
+                    onMouseLeave={() => link.label === 'Features' && setFeaturesOpen(false)}
                   >
                     {link.label}
+                    {link.label === 'Features' && (
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${featuresOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    )}
                     {isActive && (
                       <motion.span
                         layoutId="navbar-underline"
                         className="absolute bottom-1 left-4 right-4 h-[2px] bg-gradient-to-r from-indigo-400 to-violet-400 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.8)]"
                         transition={{ duration: 0.3, ease: 'easeOut' }}
                       />
+                    )}
+                    
+                    {/* Dropdown Menu for Features */}
+                    {link.label === 'Features' && (
+                      <AnimatePresence>
+                        {featuresOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] bg-[#0c0a1a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] p-2.5 flex flex-col gap-1.5 cursor-default"
+                          >
+                            <Link 
+                              to="/features"
+                              onClick={(e) => { setFeaturesOpen(false); handleClick(e, '/features'); }}
+                              className="flex flex-col gap-1 p-3.5 rounded-xl hover:bg-white/[0.06] transition-colors border border-transparent hover:border-white/[0.05] group no-underline"
+                            >
+                              <span className="text-white font-black text-sm group-hover:text-primary transition-colors">12 Core Features</span>
+                              <span className="text-white/50 font-medium text-[11px] leading-tight">Every feature your team needs. Nothing they don't.</span>
+                            </Link>
+                            <Link 
+                              to="/architecture"
+                              onClick={(e) => { setFeaturesOpen(false); handleClick(e, '/architecture'); }}
+                              className="flex flex-col gap-1 p-3.5 rounded-xl hover:bg-white/[0.06] transition-colors border border-transparent hover:border-white/[0.05] group no-underline"
+                            >
+                              <span className="text-white font-black text-sm group-hover:text-primary transition-colors">Why ownTask</span>
+                              <span className="text-white/50 font-medium text-[11px] leading-tight">Enterprise Capabilities.</span>
+                            </Link>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     )}
                   </Link>
                 );
