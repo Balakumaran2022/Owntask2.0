@@ -868,16 +868,33 @@ export default function Dashboard({ onLogout }) {
                       <div className="flex items-center gap-4 self-end sm:self-auto">
                         {/* Avatar Group Stack */}
                         <div className="flex items-center -space-x-2">
-                          <div className="w-8 h-8 rounded-full bg-[#fce4ec] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#e91e63] shadow-sm">S</div>
-                          <div className="w-8 h-8 rounded-full bg-[#f3e5f5] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#9c27b0] shadow-sm">S</div>
-                          <div className="w-8 h-8 rounded-full bg-[#000] border border-white/10 flex items-center justify-center p-1 shadow-sm overflow-hidden">
-                            <img src="/official-logo.png" alt="ownTask Logo" className="w-full h-full object-contain" />
+                          {TEAM_MEMBERS.map((member) => (
+                            <div key={member.id} className="relative group cursor-pointer">
+                              <div 
+                                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center shadow-sm overflow-hidden transition-transform duration-200 group-hover:scale-110 group-hover:z-10 relative"
+                                style={{ backgroundColor: member.bg, color: member.color }}
+                              >
+                                {member.img ? (
+                                  <img 
+                                    src={member.img} 
+                                    alt={member.name} 
+                                    className={`w-full h-full ${member.id === 3 ? 'object-contain p-1' : 'object-cover'}`} 
+                                  />
+                                ) : (
+                                  <span className="text-[10px] font-black">{member.initials}</span>
+                                )}
+                              </div>
+                              
+                              {/* Tooltip */}
+                              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 bg-[#1A1A1A] text-white text-[11px] font-bold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-xl border border-white/5">
+                                {member.name}
+                              </div>
+                            </div>
+                          ))}
+                          
+                          <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white/70 shadow-sm relative z-0">
+                            +1
                           </div>
-                          <div className="w-8 h-8 rounded-full bg-[#e8f5e9] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#2e7d32] shadow-sm">H</div>
-                          <div className="w-8 h-8 rounded-full bg-[#efebe9] border border-white/10 flex items-center justify-center text-[10px] font-black text-[#5d4037] shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar" className="w-full h-full rounded-full object-cover" />
-                          </div>
-                          <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white/70 shadow-sm">+1</div>
                         </div>
 
                         {/* Create Task Green Button */}
