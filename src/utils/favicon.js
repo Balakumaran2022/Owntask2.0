@@ -16,7 +16,14 @@ export function setRoundedFavicon(src, radiusRatio = 0.25) {
     ctx.closePath();
     ctx.clip();
     
-    ctx.drawImage(img, 0, 0);
+    // Scale up the image slightly to make the logo appear larger in the tab
+    const scale = 1.15;
+    const drawW = w * scale;
+    const drawH = h * scale;
+    const offsetX = -(drawW - w) / 2;
+    const offsetY = -(drawH - h) / 2;
+    
+    ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
     
     const dataUrl = canvas.toDataURL('image/png');
     let link = document.querySelector("link[rel~='icon']");
