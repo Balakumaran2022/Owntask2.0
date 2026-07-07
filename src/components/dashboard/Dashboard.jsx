@@ -879,7 +879,7 @@ export default function Dashboard({ onLogout }) {
                                   <img 
                                     src={member.img} 
                                     alt={member.name} 
-                                    className={`w-full h-full ${member.id === 3 ? 'object-contain p-1' : 'object-cover'}`} 
+                                    className="w-full h-full object-cover" 
                                   />
                                 ) : (
                                   <span className="text-[10px] font-black">{member.initials}</span>
